@@ -1,0 +1,1022 @@
+2025-06-15 22:57:01,456 - INFO - Start logger
+------------ CONFIGURATE ------------ 
+{'model': {'name': 'meta-llama/Llama-3.1-8B-Instruct', 'model_name_log': 'base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters', 'cache_dir': '../ft_v1/models_cache/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659/', 'quant_config': None, 'max_length': 512, 'max_new_tokens': 32, 'tokenizer': {'padding_size': 'left', 'answer_pattern': '### answer:\n'}}, 'lora': {'r': 16, 'lora_alpha': 32, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'o_proj', 'v_proj', 'k_proj']}, 'inference': {'temp': 0.4}, 'evaluate_model': {'full_path_check': './saved_models/train__15-06-2025_14-38-14__base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/', 'checkpoint': 'checkpoint-30/'}, 'train': {'model_save_dir': './saved_models', 'epochs': 30, 'train_batch': 2, 'val_batch': 70, 'test_batch': 70, 'grad_accum': 256, 'eval_step': 30, 'save_step': 30, 'torch_empty_cache_steps': 8, 'log_step': 10, 'lr': 2e-05, 'weight_decay': 0.01}, 'merge': {'dir': './merge_models'}, 'logs': {'dir': './logs'}}
+------------ ------------
+2025-06-15 22:57:01,456 - INFO - MODEL CHECKPOINT EVAL: ./saved_models/train__15-06-2025_14-38-14__base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/checkpoint-30/
+2025-06-15 22:57:01,459 - INFO - 
+Model arch:
+PeftModelForCausalLM(
+  (base_model): LoraModel(
+    (model): LlamaForCausalLM(
+      (model): LlamaModel(
+        (embed_tokens): Embedding(128256, 4096)
+        (layers): ModuleList(
+          (0-31): 32 x LlamaDecoderLayer(
+            (self_attn): LlamaAttention(
+              (q_proj): lora.Linear8bitLt(
+                (base_layer): Linear8bitLt(in_features=4096, out_features=4096, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=4096, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (k_proj): lora.Linear8bitLt(
+                (base_layer): Linear8bitLt(in_features=4096, out_features=1024, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=1024, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (v_proj): lora.Linear8bitLt(
+                (base_layer): Linear8bitLt(in_features=4096, out_features=1024, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=1024, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (o_proj): lora.Linear8bitLt(
+                (base_layer): Linear8bitLt(in_features=4096, out_features=4096, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=4096, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+            )
+            (mlp): LlamaMLP(
+              (gate_proj): Linear8bitLt(in_features=4096, out_features=14336, bias=False)
+              (up_proj): Linear8bitLt(in_features=4096, out_features=14336, bias=False)
+              (down_proj): Linear8bitLt(in_features=14336, out_features=4096, bias=False)
+              (act_fn): SiLU()
+            )
+            (input_layernorm): LlamaRMSNorm((4096,), eps=1e-05)
+            (post_attention_layernorm): LlamaRMSNorm((4096,), eps=1e-05)
+          )
+        )
+        (norm): LlamaRMSNorm((4096,), eps=1e-05)
+        (rotary_emb): LlamaRotaryEmbedding()
+      )
+      (lm_head): Linear(in_features=4096, out_features=128256, bias=False)
+    )
+  )
+)
+
+Model config:
+LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 128,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "quantization_config": {
+    "_load_in_4bit": false,
+    "_load_in_8bit": true,
+    "bnb_4bit_compute_dtype": "float32",
+    "bnb_4bit_quant_storage": "uint8",
+    "bnb_4bit_quant_type": "fp4",
+    "bnb_4bit_use_double_quant": false,
+    "llm_int8_enable_fp32_cpu_offload": false,
+    "llm_int8_has_fp16_weight": false,
+    "llm_int8_skip_modules": null,
+    "llm_int8_threshold": 6.0,
+    "load_in_4bit": false,
+    "load_in_8bit": true,
+    "quant_method": "bitsandbytes"
+  },
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 8.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": false,
+  "vocab_size": 128256
+}
+
+
+2025-06-15 22:57:01,459 - INFO - Start eval for model base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters
+2025-06-15 22:57:01,459 - INFO - Test model. Calculate metrics
+2025-06-15 22:57:01,492 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. (Note: The context does not mention any real-world applications where scheduled sampling has significantly improved seq2seq model performance, and how these improvements compare
+ANSW:No Answer
+EM:0
+F1:0.14814814814814814
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+
+
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  Named entity recognition with bidirectionalLSTM-CNNs,” arXiv preprint arXiv:1511.08308, 
+ANSW:No Answer
+EM:0
+F1:0.33333333333333337
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:"Results show that the distilled policies in soft decision trees achieve similar accuracy to the original policies, while being 2.5 times faster and more generalizable."
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. (There is no information about where Richard Sutton met Doina Precup and Satinder Singh in the context.)  
+ANSW:No Answer
+EM:0
+F1:0.1904761904761905
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+The context does not mention how the eye-tracking devices affect the natural viewing behavior of participants. It only mentions that the eye-tracking devices were used
+ANSW:No Answer
+EM:0
+F1:0.13793103448275862
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:"However, this approach has a major limitation: it can only handle short documents that are within the input sequence length limitations of the RNN. For longer documents
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:-the-art results on the tasks shown in Fig. 14? 
+
+
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED: health? No Answer
+
+
+ANSW:No Answer
+EM:0
+F1:0.8
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. (There is no mention of regulatory compliance standards in the provided context.)  [58] L. Zhang, J. Xu, P. Vij
+ANSW:No Answer
+EM:0
+F1:0.17391304347826084
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  No Answer.  No Answer.  No Answer.  No Answer.  No Answer.  No Answer.  No Answer. 
+ANSW:No Answer
+EM:0
+F1:0.2222222222222222
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:2003 shared task: Language-independent named entity recognition,”in Proceedings of the 7th Conference on Natural Language Learning(Conll-03), vol. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:80 /81 /80 /81 /80 /81 /80 /81 /80 /81 /80 /81 /80 /81 /80 /81 /
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:"No Answer"  [49] H. Zhu, “On the relationship between (secure) multi-party computationand (secure) federated learning,” arX
+ANSW:No Answer
+EM:0
+F1:0.2222222222222222
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. The context does not provide information about the specific algorithm used for the data loading procedures, and how it optimizes data transfer and memory usage. It
+ANSW:No Answer
+EM:0
+F1:0.13333333333333333
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer
+
+
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED: τ, is a sequence of states and actions, i.e., τ = (𝑠!, 𝑎!), (𝑠", 𝑎
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:Distribution of data may need to have speciﬁc authorizations, especially if we are dealing with sensitive or private data.  
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED: /119 /122 /125 /128 /139 /136 /121 /120 /121 /127 /118 /122 /118 /120 /125 /121
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  The context does not mention any industrial applications explored using MOPO after the initial publication in 2020.  However, it does mention that
+ANSW:No Answer
+EM:0
+F1:0.15384615384615385
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  Homomorphic encryption, secure joint computation from multiple parties, and differential privacy are some of the means for mitigating privacy breaches. Respectively,
+ANSW:No Answer
+EM:0
+F1:0.16
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:Python. 1.1.1. 2.1.1. 3.1.1. 4.1.1. 5
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. The context does not specify the discrete action settings explored by Petros Christodoulou. However, it does mention that the Soft Actor-Critic
+ANSW:No Answer
+EM:0
+F1:0.16
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  Peer review is the core quality control mechanism in modern science. While not perfect, it is often “compared with democracy in being the least
+ANSW:No Answer
+EM:0
+F1:0.14285714285714288
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  Researchers in [ 120] implementeddifferential-privacy schemes for protecting patients’ data ina FL setup designed for brain tumour segmentation on
+ANSW:No Answer
+EM:0
+F1:0.18181818181818182
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:, IGI Global,2020.[146] S. S. S. Rao, “Sentiment analysis of text data using deep learning,”in Proceedings of
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED: /165 /206 /162 /161 /170 /162 □ /171 /162 /158 /171 □ /158 /162 /171 /158
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:"No Answer"  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED: behaviour. The cluster id isalso shown in the PCA plot in Fig. 6(a). The action description is obtained from the action attribu-tion module
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:"However, in highly complex or non-stationary environments, the causal explanations may not be sufﬁciently informative, and the causal relationships may be
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED: barriers of conventional FL in the context of cameras and field programmable gate arrays (FPGA) attached cameras being orchestrated in an FL setting?  
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:"Re-understanding finite-state representations of recurrent policy networks has practical implications for improving the sample efficiency and generalizability of RL algorithms, which can lead to faster
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED: /113 /114 /115 /116 /117 /118 /119 /120 /121 /122 /123 /124 /125 /126 /127 /128
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,761 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:09,792 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer
+
+
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:.2. Grid-world Environment – We used the same training procedure as in the Seaquest AtariEnvironment, but with a maximum of 10,000 episodes.
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer
+
+
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer
+
+
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:"No Answer" 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer
+
+
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED: /69 /69 /157 /68 /70 /64 /77 /68 /76 /70 /64 /71 /74 /77 /67 /64
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:ukla, S. K. Singh, and S. K. Singh, “Federated learning foractivity recognition using transfer learning,” Journal of Ambient Intelligence
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:"No Answer"  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:ﬁers was proposed in [99]. The parserwas trained on a large-scale dataset and achieved state-of-the-artresults. The parser was also able to
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:pour, “A survey on federated learning for edgecomputing,” IEEE Communications Surveys & Tutorials, vol. 25, no. 1,
+ANSW:No Answer
+EM:0
+F1:0.1111111111111111
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:"We propose a new off-policy actor-critic algorithm, called TD3, that uses two actor networks and two critic networks, and a target network for the critic
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:"Soft Actor-Critic (SAC) is a model-free reinforcement learning algorithm that combines the benefits of maximum entropy reinforcement learning and actor-critic methods. The
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:, “A critical review ofrecurrent neural networks for sequence prediction,” arXiv preprintarXiv:1506.00010, 2015
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer
+
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer.  This approach is highly appropriate for wireless topologies, where network conditions and user availability can undergo rapid changes.● Turbo-aggregate's secure aggregation
+ANSW:No Answer
+EM:0
+F1:0.16
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer
+
+
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:? 
+
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer.  
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:"We employ two methods to analyze and re-understand the finite-state representations of RPNs: (1) a novel method called "Finite-State Representation Analysis"
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer
+
+
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer.  Finally, while we discuss ethics- and data-related questions since they directly influence the NLP practice, our paper does not focus on policies,
+ANSW:No Answer
+EM:0
+F1:0.15384615384615385
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:? 
+
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer
+
+
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:No Answer. 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-15 22:57:17,766 - INFO - 
+PRED:1 0.0000 0.00000 1.0000 0.0000 0.00000 0.0000 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-15 22:57:17,798 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.

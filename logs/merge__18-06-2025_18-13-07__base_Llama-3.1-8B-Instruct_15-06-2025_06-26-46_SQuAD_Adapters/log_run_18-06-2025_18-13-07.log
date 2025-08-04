@@ -1,0 +1,214 @@
+2025-06-18 18:13:07,801 - INFO - Start logger
+------------ CONFIGURATE ------------ 
+{'model': {'name': 'meta-llama/Llama-3.1-8B-Instruct', 'model_name_log': 'base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters', 'cache_dir': './merge_models/base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/', 'quant_config': None, 'max_length': 512, 'max_new_tokens': 32, 'tokenizer': {'padding_size': 'left', 'answer_pattern': '### answer:\n'}}, 'lora': {'r': 16, 'lora_alpha': 32, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'o_proj', 'v_proj', 'k_proj']}, 'inference': {'temp': 0.4}, 'evaluate_model': {'full_path_check': './saved_models/train__15-06-2025_14-38-14__base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/', 'checkpoint': 'checkpoint-90/'}, 'train': {'model_save_dir': './saved_models', 'epochs': 30, 'train_batch': 2, 'val_batch': 70, 'test_batch': 70, 'grad_accum': 256, 'eval_step': 30, 'save_step': 30, 'torch_empty_cache_steps': 8, 'log_step': 10, 'lr': 2e-05, 'weight_decay': 0.01}, 'merge': {'dir': './merge_models'}, 'logs': {'dir': './logs'}}
+------------ ------------
+2025-06-18 18:13:07,801 - INFO - MODEL BASE MERGE : ./saved_models/train__15-06-2025_14-38-14__base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters//checkpoint-90/
+2025-06-18 18:13:07,803 - INFO - 
+Model arch:
+PeftModelForCausalLM(
+  (base_model): LoraModel(
+    (model): LlamaForCausalLM(
+      (model): LlamaModel(
+        (embed_tokens): Embedding(128256, 4096)
+        (layers): ModuleList(
+          (0-31): 32 x LlamaDecoderLayer(
+            (self_attn): LlamaAttention(
+              (q_proj): lora.Linear(
+                (base_layer): Linear(in_features=4096, out_features=4096, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=4096, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (k_proj): lora.Linear(
+                (base_layer): Linear(in_features=4096, out_features=1024, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=1024, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (v_proj): lora.Linear(
+                (base_layer): Linear(in_features=4096, out_features=1024, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=1024, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (o_proj): lora.Linear(
+                (base_layer): Linear(in_features=4096, out_features=4096, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=4096, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+            )
+            (mlp): LlamaMLP(
+              (gate_proj): Linear(in_features=4096, out_features=14336, bias=False)
+              (up_proj): Linear(in_features=4096, out_features=14336, bias=False)
+              (down_proj): Linear(in_features=14336, out_features=4096, bias=False)
+              (act_fn): SiLU()
+            )
+            (input_layernorm): LlamaRMSNorm((4096,), eps=1e-05)
+            (post_attention_layernorm): LlamaRMSNorm((4096,), eps=1e-05)
+          )
+        )
+        (norm): LlamaRMSNorm((4096,), eps=1e-05)
+        (rotary_emb): LlamaRotaryEmbedding()
+      )
+      (lm_head): Linear(in_features=4096, out_features=128256, bias=False)
+    )
+  )
+)
+
+Model config:
+LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 128,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 8.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": false,
+  "vocab_size": 128256
+}
+
+
+2025-06-18 18:13:10,000 - INFO - 
+Model arch:
+LlamaForCausalLM(
+  (model): LlamaModel(
+    (embed_tokens): Embedding(128256, 4096)
+    (layers): ModuleList(
+      (0-31): 32 x LlamaDecoderLayer(
+        (self_attn): LlamaAttention(
+          (q_proj): Linear(in_features=4096, out_features=4096, bias=False)
+          (k_proj): Linear(in_features=4096, out_features=1024, bias=False)
+          (v_proj): Linear(in_features=4096, out_features=1024, bias=False)
+          (o_proj): Linear(in_features=4096, out_features=4096, bias=False)
+        )
+        (mlp): LlamaMLP(
+          (gate_proj): Linear(in_features=4096, out_features=14336, bias=False)
+          (up_proj): Linear(in_features=4096, out_features=14336, bias=False)
+          (down_proj): Linear(in_features=14336, out_features=4096, bias=False)
+          (act_fn): SiLU()
+        )
+        (input_layernorm): LlamaRMSNorm((4096,), eps=1e-05)
+        (post_attention_layernorm): LlamaRMSNorm((4096,), eps=1e-05)
+      )
+    )
+    (norm): LlamaRMSNorm((4096,), eps=1e-05)
+    (rotary_emb): LlamaRotaryEmbedding()
+  )
+  (lm_head): Linear(in_features=4096, out_features=128256, bias=False)
+)
+
+Model config:
+LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 128,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 8.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": false,
+  "vocab_size": 128256
+}
+
+
+2025-06-18 18:13:10,001 - INFO - Configuration saved in ./merge_models/base_base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters_18-06-2025_18-13-07_SQuAD_Adapters/config.json
+2025-06-18 18:13:10,001 - INFO - Configuration saved in ./merge_models/base_base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters_18-06-2025_18-13-07_SQuAD_Adapters/generation_config.json
+2025-06-18 18:13:18,802 - INFO - The model is bigger than the maximum size per checkpoint (5GB) and is going to be split in 4 checkpoint shards. You can find where each parameters has been saved in the index located at ./merge_models/base_base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters_18-06-2025_18-13-07_SQuAD_Adapters/model.safetensors.index.json.
+2025-06-18 18:13:18,802 - INFO - chat template saved in ./merge_models/base_base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters_18-06-2025_18-13-07_SQuAD_Adapters/chat_template.jinja
+2025-06-18 18:13:18,803 - INFO - tokenizer config file saved in ./merge_models/base_base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters_18-06-2025_18-13-07_SQuAD_Adapters/tokenizer_config.json
+2025-06-18 18:13:18,803 - INFO - Special tokens file saved in ./merge_models/base_base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters_18-06-2025_18-13-07_SQuAD_Adapters/special_tokens_map.json
+2025-06-18 18:13:18,888 - INFO - Model saved

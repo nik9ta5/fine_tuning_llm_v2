@@ -1,0 +1,229 @@
+2025-07-06 15:38:09,185 - INFO - init app
+2025-07-06 15:38:10,566 - INFO - 
+train: 8650
+val: 2164
+2025-07-06 15:38:10,573 - INFO - Unused kwargs: ['bnb_8bit_quant_type', 'bnb_8bit_compute_dtype', 'bnb_8bit_use_double_quant']. These kwargs are not used in <class 'transformers.utils.quantization_config.BitsAndBytesConfig'>.
+2025-07-06 15:38:10,596 - INFO - loading file tokenizer.model
+2025-07-06 15:38:10,596 - INFO - loading file tokenizer.json
+2025-07-06 15:38:10,596 - INFO - loading file added_tokens.json
+2025-07-06 15:38:10,596 - INFO - loading file special_tokens_map.json
+2025-07-06 15:38:10,596 - INFO - loading file tokenizer_config.json
+2025-07-06 15:38:10,596 - INFO - loading file chat_template.jinja
+2025-07-06 15:38:12,233 - INFO - loading configuration file ../../../all_language_models/models--google--gemma-3-1b-it/snapshots/dcc83ea841ab6100d6b47a070329e1ba4cf78752\config.json
+2025-07-06 15:38:12,237 - INFO - Model config Gemma3TextConfig {
+  "architectures": [
+    "Gemma3ForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "attn_logit_softcapping": null,
+  "bos_token_id": 2,
+  "cache_implementation": "hybrid",
+  "eos_token_id": [
+    1,
+    106
+  ],
+  "final_logit_softcapping": null,
+  "head_dim": 256,
+  "hidden_activation": "gelu_pytorch_tanh",
+  "hidden_size": 1152,
+  "initializer_range": 0.02,
+  "intermediate_size": 6912,
+  "max_position_embeddings": 32768,
+  "model_type": "gemma3_text",
+  "num_attention_heads": 4,
+  "num_hidden_layers": 26,
+  "num_key_value_heads": 1,
+  "pad_token_id": 0,
+  "query_pre_attn_scalar": 256,
+  "rms_norm_eps": 1e-06,
+  "rope_local_base_freq": 10000,
+  "rope_scaling": null,
+  "rope_theta": 1000000,
+  "sliding_window": 512,
+  "sliding_window_pattern": 6,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.51.3",
+  "use_cache": true,
+  "vocab_size": 262144
+}
+
+2025-07-06 15:38:12,370 - INFO - The device_map was not initialized. Setting device_map to {'': 0}. If you want to use the model for inference, please set device_map ='auto' 
+2025-07-06 15:38:12,370 - INFO - loading weights file ../../../all_language_models/models--google--gemma-3-1b-it/snapshots/dcc83ea841ab6100d6b47a070329e1ba4cf78752\model.safetensors
+2025-07-06 15:38:12,391 - INFO - Instantiating Gemma3ForCausalLM model under default dtype torch.bfloat16.
+2025-07-06 15:38:12,392 - INFO - Generate config GenerationConfig {
+  "bos_token_id": 2,
+  "cache_implementation": "hybrid",
+  "eos_token_id": [
+    1,
+    106
+  ],
+  "pad_token_id": 0
+}
+
+2025-07-06 15:38:18,347 - INFO - All model checkpoint weights were used when initializing Gemma3ForCausalLM.
+
+2025-07-06 15:38:18,347 - INFO - All the weights of Gemma3ForCausalLM were initialized from the model checkpoint at ../../../all_language_models/models--google--gemma-3-1b-it/snapshots/dcc83ea841ab6100d6b47a070329e1ba4cf78752.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use Gemma3ForCausalLM for predictions without further training.
+2025-07-06 15:38:18,350 - INFO - loading configuration file ../../../all_language_models/models--google--gemma-3-1b-it/snapshots/dcc83ea841ab6100d6b47a070329e1ba4cf78752\generation_config.json
+2025-07-06 15:38:18,350 - INFO - Generate config GenerationConfig {
+  "bos_token_id": 2,
+  "cache_implementation": "hybrid",
+  "do_sample": true,
+  "eos_token_id": [
+    1,
+    106
+  ],
+  "pad_token_id": 0,
+  "top_k": 64,
+  "top_p": 0.95
+}
+
+2025-07-06 15:38:18,364 - INFO - model load
+2025-07-06 15:38:18,536 - INFO - ### answer:
+
+2025-07-06 15:38:18,537 - INFO - PyTorch: setting up devices
+2025-07-06 15:38:19,259 - INFO - Using auto half precision backend
+2025-07-06 15:38:19,260 - WARNING - No label_names provided for model class `PeftModelForCausalLM`. Since `PeftModel` hides base models input arguments, if label_names is not given, label_names can't be set automatically within `Trainer`. Note that empty label_names list will be used instead.
+2025-07-06 15:38:19,261 - INFO - Start training for model gemma-3-1b-pt
+2025-07-06 15:38:19,430 - INFO - ***** Running training *****
+2025-07-06 15:38:19,430 - INFO -   Num examples = 24
+2025-07-06 15:38:19,430 - INFO -   Num Epochs = 3
+2025-07-06 15:38:19,430 - INFO -   Instantaneous batch size per device = 2
+2025-07-06 15:38:19,430 - INFO -   Total train batch size (w. parallel, distributed & accumulation) = 4
+2025-07-06 15:38:19,430 - INFO -   Gradient Accumulation steps = 2
+2025-07-06 15:38:19,430 - INFO -   Total optimization steps = 18
+2025-07-06 15:38:19,432 - INFO -   Number of trainable parameters = 1,810,432
+2025-07-06 15:38:32,946 - INFO - 
+Step 1: loss = 3.5673
+Step 1: grad_norm = 3.520993709564209
+Step 1: learning_rate = 2e-05
+Step 1: num_tokens = 2048.0
+Step 1: mean_token_accuracy = 0.3694489449262619
+Step 1: epoch = 0.16666666666666666
+2025-07-06 15:38:32,975 - INFO - 
+***** Running Evaluation *****
+2025-07-06 15:38:32,975 - INFO -   Num examples = 5
+2025-07-06 15:38:32,975 - INFO -   Batch size = 2
+2025-07-06 15:38:37,927 - INFO - 
+Step 1: eval_loss = 2.5481162071228027
+Step 1: eval_runtime = 4.9525
+Step 1: eval_samples_per_second = 1.01
+Step 1: eval_steps_per_second = 0.606
+Step 1: eval_num_tokens = 2048.0
+Step 1: eval_mean_token_accuracy = 0.7013248999913534
+Step 1: epoch = 0.16666666666666666
+2025-07-06 15:38:37,932 - INFO - Saving model checkpoint to ./saved_models/train__06-07-2025_15-38-18__gemma-3-1b-pt\checkpoint-1
+2025-07-06 15:38:37,968 - INFO - loading configuration file ../../../all_language_models/models--google--gemma-3-1b-it/snapshots/dcc83ea841ab6100d6b47a070329e1ba4cf78752\config.json
+2025-07-06 15:38:37,969 - INFO - Model config Gemma3TextConfig {
+  "architectures": [
+    "Gemma3ForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "attn_logit_softcapping": null,
+  "bos_token_id": 2,
+  "cache_implementation": "hybrid",
+  "eos_token_id": [
+    1,
+    106
+  ],
+  "final_logit_softcapping": null,
+  "head_dim": 256,
+  "hidden_activation": "gelu_pytorch_tanh",
+  "hidden_size": 1152,
+  "initializer_range": 0.02,
+  "intermediate_size": 6912,
+  "max_position_embeddings": 32768,
+  "model_type": "gemma3_text",
+  "num_attention_heads": 4,
+  "num_hidden_layers": 26,
+  "num_key_value_heads": 1,
+  "pad_token_id": 0,
+  "query_pre_attn_scalar": 256,
+  "rms_norm_eps": 1e-06,
+  "rope_local_base_freq": 10000,
+  "rope_scaling": null,
+  "rope_theta": 1000000,
+  "sliding_window": 512,
+  "sliding_window_pattern": 6,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.51.3",
+  "use_cache": true,
+  "vocab_size": 262144
+}
+
+2025-07-06 15:38:38,036 - INFO - tokenizer config file saved in ./saved_models/train__06-07-2025_15-38-18__gemma-3-1b-pt\checkpoint-1\tokenizer_config.json
+2025-07-06 15:38:38,037 - INFO - Special tokens file saved in ./saved_models/train__06-07-2025_15-38-18__gemma-3-1b-pt\checkpoint-1\special_tokens_map.json
+2025-07-06 15:38:48,926 - INFO - 
+Step 2: loss = 3.835
+Step 2: grad_norm = 2.4521780014038086
+Step 2: learning_rate = 1.888888888888889e-05
+Step 2: num_tokens = 4096.0
+Step 2: mean_token_accuracy = 0.3996390104293823
+Step 2: epoch = 0.3333333333333333
+2025-07-06 15:38:48,929 - INFO - 
+***** Running Evaluation *****
+2025-07-06 15:38:48,929 - INFO -   Num examples = 5
+2025-07-06 15:38:48,930 - INFO -   Batch size = 2
+2025-07-06 15:38:54,442 - INFO - 
+Step 2: eval_loss = 2.704000234603882
+Step 2: eval_runtime = 5.5126
+Step 2: eval_samples_per_second = 0.907
+Step 2: eval_steps_per_second = 0.544
+Step 2: eval_num_tokens = 4096.0
+Step 2: eval_mean_token_accuracy = 0.5323851903279623
+Step 2: epoch = 0.3333333333333333
+2025-07-06 15:38:54,444 - INFO - Saving model checkpoint to ./saved_models/train__06-07-2025_15-38-18__gemma-3-1b-pt\checkpoint-2
+2025-07-06 15:38:54,464 - INFO - loading configuration file ../../../all_language_models/models--google--gemma-3-1b-it/snapshots/dcc83ea841ab6100d6b47a070329e1ba4cf78752\config.json
+2025-07-06 15:38:54,465 - INFO - Model config Gemma3TextConfig {
+  "architectures": [
+    "Gemma3ForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "attn_logit_softcapping": null,
+  "bos_token_id": 2,
+  "cache_implementation": "hybrid",
+  "eos_token_id": [
+    1,
+    106
+  ],
+  "final_logit_softcapping": null,
+  "head_dim": 256,
+  "hidden_activation": "gelu_pytorch_tanh",
+  "hidden_size": 1152,
+  "initializer_range": 0.02,
+  "intermediate_size": 6912,
+  "max_position_embeddings": 32768,
+  "model_type": "gemma3_text",
+  "num_attention_heads": 4,
+  "num_hidden_layers": 26,
+  "num_key_value_heads": 1,
+  "pad_token_id": 0,
+  "query_pre_attn_scalar": 256,
+  "rms_norm_eps": 1e-06,
+  "rope_local_base_freq": 10000,
+  "rope_scaling": null,
+  "rope_theta": 1000000,
+  "sliding_window": 512,
+  "sliding_window_pattern": 6,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.51.3",
+  "use_cache": true,
+  "vocab_size": 262144
+}
+
+2025-07-06 15:38:54,510 - INFO - tokenizer config file saved in ./saved_models/train__06-07-2025_15-38-18__gemma-3-1b-pt\checkpoint-2\tokenizer_config.json
+2025-07-06 15:38:54,511 - INFO - Special tokens file saved in ./saved_models/train__06-07-2025_15-38-18__gemma-3-1b-pt\checkpoint-2\special_tokens_map.json
+2025-07-06 15:39:06,199 - INFO - 
+Step 3: loss = 3.3665
+Step 3: grad_norm = 2.815516471862793
+Step 3: learning_rate = 1.7777777777777777e-05
+Step 3: num_tokens = 6144.0
+Step 3: mean_token_accuracy = 0.45831140875816345
+Step 3: epoch = 0.5
+2025-07-06 15:39:06,203 - INFO - 
+***** Running Evaluation *****
+2025-07-06 15:39:06,203 - INFO -   Num examples = 5
+2025-07-06 15:39:06,203 - INFO -   Batch size = 2

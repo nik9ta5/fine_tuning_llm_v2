@@ -1,0 +1,1312 @@
+2025-06-14 17:21:18,872 - INFO - Start logger
+------------ CONFIGURATE ------------ 
+{'model': {'name': 'meta-llama/Llama-3.1-8B-Instruct', 'model_name_log': 'Llama-3.1-8B-Instruct', 'cache_dir': '../ft_v1/models_cache/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659/', 'quant_config': None, 'max_length': 512, 'max_new_tokens': 32, 'tokenizer': {'padding_size': 'left', 'answer_pattern': '### answer:\n'}}, 'lora': {'r': 16, 'lora_alpha': 32, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'o_proj', 'v_proj', 'k_proj']}, 'inference': {'temp': 0.4}, 'evaluate_model': {'checkpoint': 'checkpoint-100/'}, 'train': {'model_save_dir': './saved_models', 'epochs': 2, 'train_batch': 2, 'val_batch': 32, 'test_batch': 32, 'grad_accum': 256, 'eval_step': 25, 'save_step': 25, 'torch_empty_cache_steps': 8, 'log_step': 15, 'lr': 2e-05, 'weight_decay': 0.01}, 'logs': {'dir': './logs'}}
+------------ ------------
+2025-06-14 17:21:18,872 - INFO - MODEL CHECKPOINT EVAL: ./saved_models/train__14-06-2025_06-57-34__Llama-3.1-8B-Instruct/checkpoint-100/
+2025-06-14 17:21:18,875 - INFO - 
+Model arch:
+PeftModelForCausalLM(
+  (base_model): LoraModel(
+    (model): LlamaForCausalLM(
+      (model): LlamaModel(
+        (embed_tokens): Embedding(128256, 4096)
+        (layers): ModuleList(
+          (0-31): 32 x LlamaDecoderLayer(
+            (self_attn): LlamaAttention(
+              (q_proj): lora.Linear8bitLt(
+                (base_layer): Linear8bitLt(in_features=4096, out_features=4096, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=4096, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (k_proj): lora.Linear8bitLt(
+                (base_layer): Linear8bitLt(in_features=4096, out_features=1024, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=1024, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (v_proj): lora.Linear8bitLt(
+                (base_layer): Linear8bitLt(in_features=4096, out_features=1024, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=1024, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (o_proj): lora.Linear8bitLt(
+                (base_layer): Linear8bitLt(in_features=4096, out_features=4096, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=4096, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+            )
+            (mlp): LlamaMLP(
+              (gate_proj): Linear8bitLt(in_features=4096, out_features=14336, bias=False)
+              (up_proj): Linear8bitLt(in_features=4096, out_features=14336, bias=False)
+              (down_proj): Linear8bitLt(in_features=14336, out_features=4096, bias=False)
+              (act_fn): SiLU()
+            )
+            (input_layernorm): LlamaRMSNorm((4096,), eps=1e-05)
+            (post_attention_layernorm): LlamaRMSNorm((4096,), eps=1e-05)
+          )
+        )
+        (norm): LlamaRMSNorm((4096,), eps=1e-05)
+        (rotary_emb): LlamaRotaryEmbedding()
+      )
+      (lm_head): Linear(in_features=4096, out_features=128256, bias=False)
+    )
+  )
+)
+
+Model config:
+LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 128,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "quantization_config": {
+    "_load_in_4bit": false,
+    "_load_in_8bit": true,
+    "bnb_4bit_compute_dtype": "float32",
+    "bnb_4bit_quant_storage": "uint8",
+    "bnb_4bit_quant_type": "fp4",
+    "bnb_4bit_use_double_quant": false,
+    "llm_int8_enable_fp32_cpu_offload": false,
+    "llm_int8_has_fp16_weight": false,
+    "llm_int8_skip_modules": null,
+    "llm_int8_threshold": 6.0,
+    "load_in_4bit": false,
+    "load_in_8bit": true,
+    "quant_method": "bitsandbytes"
+  },
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 8.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": false,
+  "vocab_size": 128256
+}
+
+
+2025-06-14 17:21:18,875 - INFO - Start eval for model Llama-3.1-8B-Instruct
+2025-06-14 17:21:18,875 - INFO - Test model. Calculate metrics
+2025-06-14 17:21:18,891 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:21:23,571 - INFO - 
+PRED:France. 
+ANSW:France
+EM:1
+F1:1.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:The 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from
+ANSW:10th and 11th centuries
+EM:0
+F1:0.3076923076923077
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:Denmark, Iceland and Norway who, under their leader Rollo, agreed to swear fealty to King Charles III of West Francia. 
+ANSW:Denmark, Iceland and Norway
+EM:0
+F1:0.33333333333333337
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:Rollo, agreed to swear fealty to King Charles III of West Francia. Through generations of assimilation and mixing with the native Frankish and Roman-G
+ANSW:Rollo
+EM:0
+F1:0.07999999999999999
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:The distinct cultural and ethnic identity of the Normans emerged initially in the first half of the 10th century, and it continued to evolve over the succeeding centuries
+ANSW:10th century
+EM:0
+F1:0.13333333333333333
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:King Charles III of West Francia. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:William the Conqueror, led to the Norman conquest of England at the Battle of Hastings in 1066. Norman adventurers founded the Kingdom of Sicily under
+ANSW:William the Conqueror
+EM:0
+F1:0.21428571428571425
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:Richard I of Normandy was forged into a cohesive and formidable principality in feudal tenure. The Normans are noted both for their culture, such as their unique
+ANSW:Richard I
+EM:0
+F1:0.13793103448275862
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:Catholic orthodoxy into which they assimilated. 
+ANSW:Catholic
+EM:0
+F1:0.2857142857142857
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:major political, cultural and military impact on medieval Europe and even the Near East. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:exponents of the Catholic orthodoxy into which they assimilated. They adopted the Gallo-Romance language of the Frankish land they settled, their dialect
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:Richard I of Normandy was forged into a cohesive and formidable principality in feudal tenure. The Normans are noted both for their culture, such as their unique
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:Kingdom of Sicily under Roger II after conquering southern Italy on the Saracens and Byzantines, and an expedition on behalf of their duke,
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:Northman or directly from Old Norse Norðmaðr, Latinized variously as Nortmannus, Normannus, or Nordmannus (
+ANSW:Viking
+EM:0
+F1:0.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:9th century) to mean "Norseman, Viking". 
+ANSW:9th century
+EM:0
+F1:0.5
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:Normans/Normanz, plural of Normant, modern French normand, which is itself borrowed from Old Low Franconian Nortmann "Northman
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:9th century) to mean "Norseman, Viking". 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:911 as a fiefdom, was established by the treaty of Saint-Clair-sur-Epte between King Charles III of West Francia and the famed Viking
+ANSW:911
+EM:0
+F1:0.08695652173913045
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:King Charles III of West Francia and the famed Viking ruler Rollo, and was situated in the former Frankish kingdom of Neustria. The treaty offered R
+ANSW:King Charles III
+EM:0
+F1:0.20689655172413793
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:river Epte and the Atlantic coast in exchange for their protection against further Viking incursions. The area corresponded to the northern part of present-day Upper Normandy
+ANSW:Seine
+EM:0
+F1:0.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:King Charles III of West Francia and the famed Viking ruler Rollo, and was situated in the former Frankish kingdom of Neustria. The treaty offered R
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:further Viking incursions. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:No Answer 
+ANSW:Rollo
+EM:0
+F1:0.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:Danes, Norwegians, Norse–Gaels, Orkney Vikings, possibly Swedes, and Anglo-Danes from the English Danelaw under
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:23,571 - INFO - 
+PRED:No Answer 
+ANSW:Catholicism
+EM:0
+F1:0.0
+
+2025-06-14 17:21:23,585 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:21:28,057 - INFO - 
+PRED:north of France. 
+ANSW:north
+EM:0
+F1:0.5
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:Catholicism (Christianity) and the Gallo-Romance language of the local people, blending their maternal Frankish heritage with Old Norse traditions and customs
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:Frankish heritage with Old Norse traditions and customs to synthesize a unique "Norman" culture in the north of France. The Norman language was forged by the
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:fighting horsemen for more than a generation. 
+ANSW:fighting horsemen
+EM:0
+F1:0.4444444444444445
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:Seljuk Turks. 
+ANSW:Seljuk Turks
+EM:1
+F1:1.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:Lombards to act against the Byzantines, but they soon fought in Byzantine service in Sicily. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:Sicilian campaign of George Maniaces in 1038–40. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:One of the first Norman mercenaries to serve as a Byzantine general was Hervé in the 1050s. 
+ANSW:1050s
+EM:0
+F1:0.1111111111111111
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:1060s, Robert Crispin led the Normans of Edessa against the Turks. 
+ANSW:1060s
+EM:0
+F1:0.16666666666666669
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:Alexius Komnenos. 
+ANSW:Alexius Komnenos
+EM:1
+F1:1.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:Hervé in the 1050s. By then however, there were already Norman mercenaries serving as far away as Trebizond and Georgia. ### instructions
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:the 1050s. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:Roussel de Bailleul 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:Afranji, meaning "Franks." 
+ANSW:Afranji
+EM:0
+F1:0.5
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:Oursel led a force of "Franks" into the upper Euphrates valley in northern Syria. From 1073 to 1074,
+ANSW:Oursel
+EM:0
+F1:0.10526315789473684
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:Some Normans joined Turkish forces to aid in the destruction of the Armenians vassal-states of Sassoun and Taron in far eastern Anatolia. ###
+ANSW:Turkish forces
+EM:0
+F1:0.16666666666666669
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:Some Normans joined Turkish forces to aid in the destruction of the Armenians vassal-states of Sassoun and Taron in far eastern Anatolia. ###
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:Oursel led a force of "Franks" into the upper Euphrates valley in northern Syria. From 1073 to 1074,
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:upper Euphrates valley in northern Syria. From 1073 to 1074, 8,000 of the 20,000 troops of the
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:of Norman mercenary origin during the period of the Comnenian Restoration, when Byzantine emperors were seeking out western European warriors. The Raouli
+ANSW:Norman mercenary
+EM:0
+F1:0.16666666666666669
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:Byzantine Greece were of Norman mercenary origin during the period of the Comnenian Restoration, when Byzantine emperors were seeking out western European warriors
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:George Maniaces in the Sicilian expedition of 1038. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:Sicilian expedition of 1038. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:28,057 - INFO - 
+PRED:Robert Guiscard, an other Norman adventurer previously elevated to the dignity of count of Apulia as the result of his military successes, ultimately drove the Byzantines
+ANSW:Robert Guiscard
+EM:0
+F1:0.14285714285714288
+
+2025-06-14 17:21:28,071 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:21:32,539 - INFO - 
+PRED:February 1082, when Dyrrachium was betrayed to the Normans by the Venetian and Amalfitan merchants who had settled there. The
+ANSW:1082
+EM:0
+F1:0.09523809523809523
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:30,000 men in 300 ships landing on the southern shores of Albania, capturing Valona, Kanina, Jericho (Orikumi), and reaching
+ANSW:30,000
+EM:0
+F1:0.1
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:Deabolis. 
+ANSW:Deabolis
+EM:1
+F1:1.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:Bohemond, Robert's son, landed in Valona and besieged Dyrrachium using the most sophisticated military equipment of the time, but to no
+ANSW:Bohemond
+EM:0
+F1:0.0909090909090909
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:Deabolis, Gllavenica (Ballsh), Kanina and Jericho. This time, the Albanians sided with the Normans, dissatisfied
+ANSW:Deabolis
+EM:0
+F1:0.125
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:Dyrrachium using the most sophisticated military equipment of the time, but to no avail. Meanwhile, they occupied Petrela, the citadel of
+ANSW:No Answer
+EM:0
+F1:0.08695652173913042
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:Bohemond, Robert's son, landed in Valona and besieged Dyrrachium using the most sophisticated military equipment of the time, but to no
+ANSW:No Answer
+EM:0
+F1:0.08695652173913042
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:1185, when a large Norman army invaded Dyrrachium, owing to the betrayal of high Byzantine officials. Some time later, Dyrrachium
+ANSW:1185
+EM:0
+F1:0.09523809523809523
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:Dyrrachium 
+ANSW:Dyrrachium
+EM:1
+F1:1.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:one of the most important naval bases of the Adriatic—fell again to Byzantine hands. 
+ANSW:the Adriatic
+EM:0
+F1:0.125
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:Dyrrachium—one of the most important naval bases of the Adriatic—fell again to Byzantine hands. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:King Ethelred II of England. 
+ANSW:King Ethelred II
+EM:0
+F1:0.7499999999999999
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:Duke Richard II of Normandy, and King Ethelred II of England. Because of this, Ethelred fled to Normandy in 1013
+ANSW:Duke Richard II
+EM:0
+F1:0.2608695652173913
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:Normandy in 1013, when he was forced from his kingdom by Sweyn Forkbeard. His stay in Normandy (until 1016)
+ANSW:Normandy
+EM:0
+F1:0.1
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:Sweyn Forkbeard. 
+ANSW:Sweyn Forkbeard
+EM:1
+F1:1.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:Harthacnut, he brought with him a Norman-educated mind. He also brought many Norman counsellors and fighters, some of whom established an English cavalry
+ANSW:Harthacnut
+EM:0
+F1:0.08333333333333333
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:When finally Edward the Confessor returned from his father's refuge in 1041, at the invitation of his half-brother Harthacnut, he
+ANSW:1041
+EM:0
+F1:0.09523809523809523
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:Robert of Jumièges archbishop of Canterbury and made Ralph the Timid earl of Hereford. 
+ANSW:Robert of Jumièges
+EM:0
+F1:0.35294117647058826
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:English cavalry force. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:32,539 - INFO - 
+PRED:Battle of Hastings. The invading Normans and their descendants replaced the Anglo-Saxons as the ruling class of England. The nobility of England were part of
+ANSW:Battle of Hastings
+EM:0
+F1:0.21428571428571425
+
+2025-06-14 17:21:32,553 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:21:37,008 - INFO - 
+PRED:King Harold II at the Battle of Hastings. 
+ANSW:William II
+EM:0
+F1:0.2
+
+2025-06-14 17:21:37,008 - INFO - 
+PRED:No Answer 
+ANSW:1066
+EM:0
+F1:0.0
+
+2025-06-14 17:21:37,008 - INFO - 
+PRED:No Answer 
+ANSW:Anglo-Saxons
+EM:0
+F1:0.0
+
+2025-06-14 17:21:37,008 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,008 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:Modern English. 
+ANSW:Modern English
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:Geoffrey Chaucer. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:1169. 
+ANSW:1169
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:Ireland, after their invasion at Bannow Bay in 1169. 
+ANSW:Ireland
+EM:0
+F1:0.19999999999999998
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:Irish culture to the point that it has been said that they became "more Irish than the Irish themselves." 
+ANSW:Irish
+EM:0
+F1:0.1
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:Trim Castle and Dublin Castle. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:Edgar Atheling 
+ANSW:Edgar
+EM:0
+F1:0.6666666666666666
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:Malcolm III of Scotland 
+ANSW:King Malcolm III of Scotland
+EM:0
+F1:0.888888888888889
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:1072, riding as far as Abernethy where he met up with his fleet of ships. Malcolm submitted, paid homage to William and surrendered his son
+ANSW:1072
+EM:0
+F1:0.07692307692307693
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:Duncan 
+ANSW:Duncan
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:Duncan 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:Sybilla of Normandy 
+ANSW:Sybilla of Normandy
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:the "Davidian Revolution" 
+ANSW:Norman
+EM:0
+F1:0.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:Hereford and charged him with defending the Marches and warring with the Welsh. In these original ventures, the Normans failed to make any headway into
+ANSW:Hereford
+EM:0
+F1:0.07692307692307693
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:the Welsh. 
+ANSW:the Welsh
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:Edward the Confessor had set up the aforementioned Ralph as earl of Hereford and charged him with defending the Marches and warring with the Welsh. ###
+ANSW:Edward the Confessor
+EM:0
+F1:0.21428571428571425
+
+2025-06-14 17:21:37,009 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:37,024 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:21:41,486 - INFO - 
+PRED:Ralph 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:Wales was at some point subject to Norman interference. Norman words, such as baron (barwn), first entered Welsh at that time. 
+ANSW:Wales
+EM:0
+F1:0.0909090909090909
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:1018, Roger de Tosny travelled to the Iberian Peninsula to carve out a state for himself from Moorish lands, but failed. 
+ANSW:1018
+EM:0
+F1:0.0909090909090909
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:William of Montreuil led the papal army and took a huge booty. 
+ANSW:William of Montreuil
+EM:0
+F1:0.4
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:Antioch. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:Roger de Tosny travelled to the Iberian Peninsula to carve out a state for himself from Moorish lands, but failed. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:1097 
+ANSW:1097
+EM:1
+F1:1.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:Tancred with an army of Italo-Normans. Bohemond was the de facto leader of the Crusade during its passage through Asia Minor. After
+ANSW:Tancred
+EM:0
+F1:0.08695652173913045
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:conquest of Jerusalem and he worked for the expansion of the Crusader kingdom in Transjordan and the region of Galilee. 
+ANSW:Jerusalem
+EM:0
+F1:0.09523809523809523
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:Bohemond of Taranto and his nephew Tancred with an army of Italo-Normans. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:380 years 
+ANSW:380 years
+EM:1
+F1:1.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:a storm dispersed the fleet. 
+ANSW:a storm
+EM:0
+F1:0.5714285714285715
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:Berengaria 
+ANSW:Berengaria
+EM:1
+F1:1.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:No Answer 
+ANSW:1191
+EM:0
+F1:0.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:Isaac Komnenos. 
+ANSW:Isaac Komnenos
+EM:1
+F1:1.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:Richard the Lion-hearted left Messina with a large fleet in order to reach Acre. But a storm dispersed the fleet. After some searching, it was discovered
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:Isaac Komnenos. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:Conrad of Montferrat. 
+ANSW:Conrad of Montferrat
+EM:1
+F1:1.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:silver chains, because Richard had promised that he would not place him in irons. 
+ANSW:silver
+EM:0
+F1:0.13333333333333333
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:Richard de Camville and Robert de Thornham, as governors of Cyprus. 
+ANSW:Guy de Lusignan
+EM:0
+F1:0.14285714285714288
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:his daughter in marriage to the person named by Richard. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:41,486 - INFO - 
+PRED:Africa. 
+ANSW:Africa
+EM:1
+F1:1.0
+
+2025-06-14 17:21:41,500 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:21:45,956 - INFO - 
+PRED:Jean de Bethencourt and Gadifer de la Salle. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:Bethencourt took the title of King of the Canary Islands, as vassal to Henry III of Castile. 
+ANSW:Bethencourt
+EM:0
+F1:0.1111111111111111
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:Enrique Pérez de Guzmán, 2nd Count de Niebla. 
+ANSW:Enrique Pérez de Guzmán
+EM:0
+F1:0.6666666666666666
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:Enrique Pérez de Guzmán, 2nd Count de Niebla. 
+ANSW:Maciot de Bethencourt
+EM:0
+F1:0.18181818181818182
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:King of the Canary Islands, as vassal to Henry III of Castile. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:Maciot de Bethencourt 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:Channel Islands. 
+ANSW:Channel Islands
+EM:1
+F1:1.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:two customaries in Latin by two judges for use by them and their colleagues: These are the Très ancien coutumier (Very ancient customary), authored
+ANSW:two
+EM:0
+F1:0.07999999999999999
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:Très ancien coutumier (Very ancient customary) 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:Romanesque idiom to England and Italy, and the encastellation of these regions with keeps in their north French style fundamentally altered the military landscape. Their
+ANSW:Romanesque
+EM:0
+F1:0.07692307692307693
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:rounded arches, particularly over windows and doorways, and massive proportions. 
+ANSW:rounded
+EM:0
+F1:0.18181818181818182
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:rounded arches, particularly over windows and doorways, and massive proportions. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:No Answer 
+ANSW:Early Gothic
+EM:0
+F1:0.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:Anglo-Saxon and precedes the Early Gothic. 
+ANSW:Anglo-Saxon
+EM:0
+F1:0.2857142857142857
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:Kingdom of Sicily. 
+ANSW:Sicily
+EM:0
+F1:0.5
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:In the early 11th century the dukes began a programme of church reform, encouraging the Cluniac reform of monasteries and patronising intellectual pursuits
+ANSW:early 11th century
+EM:0
+F1:0.23076923076923078
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:the dukes as a unifying force for their disparate duchy. 
+ANSW:dukes
+EM:0
+F1:0.18181818181818182
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:the dukes began a programme of church reform, encouraging the Cluniac reform of monasteries and patronising intellectual pursuits, especially the proliferation of scriptoria
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:Normandy experienced a golden age of illustrated manuscripts, but it was brief and the major scriptoria of Normandy ceased to function after the midpoint of the century.
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:The French Wars of Religion in the 16th century and French Revolution in the 18th successively destroyed much of what existed in the way of the architectural
+ANSW:16th century
+EM:0
+F1:0.13793103448275862
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:embroidery. 
+ANSW:embroidery
+EM:1
+F1:1.0
+
+2025-06-14 17:21:45,956 - INFO - 
+PRED:By far the most famous work of Norman art is the Bayeux Tapestry, which is not a tapestry but a work of embroidery. 
+ANSW:Bayeux Tapestry
+EM:0
+F1:0.16
+
+2025-06-14 17:21:45,970 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.

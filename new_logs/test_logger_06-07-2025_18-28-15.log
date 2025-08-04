@@ -1,0 +1,445 @@
+2025-07-06 18:28:15,357 - INFO - init app
+2025-07-06 18:28:16,801 - INFO - 
+train: 8650
+val: 2164
+2025-07-06 18:28:16,835 - INFO - Unused kwargs: ['bnb_8bit_quant_type', 'bnb_8bit_compute_dtype', 'bnb_8bit_use_double_quant']. These kwargs are not used in <class 'transformers.utils.quantization_config.BitsAndBytesConfig'>.
+2025-07-06 18:28:16,873 - INFO - loading file tokenizer.model
+2025-07-06 18:28:16,873 - INFO - loading file tokenizer.json
+2025-07-06 18:28:16,873 - INFO - loading file added_tokens.json
+2025-07-06 18:28:16,874 - INFO - loading file special_tokens_map.json
+2025-07-06 18:28:16,874 - INFO - loading file tokenizer_config.json
+2025-07-06 18:28:16,874 - INFO - loading file chat_template.jinja
+2025-07-06 18:28:18,187 - INFO - loading configuration file ../../../all_language_models/models--google--gemma-3-1b-it/snapshots/dcc83ea841ab6100d6b47a070329e1ba4cf78752\config.json
+2025-07-06 18:28:18,206 - INFO - Model config Gemma3TextConfig {
+  "architectures": [
+    "Gemma3ForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "attn_logit_softcapping": null,
+  "bos_token_id": 2,
+  "cache_implementation": "hybrid",
+  "eos_token_id": [
+    1,
+    106
+  ],
+  "final_logit_softcapping": null,
+  "head_dim": 256,
+  "hidden_activation": "gelu_pytorch_tanh",
+  "hidden_size": 1152,
+  "initializer_range": 0.02,
+  "intermediate_size": 6912,
+  "max_position_embeddings": 32768,
+  "model_type": "gemma3_text",
+  "num_attention_heads": 4,
+  "num_hidden_layers": 26,
+  "num_key_value_heads": 1,
+  "pad_token_id": 0,
+  "query_pre_attn_scalar": 256,
+  "rms_norm_eps": 1e-06,
+  "rope_local_base_freq": 10000,
+  "rope_scaling": null,
+  "rope_theta": 1000000,
+  "sliding_window": 512,
+  "sliding_window_pattern": 6,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.51.3",
+  "use_cache": true,
+  "vocab_size": 262144
+}
+
+2025-07-06 18:28:19,236 - INFO - The device_map was not initialized. Setting device_map to {'': 0}. If you want to use the model for inference, please set device_map ='auto' 
+2025-07-06 18:28:19,236 - INFO - loading weights file ../../../all_language_models/models--google--gemma-3-1b-it/snapshots/dcc83ea841ab6100d6b47a070329e1ba4cf78752\model.safetensors
+2025-07-06 18:28:19,250 - INFO - Instantiating Gemma3ForCausalLM model under default dtype torch.bfloat16.
+2025-07-06 18:28:19,252 - INFO - Generate config GenerationConfig {
+  "bos_token_id": 2,
+  "cache_implementation": "hybrid",
+  "eos_token_id": [
+    1,
+    106
+  ],
+  "pad_token_id": 0
+}
+
+2025-07-06 18:28:24,592 - INFO - All model checkpoint weights were used when initializing Gemma3ForCausalLM.
+
+2025-07-06 18:28:24,593 - INFO - All the weights of Gemma3ForCausalLM were initialized from the model checkpoint at ../../../all_language_models/models--google--gemma-3-1b-it/snapshots/dcc83ea841ab6100d6b47a070329e1ba4cf78752.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use Gemma3ForCausalLM for predictions without further training.
+2025-07-06 18:28:24,610 - INFO - loading configuration file ../../../all_language_models/models--google--gemma-3-1b-it/snapshots/dcc83ea841ab6100d6b47a070329e1ba4cf78752\generation_config.json
+2025-07-06 18:28:24,611 - INFO - Generate config GenerationConfig {
+  "bos_token_id": 2,
+  "cache_implementation": "hybrid",
+  "do_sample": true,
+  "eos_token_id": [
+    1,
+    106
+  ],
+  "pad_token_id": 0,
+  "top_k": 64,
+  "top_p": 0.95
+}
+
+2025-07-06 18:28:24,625 - INFO - model load
+2025-07-06 18:28:24,804 - INFO - ### answer:
+
+2025-07-06 18:28:24,805 - INFO - PyTorch: setting up devices
+2025-07-06 18:28:25,748 - INFO - Using auto half precision backend
+2025-07-06 18:28:25,749 - WARNING - No label_names provided for model class `PeftModelForCausalLM`. Since `PeftModel` hides base models input arguments, if label_names is not given, label_names can't be set automatically within `Trainer`. Note that empty label_names list will be used instead.
+2025-07-06 18:28:25,749 - INFO - Start training for model gemma-3-1b-pt
+2025-07-06 18:28:25,925 - INFO - ***** Running training *****
+2025-07-06 18:28:25,925 - INFO -   Num examples = 24
+2025-07-06 18:28:25,925 - INFO -   Num Epochs = 3
+2025-07-06 18:28:25,925 - INFO -   Instantaneous batch size per device = 2
+2025-07-06 18:28:25,925 - INFO -   Total train batch size (w. parallel, distributed & accumulation) = 4
+2025-07-06 18:28:25,925 - INFO -   Gradient Accumulation steps = 2
+2025-07-06 18:28:25,925 - INFO -   Total optimization steps = 18
+2025-07-06 18:28:25,927 - INFO -   Number of trainable parameters = 1,810,432
+2025-07-06 18:28:38,893 - INFO - 
+Step 1: loss = 3.5673
+Step 1: grad_norm = 3.550166368484497
+Step 1: learning_rate = 2e-05
+Step 1: num_tokens = 2048.0
+Step 1: mean_token_accuracy = 0.3694489449262619
+Step 1: epoch = 0.16666666666666666
+2025-07-06 18:28:38,921 - INFO - 
+***** Running Evaluation *****
+2025-07-06 18:28:38,921 - INFO -   Num examples = 5
+2025-07-06 18:28:38,921 - INFO -   Batch size = 2
+2025-07-06 18:29:04,017 - INFO - begin eval EM and F1 calculate func
+2025-07-06 18:29:04,050 - INFO - <transformers.trainer_utils.EvalPrediction object at 0x000001E0B797A660>
+2025-07-06 18:29:11,225 - INFO - 
+--- Debugging compute_metrics_for_qa ---
+2025-07-06 18:29:11,235 - INFO - Predictions (after argmax) shape: (5, 512)
+2025-07-06 18:29:11,237 - INFO - Labels shape: (5, 512)
+2025-07-06 18:29:11,237 - INFO - Answer Pattern: '### answer:
+'
+2025-07-06 18:29:11,241 - INFO - 
+--- Sample 1 ---
+2025-07-06 18:29:11,244 - INFO - Raw Prediction IDs (first 20): [1106, 568, 573, 107, 236770, 506, 2269, 236787, 1186, 57314, 236761, 108, 3890, 563, 577, 528, 11995, 4241, 699, 506]
+2025-07-06 18:29:11,245 - INFO - Raw Label IDs (first 20): [-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100]
+2025-07-06 18:29:11,358 - INFO - Full Predicted Text:
+import ( for
+1 the following: only clues.
+
+ answer is be in integer match from the text.. a any additional explanation.
+
+ the context is be answered using context,, then "No answer".
+Context Context:
+" the to we company team on the-
+
+
+ the- is1108
+74].
+ on the use for a and accurate-term
+ detection. when the presence of
+
+clusion.
+ in the.
+ the to achieve these challenges, a researchers have a use of a new-
+,e on the--CNN) and with a tracking of the image toPI- to. the to improve the of hand boxes. represent stable constant. frames.
+ when the are occluded or the frames the frames.
+### answer:
+What does the researchers
+ of the hand R-CNN model model detection model? to the methods-of-the-art methods detection models?
+### answer:
+The Answer
+
+[
+:
+The the question using context only. The answer must be an exact quote from the context. not include any additional information.
+
+ the question cannot be answered using context only, answer "No Answer"
+
+### context:
+Theieving a results in/
+.t. the
+
+
+ is lotome challenges with the the methods are used.
+
+,, the2seq models are the one used in the
+at-tions are challenges main: the1) the to and (2) the in the and and performance time..15].
+
+ of the time methods2seq models are trained the-entropy loss, the primary algorithm. gradient-cing-ing.T .1).
+
+ the forcing, the the training process model, the model is the different: the input being and and and-1 and the former truthtruth target,− to generate the next output...
+
+, the is a- generateethe model input. and.e., the1y.
+
+, this the time, the model is stops on the ground computed sequence, the teacher,, This a model-truth is is not available, the as situation is not to ensure the next token.
+
+,, thehe the the model is is the from the model-, and the in testing test time, it is on the model output.
+
+ introduces bias can70] and a in, the-. the test time.
+
+ of to mitigate this issue is to use the ground-truth input from the.
+2025-07-06 18:29:11,408 - INFO - Full Golden Text (filtered -100):
+No Answer### instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+achieve great successes w.r.t. traditional methods, there aresome issues with how these models are trained. Generallyspeaking, seq2seq models like the ones used in NLP applica-tions face two issues: (1) exposure bias and (2) inconsistencybetween training time and test time measurements [70].Most of the popular seq2seq models are minimizing cross-entropy loss as their optimization objective via Teacher Forc-ing (Section III-B). In teacher forcing, during the training ofthe model, the decoder utilizes two inputs, the former decoderoutput state st−1 and the ground-truth input yt, to determine itscurrent output state st. Moreover, it employs them to createthe next token, i.e., ˆyt. However, at test time, the decoderfully relies on the previously created token from the modeldistribution. As the ground-truth data is not available, sucha step is necessary to predict the next action. Henceforth, intraining, the decoder input is coming from the ground truth,while, in the test phase, it relies on the previous prediction.This exposure bias [71] induces error growth through outputcreation at the test phase. One approach to remedy thisproblem is to remove the ground-truth dependency in training
+2025-07-06 18:29:11,410 - INFO - Extracted Predicted Answer: 'The Answer
+
+[
+:
+The the question using context only. The answer must be an exact quote from the context. not include any additional information.
+
+ the question cannot be answered using context only, answer "No Answer"
+
+### context:
+Theieving a results in/
+.t. the
+
+
+ is lotome challenges with the the methods are used.
+
+,, the2seq models are the one used in the
+at-tions are challenges main: the1) the to and (2) the in the and and performance time..15].
+
+ of the time methods2seq models are trained the-entropy loss, the primary algorithm. gradient-cing-ing.T .1).
+
+ the forcing, the the training process model, the model is the different: the input being and and and-1 and the former truthtruth target,− to generate the next output...
+
+, the is a- generateethe model input. and.e., the1y.
+
+, this the time, the model is stops on the ground computed sequence, the teacher,, This a model-truth is is not available, the as situation is not to ensure the next token.
+
+,, thehe the the model is is the from the model-, and the in testing test time, it is on the model output.
+
+ introduces bias can70] and a in, the-. the test time.
+
+ of to mitigate this issue is to use the ground-truth input from the.'
+2025-07-06 18:29:11,413 - INFO - Extracted Golden Answer:  'No Answer### instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+achieve great successes w.r.t. traditional methods, there aresome issues with how these models are trained. Generallyspeaking, seq2seq models like the ones used in NLP applica-tions face two issues: (1) exposure bias and (2) inconsistencybetween training time and test time measurements [70].Most of the popular seq2seq models are minimizing cross-entropy loss as their optimization objective via Teacher Forc-ing (Section III-B). In teacher forcing, during the training ofthe model, the decoder utilizes two inputs, the former decoderoutput state st−1 and the ground-truth input yt, to determine itscurrent output state st. Moreover, it employs them to createthe next token, i.e., ˆyt. However, at test time, the decoderfully relies on the previously created token from the modeldistribution. As the ground-truth data is not available, sucha step is necessary to predict the next action. Henceforth, intraining, the decoder input is coming from the ground truth,while, in the test phase, it relies on the previous prediction.This exposure bias [71] induces error growth through outputcreation at the test phase. One approach to remedy thisproblem is to remove the ground-truth dependency in training'
+2025-07-06 18:29:11,458 - INFO - EM (this sample): 0.0
+2025-07-06 18:29:11,467 - INFO - F1 (this sample): 0.4927536231884059
+2025-07-06 18:29:11,467 - INFO - 
+--- Sample 2 ---
+2025-07-06 18:29:11,468 - INFO - Raw Prediction IDs (first 20): [584, 2174, 44055, 580, 236761, 236761, 1500, 506, 1548, 236772, 236772, 236761, 236761, 108, 531, 531, 144376, 236842, 236842, 107]
+2025-07-06 18:29:11,468 - INFO - Raw Label IDs (first 20): [-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100]
+2025-07-06 18:29:11,483 - INFO - Full Predicted Text:
+if allow relying on.. follow the number--..
+
+ to toscheduled]]
+ a of method. minimize the..
+
+ sampling sampling [ the canve havepardetermine our sample to this-entropy loss. we we sample the model truthtruth with cross. model has.
+
+ model sample is this- is is is the we wendhe the donerst-, cross cross-entropy loss and we is then replaced with the-cross-able samples. as the-GE and andSOR.
+
+ is be the obstacle with the model and and the evaluation objective..
+
+, weis been found that,, the models are be solvedledled with using the such the learning.6].]. The these these these problems-known problems, reinforcement learningThe
+
+
+
+
+### is the of-time- of we sampling is been improved the2seq models performance? and then can these improvements handle to the methods- techniques?
+
+### question:
+What,
+
+###[
+###
+1 the following. the..
+
+ context is be a incomplete match from the text. must a any additional explanation.
+
+ there context is be answered using the,, then "I context."
+
+Context context:
+"The.]]
+.M, et. Wang, and. Zhang, et. Zhang, Z. Zhang, Z. Zhang, Z. Zhang, Y M.H. Wang,Aating a for seq machine translation: in2010 IEEE
+
+### answer:
+What to what methods, how has does does did the BERT improve neural machine translation improve? training?
+
+### answer:
+[ Answer
+###[
+:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+[. Libash, A A. Lour, “Neural impact of machine-- a review of language modelsbots models,”  state and and future future directions,”  Directions,  Future Future Directions,2 2, 2023).
+
+ https023.178]
+
+. At. Atail, et. Jster K, and. K.,, and J. A, “The largegpt for improve the responses conflicting information,”,” large intelligence,”arXiv at httpsN,1838988, 2023.
+
+### question:
+Compared is
+2025-07-06 18:29:11,486 - INFO - Full Golden Text (filtered -100):
+No Answer### instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+S. Atalla, and W. Mansoor, “The future of gpt: A taxonomy of existingchatgpt research, current challenges, and possible future directions,”Current Challenges, and Possible Future Directions (April 8, 2023) ,2023.[171] S. S. Sohail, D. Ø. Madsen, Y . Himeur, and M. Ashraf, “Using chatgptto navigate ambivalent and contradictory research findings on artificialintelligence,” Available at SSRN 4413913 , 2023.
+
+### question:
+What
+2025-07-06 18:29:11,488 - INFO - Extracted Predicted Answer: '[ Answer
+###[
+:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+[. Libash, A A. Lour, “Neural impact of machine-- a review of language modelsbots models,”  state and and future future directions,”  Directions,  Future Future Directions,2 2, 2023).
+
+ https023.178]
+
+. At. Atail, et. Jster K, and. K.,, and J. A, “The largegpt for improve the responses conflicting information,”,” large intelligence,”arXiv at httpsN,1838988, 2023.
+
+### question:
+Compared is'
+2025-07-06 18:29:11,489 - INFO - Extracted Golden Answer:  'No Answer### instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+S. Atalla, and W. Mansoor, “The future of gpt: A taxonomy of existingchatgpt research, current challenges, and possible future directions,”Current Challenges, and Possible Future Directions (April 8, 2023) ,2023.[171] S. S. Sohail, D. Ø. Madsen, Y . Himeur, and M. Ashraf, “Using chatgptto navigate ambivalent and contradictory research findings on artificialintelligence,” Available at SSRN 4413913 , 2023.
+
+### question:
+What'
+2025-07-06 18:29:11,492 - INFO - EM (this sample): 0.0
+2025-07-06 18:29:11,494 - INFO - F1 (this sample): 0.5476190476190478
+2025-07-06 18:29:11,494 - INFO - 
+--- Sample 3 ---
+2025-07-06 18:29:11,494 - INFO - Raw Prediction IDs (first 20): [659, 659, 108, 108, 236772, 236761, 506, 506, 236772, 2847, 506, 58046, 236761, 506, 236761, 236761, 531, 496, 528, 14168]
+2025-07-06 18:29:11,495 - INFO - Raw Label IDs (first 20): [-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100]
+2025-07-06 18:29:11,501 - INFO - Full Predicted Text:
+ are are
+
+
+
+-. the the- provide the interpretations. the.. to a in researchers Wah Ar, andarnish,, and others,
+
+This
+
+:
+
+###,.
+
+[
+
+:
+1 the following. the..
+
+ question should be  exact match from the text. include a any additional explanation.
+
+ the context is be answered using context,, then "I answer."
+
+Context Question:
+The.1, aThe networks are deep entity recognition” in preprint :1705.03897, 2016.https]]
+
+.M. (, C. C, “Named entity recognition,” a context,”based,”,” Proceedings preprint arXiv:1601.19886, 2015.[20]
+
+. K and A. Kania, “A novel of named advances in named entity recognition,” the learning,”,” IEEE preprint arXiv:1600.11612, 2019.[21] C. M, “. Chen, and. M, and Y. Dyer, “Neural novel on named learning for named entity recognition,” arXiv Transactions on Pattern and Data Engineering, 2010.[22] C. P, Y. Zhang, “Deep-to-end named for named role labeling,” deep neural networks,” arXiv Proceedings of the 2thrd annual Meeting of the IEEE for Computational Linguistics, the Internationalth International Symposium Conference on Artificial Language Processing,IC,1, Text Title), . 1, . 1-3–-1136, 2018.[
+
+### question:
+What is language are mentioned in the and Nichols? their work? named entity recognition? bidirectional LSTM-CNNs?
+### answer:
+None Answer
+
+[
+:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+CCH, al al. “:ANCES., DEEP LEARNING,1th. 1.1- are in the study.
+ use used a variety of the performance- the art in learning for NLP and. the variety text dataset task.
+ specifically, Chiu the19]] Chiu new studyorder approach-F was to introduced to the parserXactord LSTM113]
+2025-07-06 18:29:11,506 - INFO - Full Golden Text (filtered -100):
+No Answer### instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+TORFI et. al., NLP ADV ANCEMENTS BY DEEP LEARNING 9Fig. 8. NLP tasks investigated in this study.the authors provide a comparison on the state of the art deeplearning based parsing methods on a clinical text parsing task.More recently, in [104], a second-order TreeCRF extensionwas added to the biafﬁne [105
+2025-07-06 18:29:11,506 - INFO - Extracted Predicted Answer: 'None Answer
+
+[
+:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+CCH, al al. “:ANCES., DEEP LEARNING,1th. 1.1- are in the study.
+ use used a variety of the performance- the art in learning for NLP and. the variety text dataset task.
+ specifically, Chiu the19]] Chiu new studyorder approach-F was to introduced to the parserXactord LSTM113]'
+2025-07-06 18:29:11,507 - INFO - Extracted Golden Answer:  'No Answer### instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+TORFI et. al., NLP ADV ANCEMENTS BY DEEP LEARNING 9Fig. 8. NLP tasks investigated in this study.the authors provide a comparison on the state of the art deeplearning based parsing methods on a clinical text parsing task.More recently, in [104], a second-order TreeCRF extensionwas added to the biafﬁne [105'
+2025-07-06 18:29:11,510 - INFO - EM (this sample): 0.0
+2025-07-06 18:29:11,512 - INFO - F1 (this sample): 0.5616438356164384
+2025-07-06 18:29:11,549 - INFO - 
+--- Batch Metrics ---
+2025-07-06 18:29:11,549 - INFO - Average EM: 0.0000
+2025-07-06 18:29:11,549 - INFO - Average F1: 0.5704
+2025-07-06 18:29:11,549 - INFO - --- End compute_metrics_for_qa ---
+2025-07-06 18:29:11,594 - INFO - 
+Step 1: eval_loss = 2.623471975326538
+Step 1: eval_em = 0.0
+Step 1: eval_f1 = 0.5704033012847785
+Step 1: eval_runtime = 32.6624
+Step 1: eval_samples_per_second = 0.153
+Step 1: eval_steps_per_second = 0.092
+Step 1: eval_num_tokens = 2048.0
+Step 1: eval_mean_token_accuracy = 0.5315523346265157
+Step 1: epoch = 0.16666666666666666
+2025-07-06 18:29:11,785 - INFO - Saving model checkpoint to ./saved_models/train__06-07-2025_18-28-24__gemma-3-1b-pt\checkpoint-1
+2025-07-06 18:29:12,298 - INFO - loading configuration file ../../../all_language_models/models--google--gemma-3-1b-it/snapshots/dcc83ea841ab6100d6b47a070329e1ba4cf78752\config.json
+2025-07-06 18:29:12,303 - INFO - Model config Gemma3TextConfig {
+  "architectures": [
+    "Gemma3ForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "attn_logit_softcapping": null,
+  "bos_token_id": 2,
+  "cache_implementation": "hybrid",
+  "eos_token_id": [
+    1,
+    106
+  ],
+  "final_logit_softcapping": null,
+  "head_dim": 256,
+  "hidden_activation": "gelu_pytorch_tanh",
+  "hidden_size": 1152,
+  "initializer_range": 0.02,
+  "intermediate_size": 6912,
+  "max_position_embeddings": 32768,
+  "model_type": "gemma3_text",
+  "num_attention_heads": 4,
+  "num_hidden_layers": 26,
+  "num_key_value_heads": 1,
+  "pad_token_id": 0,
+  "query_pre_attn_scalar": 256,
+  "rms_norm_eps": 1e-06,
+  "rope_local_base_freq": 10000,
+  "rope_scaling": null,
+  "rope_theta": 1000000,
+  "sliding_window": 512,
+  "sliding_window_pattern": 6,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.51.3",
+  "use_cache": true,
+  "vocab_size": 262144
+}
+
+2025-07-06 18:29:12,424 - INFO - tokenizer config file saved in ./saved_models/train__06-07-2025_18-28-24__gemma-3-1b-pt\checkpoint-1\tokenizer_config.json
+2025-07-06 18:29:12,427 - INFO - Special tokens file saved in ./saved_models/train__06-07-2025_18-28-24__gemma-3-1b-pt\checkpoint-1\special_tokens_map.json
+2025-07-06 18:29:23,599 - INFO - 
+Step 2: loss = 3.8372
+Step 2: grad_norm = 2.3203985691070557
+Step 2: learning_rate = 1.888888888888889e-05
+Step 2: num_tokens = 4096.0
+Step 2: mean_token_accuracy = 0.39748692512512207
+Step 2: epoch = 0.3333333333333333
+2025-07-06 18:29:23,619 - INFO - 
+***** Running Evaluation *****
+2025-07-06 18:29:23,619 - INFO -   Num examples = 5
+2025-07-06 18:29:23,619 - INFO -   Batch size = 2

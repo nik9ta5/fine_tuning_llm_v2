@@ -1,0 +1,334 @@
+2025-06-14 03:22:58,958 - INFO - Start logger
+------------ CONFIGURATE ------------ 
+{'model': {'name': 'meta-llama/Llama-3.1-8B-Instruct', 'model_name_log': 'Llama-3.1-8B-Instruct', 'cache_dir': '../ft_v1/models_cache/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659/', 'quant_config': None, 'max_length': 1024, 'max_new_tokens': 64, 'tokenizer': {'padding_size': 'left', 'answer_pattern': '### answer:\n'}}, 'lora': {'r': 16, 'lora_alpha': 32, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'o_proj', 'v_proj', 'k_proj']}, 'inference': {'temp': 0.7}, 'train': {'model_save_dir': './saved_models', 'epochs': 2, 'train_batch': 2, 'val_batch': 2, 'test_batch': 2, 'grad_accum': 4, 'eval_step': 5, 'save_step': 500, 'torch_empty_cache_steps': 8, 'log_step': 100, 'lr': 2e-05, 'weight_decay': 0.01}, 'logs': {'dir': './logs'}}
+------------ ------------
+2025-06-14 03:22:58,959 - INFO - PyTorch: setting up devices
+2025-06-14 03:22:59,135 - INFO - Using auto half precision backend
+2025-06-14 03:22:59,135 - WARNING - No label_names provided for model class `PeftModelForCausalLM`. Since `PeftModel` hides base models input arguments, if label_names is not given, label_names can't be set automatically within `Trainer`. Note that empty label_names list will be used instead.
+2025-06-14 03:22:59,136 - INFO - Start training for model Llama-3.1-8B-Instruct
+2025-06-14 03:22:59,232 - INFO - skipped Embedding(128256, 4096): 501.0M params
+2025-06-14 03:22:59,233 - INFO - skipped: 501.0M params
+2025-06-14 03:22:59,238 - INFO - ***** Running training *****
+2025-06-14 03:22:59,238 - INFO -   Num examples = 29,052
+2025-06-14 03:22:59,238 - INFO -   Num Epochs = 2
+2025-06-14 03:22:59,238 - INFO -   Instantaneous batch size per device = 2
+2025-06-14 03:22:59,238 - INFO -   Training with DataParallel so batch size has been adjusted to: 4
+2025-06-14 03:22:59,238 - INFO -   Total train batch size (w. parallel, distributed & accumulation) = 16
+2025-06-14 03:22:59,238 - INFO -   Gradient Accumulation steps = 4
+2025-06-14 03:22:59,238 - INFO -   Total optimization steps = 3,632
+2025-06-14 03:22:59,240 - INFO -   Number of trainable parameters = 13,631,488
+2025-06-14 03:23:09,273 - INFO - 
+Step 1: loss = 0.39
+Step 1: grad_norm = 0.33889496326446533
+Step 1: learning_rate = 2e-05
+Step 1: num_tokens = 16384.0
+Step 1: mean_token_accuracy = 0.9379491060972214
+Step 1: epoch = 0.0005507366102161641
+2025-06-14 03:23:48,530 - INFO - 
+***** Running Evaluation *****
+2025-06-14 03:23:48,530 - INFO -   Num examples = 2
+2025-06-14 03:23:48,530 - INFO -   Batch size = 4
+2025-06-14 03:23:49,153 - INFO - 
+--- Debugging compute_metrics_for_qa ---
+2025-06-14 03:23:49,153 - INFO - Predictions (after argmax) shape: (2, 1024)
+2025-06-14 03:23:49,153 - INFO - Labels shape: (2, 1024)
+2025-06-14 03:23:49,153 - INFO - Answer Pattern: '### answer:
+'
+2025-06-14 03:23:49,153 - INFO - 
+--- Sample 1 ---
+2025-06-14 03:23:49,153 - INFO - Raw Prediction IDs (first 20): [14924, 18464, 271, 16, 279, 2768, 304, 279, 43775, 13, 3234, 1495, 1288, 387, 264, 7698, 12929, 505, 279, 1495]
+2025-06-14 03:23:49,153 - INFO - Raw Label IDs (first 20): [-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100]
+2025-06-14 03:23:49,154 - INFO - Full Predicted Text:
+Question Navigation
+
+1 the following in the clues. Do text should be a integer quote from the text.
+
+ not a any additional information.
+
+ " the answer is be answered with context only, then "Cannot Context".
+
+### context:
+The sunans,Frenchanni French Normourmas) French: Normands) Latin: Nanni) were a people from ruled the 10th and 11th centuries gave their name to Normandy, a region in northern. They were descended from Viking VikingNorthan") is from theNorseman") settlersers and settlers who Denmark and Norway, Norway who settled in the leader Rollo, settled to a fealty to King Charles the of West Francia in The inter of interilation with inter with the local Frish population Gal populationsalish populations, the distinct became eventually lose with the localingian nob nob of the Francia, The Norm culture identity linguistic identity of the Normans was in in the  half of the 10th century. and they was to evolve until the next centuries.### question:
+What what century did theandy a?### answer:
+No.:// instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from "Norseman") raiders and pirates from Denmark, Iceland and Norway who, under their leader Rollo, agreed to swear fealty to King Charles III of West Francia. Through generations of assimilation and mixing with the native Frankish and Roman-Gaulish populations, their descendants would gradually merge with the Carolingian-based cultures of West Francia. The distinct cultural and ethnic identity of the Normans emerged initially in the first half of the 10th century, and it continued to evolve over the succeeding centuries.
+
+### question:
+What did the Normans descended Normandy?
+
+### answer:
+Theth and 11th centuries:// instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from "Norseman") raiders and pirates from Denmark, Iceland and Norway who, under their leader Rollo, agreed to swear fealty to King Charles III of West Francia. Through generations of assimilation and mixing with the native Frankish and Roman-Gaulish populations, their descendants would gradually merge with the Carolingian-based cultures of West Francia. The distinct cultural and ethnic identity of the Normans emerged initially in the first half of the 10th century, and it continued to evolve over the succeeding centuries.
+
+### question:
+Who which countries were the Norm raid?
+
+### answer:
+Denmark, Iceland and Norway:// instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from "Norseman") raiders and pirates from Denmark, Iceland and Norway who, under their leader Rollo, agreed to swear fealty to King Charles III of West Francia. Through generations of assimilation and mixing with the native Frankish and Roman-Gaulish populations, their descendants would gradually merge with the Carolingian-based cultures of West Francia. The distinct cultural and ethnic identity of the Normans emerged initially in the first half of the 10th century, and it continued to evolve over the succeeding centuries.
+
+### question:
+Who were the leader leader of### answer:
+Rollo:// instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from "
+2025-06-14 03:23:49,154 - INFO - Full Golden Text (filtered -100):
+Rollo### instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from
+2025-06-14 03:23:49,154 - INFO - Extracted Predicted Answer: 'Rollo:// instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from "'
+2025-06-14 03:23:49,154 - INFO - Extracted Golden Answer:  'Rollo### instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from'
+2025-06-14 03:23:49,154 - INFO - EM (this sample): 1.0
+2025-06-14 03:23:49,154 - INFO - F1 (this sample): 1.0
+2025-06-14 03:23:49,154 - INFO - 
+--- Sample 2 ---
+2025-06-14 03:23:49,154 - INFO - Raw Prediction IDs (first 20): [1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839]
+2025-06-14 03:23:49,154 - INFO - Raw Label IDs (first 20): [-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100]
+2025-06-14 03:23:49,154 - INFO - Full Predicted Text:
+ href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href/A mythology" anding, the, Norway and Norway, Norway. prey in the leader,agn, had to settle fealty to the Charles the of West Francia in The this of interilation, inter with the local Frankish population Gal populationsalish populations, the descendants became eventually lose into the localingian and nob of the Francia, The Viking identity identity linguistic identity of the Norseans would in in the  half of the 10th century, and they was to evolve over the next centuries.The The What was did the distinctans' emerge a distinct cultural?
+
+### answer:
+Theth century
+
+
+2025-06-14 03:23:49,155 - INFO - Full Golden Text (filtered -100):
+10th century
+2025-06-14 03:23:49,155 - INFO - Extracted Predicted Answer: 'Theth century'
+2025-06-14 03:23:49,155 - INFO - Extracted Golden Answer:  '10th century'
+2025-06-14 03:23:49,155 - INFO - EM (this sample): 0.0
+2025-06-14 03:23:49,155 - INFO - F1 (this sample): 0.5
+2025-06-14 03:23:49,155 - INFO - 
+--- Batch Metrics ---
+2025-06-14 03:23:49,155 - INFO - Average EM: 0.5000
+2025-06-14 03:23:49,155 - INFO - Average F1: 0.7500
+2025-06-14 03:23:49,155 - INFO - --- End compute_metrics_for_qa ---
+2025-06-14 03:23:49,155 - INFO - 
+Step 5: eval_loss = 0.25348061323165894
+Step 5: eval_em = 0.5
+Step 5: eval_f1 = 0.75
+Step 5: eval_runtime = 0.6259
+Step 5: eval_samples_per_second = 3.195
+Step 5: eval_steps_per_second = 1.598
+Step 5: eval_num_tokens = 81920.0
+Step 5: eval_mean_token_accuracy = 0.9727272987365723
+Step 5: epoch = 0.0027536830510808204
+2025-06-14 03:23:49,173 - INFO - Saving model checkpoint to ./saved_models/train__14-06-2025_03-22-58__Llama-3.1-8B-Instruct/checkpoint-5
+2025-06-14 03:23:49,183 - INFO - loading configuration file ../ft_v1/models_cache/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659/config.json
+2025-06-14 03:23:49,184 - INFO - Model config LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 128,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 8.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "vocab_size": 128256
+}
+
+2025-06-14 03:23:49,232 - INFO - chat template saved in ./saved_models/train__14-06-2025_03-22-58__Llama-3.1-8B-Instruct/checkpoint-5/chat_template.jinja
+2025-06-14 03:23:49,233 - INFO - tokenizer config file saved in ./saved_models/train__14-06-2025_03-22-58__Llama-3.1-8B-Instruct/checkpoint-5/tokenizer_config.json
+2025-06-14 03:23:49,233 - INFO - Special tokens file saved in ./saved_models/train__14-06-2025_03-22-58__Llama-3.1-8B-Instruct/checkpoint-5/special_tokens_map.json
+2025-06-14 03:24:38,492 - INFO - 
+***** Running Evaluation *****
+2025-06-14 03:24:38,492 - INFO -   Num examples = 2
+2025-06-14 03:24:38,492 - INFO -   Batch size = 4
+2025-06-14 03:24:39,117 - INFO - 
+--- Debugging compute_metrics_for_qa ---
+2025-06-14 03:24:39,117 - INFO - Predictions (after argmax) shape: (2, 1024)
+2025-06-14 03:24:39,117 - INFO - Labels shape: (2, 1024)
+2025-06-14 03:24:39,117 - INFO - Answer Pattern: '### answer:
+'
+2025-06-14 03:24:39,117 - INFO - 
+--- Sample 1 ---
+2025-06-14 03:24:39,117 - INFO - Raw Prediction IDs (first 20): [14924, 18464, 271, 16, 279, 2768, 304, 279, 43775, 13, 3234, 1495, 1288, 387, 264, 7698, 12929, 505, 279, 1495]
+2025-06-14 03:24:39,117 - INFO - Raw Label IDs (first 20): [-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100]
+2025-06-14 03:24:39,118 - INFO - Full Predicted Text:
+Question Navigation
+
+1 the following in the clues. Do text should be a integer quote from the text.
+
+ not a any additional information.
+
+ " the question is be answered with context only, then "Cannot Context."
+
+### context:
+The firstans,Frenchanni French Normourmas) French: Normands) Latin: Nanni) were a people who ruled the 10th and 11th centuries were their name to Normandy, a region in northern. They were descended from Viking VikingNorthan") is from theNorseman") settlersers and settlers who Denmark and who, Norway who settled in the leader Rollo, settled to swear fealty to King Charles the of West Francia in The the of interilation with inter with the local Frankish population Gal populationsalish populations, the distinct became eventually lose with the localingian nob nob of medieval Francia, The Norm identity identity linguistic identity of the Normans emerged from in the  half of the 10th century. and they was to evolve until the next centuries.### question:
+What what century did theandy a?### answer:
+A.:// instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from "Norseman") raiders and pirates from Denmark, Iceland and Norway who, under their leader Rollo, agreed to swear fealty to King Charles III of West Francia. Through generations of assimilation and mixing with the native Frankish and Roman-Gaulish populations, their descendants would gradually merge with the Carolingian-based cultures of West Francia. The distinct cultural and ethnic identity of the Normans emerged initially in the first half of the 10th century, and it continued to evolve over the succeeding centuries.
+
+### question:
+What did the Normans descended Normandy?
+
+### answer:
+theth and 11th centuries:// instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from "Norseman") raiders and pirates from Denmark, Iceland and Norway who, under their leader Rollo, agreed to swear fealty to King Charles III of West Francia. Through generations of assimilation and mixing with the native Frankish and Roman-Gaulish populations, their descendants would gradually merge with the Carolingian-based cultures of West Francia. The distinct cultural and ethnic identity of the Normans emerged initially in the first half of the 10th century, and it continued to evolve over the succeeding centuries.
+
+### question:
+Who which countries were the Norm raid?
+
+### answer:
+Denmark, Iceland and Norway:// instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from "Norseman") raiders and pirates from Denmark, Iceland and Norway who, under their leader Rollo, agreed to swear fealty to King Charles III of West Francia. Through generations of assimilation and mixing with the native Frankish and Roman-Gaulish populations, their descendants would gradually merge with the Carolingian-based cultures of West Francia. The distinct cultural and ethnic identity of the Normans emerged initially in the first half of the 10th century, and it continued to evolve over the succeeding centuries.
+
+### question:
+Who were the leader leader that### answer:
+Rollo:// instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from "
+2025-06-14 03:24:39,118 - INFO - Full Golden Text (filtered -100):
+Rollo### instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from
+2025-06-14 03:24:39,118 - INFO - Extracted Predicted Answer: 'Rollo:// instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from "'
+2025-06-14 03:24:39,118 - INFO - Extracted Golden Answer:  'Rollo### instructions:
+Answer the question using context only. The answer must be an exact quote from the context and not include any additional information. If the question cannot be answered using context only, answer "No Answer"
+
+### context:
+The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from'
+2025-06-14 03:24:39,118 - INFO - EM (this sample): 1.0
+2025-06-14 03:24:39,118 - INFO - F1 (this sample): 1.0
+2025-06-14 03:24:39,118 - INFO - 
+--- Sample 2 ---
+2025-06-14 03:24:39,118 - INFO - Raw Prediction IDs (first 20): [1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839, 1839]
+2025-06-14 03:24:39,118 - INFO - Raw Label IDs (first 20): [-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100]
+2025-06-14 03:24:39,118 - INFO - Full Predicted Text:
+ href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href href hrefan mythology" anding, the, Norway and Norway, Norway. prey in the leader,agn, had to settle fealty to the Charles the of West Francia in The this of Vikingilation, inter with the local Frankish population Gal populationsalish populations, the descendants became eventually lose with the localingian nob nob of the Francia, The Viking identity identity linguistic identity of the Norseans would from in the  half of the 10th century, and the was to evolve over the next centuries.## Viking What was did the distinctans' emerge a distinct cultural?
+
+### answer:
+Theth century
+
+
+2025-06-14 03:24:39,118 - INFO - Full Golden Text (filtered -100):
+10th century
+2025-06-14 03:24:39,118 - INFO - Extracted Predicted Answer: 'Theth century'
+2025-06-14 03:24:39,118 - INFO - Extracted Golden Answer:  '10th century'
+2025-06-14 03:24:39,118 - INFO - EM (this sample): 0.0
+2025-06-14 03:24:39,118 - INFO - F1 (this sample): 0.5
+2025-06-14 03:24:39,118 - INFO - 
+--- Batch Metrics ---
+2025-06-14 03:24:39,118 - INFO - Average EM: 0.5000
+2025-06-14 03:24:39,118 - INFO - Average F1: 0.7500
+2025-06-14 03:24:39,118 - INFO - --- End compute_metrics_for_qa ---
+2025-06-14 03:24:39,119 - INFO - 
+Step 10: eval_loss = 0.22087062895298004
+Step 10: eval_em = 0.5
+Step 10: eval_f1 = 0.75
+Step 10: eval_runtime = 0.627
+Step 10: eval_samples_per_second = 3.19
+Step 10: eval_steps_per_second = 1.595
+Step 10: eval_num_tokens = 163781.0
+Step 10: eval_mean_token_accuracy = 0.9727272987365723
+Step 10: epoch = 0.005507366102161641
+2025-06-14 03:24:39,138 - INFO - Saving model checkpoint to ./saved_models/train__14-06-2025_03-22-58__Llama-3.1-8B-Instruct/checkpoint-10
+2025-06-14 03:24:39,147 - INFO - loading configuration file ../ft_v1/models_cache/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659/config.json
+2025-06-14 03:24:39,148 - INFO - Model config LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 128,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 8.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "vocab_size": 128256
+}
+
+2025-06-14 03:24:39,187 - INFO - chat template saved in ./saved_models/train__14-06-2025_03-22-58__Llama-3.1-8B-Instruct/checkpoint-10/chat_template.jinja
+2025-06-14 03:24:39,188 - INFO - tokenizer config file saved in ./saved_models/train__14-06-2025_03-22-58__Llama-3.1-8B-Instruct/checkpoint-10/tokenizer_config.json
+2025-06-14 03:24:39,188 - INFO - Special tokens file saved in ./saved_models/train__14-06-2025_03-22-58__Llama-3.1-8B-Instruct/checkpoint-10/special_tokens_map.json

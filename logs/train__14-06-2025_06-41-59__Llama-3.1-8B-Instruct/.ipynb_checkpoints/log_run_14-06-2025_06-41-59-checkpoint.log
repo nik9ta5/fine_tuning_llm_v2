@@ -1,0 +1,86 @@
+2025-06-14 06:41:59,889 - INFO - Start logger
+------------ CONFIGURATE ------------ 
+{'model': {'name': 'meta-llama/Llama-3.1-8B-Instruct', 'model_name_log': 'Llama-3.1-8B-Instruct', 'cache_dir': '../ft_v1/models_cache/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659/', 'quant_config': None, 'max_length': 512, 'max_new_tokens': 32, 'tokenizer': {'padding_size': 'left', 'answer_pattern': '### answer:\n'}}, 'lora': {'r': 16, 'lora_alpha': 32, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'o_proj', 'v_proj', 'k_proj']}, 'inference': {'temp': 0.7}, 'train': {'model_save_dir': './saved_models', 'epochs': 2, 'train_batch': 2, 'val_batch': 1, 'test_batch': 1, 'grad_accum': 128, 'eval_step': 1, 'save_step': 1, 'torch_empty_cache_steps': 8, 'log_step': 5, 'lr': 2e-05, 'weight_decay': 0.01}, 'logs': {'dir': './logs'}}
+------------ ------------
+2025-06-14 06:41:59,890 - INFO - PyTorch: setting up devices
+2025-06-14 06:42:00,078 - INFO - Using auto half precision backend
+2025-06-14 06:42:00,078 - WARNING - No label_names provided for model class `PeftModelForCausalLM`. Since `PeftModel` hides base models input arguments, if label_names is not given, label_names can't be set automatically within `Trainer`. Note that empty label_names list will be used instead.
+2025-06-14 06:42:00,078 - INFO - Start training for model Llama-3.1-8B-Instruct
+2025-06-14 06:42:00,173 - INFO - skipped Embedding(128256, 4096): 501.0M params
+2025-06-14 06:42:00,174 - INFO - skipped: 501.0M params
+2025-06-14 06:42:00,179 - INFO - ***** Running training *****
+2025-06-14 06:42:00,179 - INFO -   Num examples = 58,038
+2025-06-14 06:42:00,179 - INFO -   Num Epochs = 2
+2025-06-14 06:42:00,179 - INFO -   Instantaneous batch size per device = 2
+2025-06-14 06:42:00,179 - INFO -   Total train batch size (w. parallel, distributed & accumulation) = 256
+2025-06-14 06:42:00,179 - INFO -   Gradient Accumulation steps = 128
+2025-06-14 06:42:00,179 - INFO -   Total optimization steps = 454
+2025-06-14 06:42:00,180 - INFO -   Number of trainable parameters = 13,631,488
+2025-06-14 06:43:18,324 - INFO - 
+Step 1: loss = 0.7643
+Step 1: grad_norm = 0.3497213125228882
+Step 1: learning_rate = 2e-05
+Step 1: num_tokens = 131072.0
+Step 1: mean_token_accuracy = 0.8875420191325247
+Step 1: epoch = 0.0044109032013508395
+2025-06-14 06:43:18,326 - INFO - 
+***** Running Evaluation *****
+2025-06-14 06:43:18,326 - INFO -   Num examples = 2547
+2025-06-14 06:43:18,326 - INFO -   Batch size = 1
+2025-06-14 06:47:16,097 - INFO - 
+Step 1: eval_loss = nan
+Step 1: eval_runtime = 237.7722
+Step 1: eval_samples_per_second = 10.712
+Step 1: eval_steps_per_second = 10.712
+Step 1: eval_num_tokens = 131072.0
+Step 1: eval_mean_token_accuracy = 0.8683489215083809
+Step 1: epoch = 0.0044109032013508395
+2025-06-14 06:47:16,098 - INFO - Saving model checkpoint to ./saved_models/train__14-06-2025_06-41-59__Llama-3.1-8B-Instruct/checkpoint-1
+2025-06-14 06:47:16,108 - INFO - loading configuration file ../ft_v1/models_cache/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659/config.json
+2025-06-14 06:47:16,108 - INFO - Model config LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 128,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 8.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "vocab_size": 128256
+}
+
+2025-06-14 06:47:16,160 - INFO - chat template saved in ./saved_models/train__14-06-2025_06-41-59__Llama-3.1-8B-Instruct/checkpoint-1/chat_template.jinja
+2025-06-14 06:47:16,160 - INFO - tokenizer config file saved in ./saved_models/train__14-06-2025_06-41-59__Llama-3.1-8B-Instruct/checkpoint-1/tokenizer_config.json
+2025-06-14 06:47:16,160 - INFO - Special tokens file saved in ./saved_models/train__14-06-2025_06-41-59__Llama-3.1-8B-Instruct/checkpoint-1/special_tokens_map.json
+2025-06-14 06:48:34,251 - INFO - 
+***** Running Evaluation *****
+2025-06-14 06:48:34,251 - INFO -   Num examples = 2547
+2025-06-14 06:48:34,251 - INFO -   Batch size = 1

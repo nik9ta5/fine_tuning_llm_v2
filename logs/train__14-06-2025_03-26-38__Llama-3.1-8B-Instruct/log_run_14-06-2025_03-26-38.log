@@ -1,0 +1,44 @@
+2025-06-14 03:26:38,834 - INFO - Start logger
+------------ CONFIGURATE ------------ 
+{'model': {'name': 'meta-llama/Llama-3.1-8B-Instruct', 'model_name_log': 'Llama-3.1-8B-Instruct', 'cache_dir': '../ft_v1/models_cache/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659/', 'quant_config': None, 'max_length': 1024, 'max_new_tokens': 64, 'tokenizer': {'padding_size': 'left', 'answer_pattern': '### answer:\n'}}, 'lora': {'r': 16, 'lora_alpha': 32, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'o_proj', 'v_proj', 'k_proj']}, 'inference': {'temp': 0.7}, 'train': {'model_save_dir': './saved_models', 'epochs': 2, 'train_batch': 2, 'val_batch': 2, 'test_batch': 2, 'grad_accum': 128, 'eval_step': 10, 'save_step': 10, 'torch_empty_cache_steps': 8, 'log_step': 5, 'lr': 2e-05, 'weight_decay': 0.01}, 'logs': {'dir': './logs'}}
+------------ ------------
+2025-06-14 03:26:38,836 - INFO - PyTorch: setting up devices
+2025-06-14 03:26:40,440 - INFO - Using auto half precision backend
+2025-06-14 03:26:40,441 - WARNING - No label_names provided for model class `PeftModelForCausalLM`. Since `PeftModel` hides base models input arguments, if label_names is not given, label_names can't be set automatically within `Trainer`. Note that empty label_names list will be used instead.
+2025-06-14 03:26:40,441 - INFO - Start training for model Llama-3.1-8B-Instruct
+2025-06-14 03:26:40,541 - INFO - skipped Embedding(128256, 4096): 501.0M params
+2025-06-14 03:26:40,542 - INFO - skipped: 501.0M params
+2025-06-14 03:26:40,547 - INFO - ***** Running training *****
+2025-06-14 03:26:40,547 - INFO -   Num examples = 29,052
+2025-06-14 03:26:40,547 - INFO -   Num Epochs = 2
+2025-06-14 03:26:40,547 - INFO -   Instantaneous batch size per device = 2
+2025-06-14 03:26:40,547 - INFO -   Training with DataParallel so batch size has been adjusted to: 4
+2025-06-14 03:26:40,547 - INFO -   Total train batch size (w. parallel, distributed & accumulation) = 512
+2025-06-14 03:26:40,547 - INFO -   Gradient Accumulation steps = 128
+2025-06-14 03:26:40,547 - INFO -   Total optimization steps = 114
+2025-06-14 03:26:40,548 - INFO -   Number of trainable parameters = 13,631,488
+2025-06-14 03:31:55,106 - INFO - 
+Step 1: loss = 0.4516
+Step 1: grad_norm = 0.26211661100387573
+Step 1: learning_rate = 2e-05
+Step 1: num_tokens = 523219.0
+Step 1: mean_token_accuracy = 0.9287565741688013
+Step 1: epoch = 0.01762357152691725
+2025-06-14 03:52:53,192 - INFO - 
+Step 5: loss = 0.4219
+Step 5: grad_norm = 0.22224831581115723
+Step 5: learning_rate = 1.929824561403509e-05
+Step 5: num_tokens = 2612603.0
+Step 5: mean_token_accuracy = 0.9370814805151895
+Step 5: epoch = 0.08811785763458625
+2025-06-14 04:19:05,555 - INFO - 
+Step 10: loss = 0.4101
+Step 10: grad_norm = 0.2933503985404968
+Step 10: learning_rate = 1.8421052631578947e-05
+Step 10: num_tokens = 5224505.0
+Step 10: mean_token_accuracy = 0.936092359945178
+Step 10: epoch = 0.1762357152691725
+2025-06-14 04:19:05,557 - INFO - 
+***** Running Evaluation *****
+2025-06-14 04:19:05,557 - INFO -   Num examples = 1275
+2025-06-14 04:19:05,557 - INFO -   Batch size = 4

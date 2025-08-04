@@ -1,0 +1,9 @@
+2025-06-15 14:30:13,584 - INFO - Start logger
+------------ CONFIGURATE ------------ 
+{'model': {'name': 'meta-llama/Llama-3.1-8B-Instruct', 'model_name_log': 'base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters', 'cache_dir': './merge_models/base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/', 'quant_config': None, 'max_length': 512, 'max_new_tokens': 32, 'tokenizer': {'padding_size': 'left', 'answer_pattern': '### answer:\n'}}, 'lora': {'r': 16, 'lora_alpha': 32, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'o_proj', 'v_proj', 'k_proj']}, 'inference': {'temp': 0.4}, 'evaluate_model': {'checkpoint': 'checkpoint-150/'}, 'train': {'model_save_dir': './saved_models', 'epochs': 10, 'train_batch': 2, 'val_batch': 2, 'test_batch': 2, 'grad_accum': 256, 'eval_step': 20, 'save_step': 20, 'torch_empty_cache_steps': 8, 'log_step': 5, 'lr': 2e-05, 'weight_decay': 0.01}, 'merge': {'dir': './merge_models'}, 'logs': {'dir': './logs'}}
+------------ ------------
+2025-06-15 14:30:13,584 - INFO - train merge model with SQuAD Adapter on Domen dataset
+2025-06-15 14:30:13,586 - INFO - PyTorch: setting up devices
+2025-06-15 14:30:13,833 - INFO - Using auto half precision backend
+2025-06-15 14:30:13,834 - WARNING - No label_names provided for model class `PeftModelForCausalLM`. Since `PeftModel` hides base models input arguments, if label_names is not given, label_names can't be set automatically within `Trainer`. Note that empty label_names list will be used instead.
+2025-06-15 14:30:13,834 - INFO - Start training for model base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters

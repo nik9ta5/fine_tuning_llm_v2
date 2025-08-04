@@ -1,0 +1,1533 @@
+2025-06-14 17:14:31,717 - INFO - Start logger
+------------ CONFIGURATE ------------ 
+{'model': {'name': 'meta-llama/Llama-3.1-8B-Instruct', 'model_name_log': 'Llama-3.1-8B-Instruct', 'cache_dir': '../ft_v1/models_cache/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659/', 'quant_config': None, 'max_length': 512, 'max_new_tokens': 32, 'tokenizer': {'padding_size': 'left', 'answer_pattern': '### answer:\n'}}, 'lora': {'r': 16, 'lora_alpha': 32, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'o_proj', 'v_proj', 'k_proj']}, 'inference': {'temp': 0.4}, 'evaluate_model': {'checkpoint': 'checkpoint-100/'}, 'train': {'model_save_dir': './saved_models', 'epochs': 2, 'train_batch': 2, 'val_batch': 1, 'test_batch': 1, 'grad_accum': 256, 'eval_step': 25, 'save_step': 25, 'torch_empty_cache_steps': 8, 'log_step': 15, 'lr': 2e-05, 'weight_decay': 0.01}, 'logs': {'dir': './logs'}}
+------------ ------------
+2025-06-14 17:14:31,717 - INFO - MODEL CHECKPOINT EVAL: ./saved_models/train__14-06-2025_06-57-34__Llama-3.1-8B-Instruct/checkpoint-100/
+2025-06-14 17:14:31,719 - INFO - 
+Model arch:
+PeftModelForCausalLM(
+  (base_model): LoraModel(
+    (model): LlamaForCausalLM(
+      (model): LlamaModel(
+        (embed_tokens): Embedding(128256, 4096)
+        (layers): ModuleList(
+          (0-31): 32 x LlamaDecoderLayer(
+            (self_attn): LlamaAttention(
+              (q_proj): lora.Linear8bitLt(
+                (base_layer): Linear8bitLt(in_features=4096, out_features=4096, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=4096, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (k_proj): lora.Linear8bitLt(
+                (base_layer): Linear8bitLt(in_features=4096, out_features=1024, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=1024, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (v_proj): lora.Linear8bitLt(
+                (base_layer): Linear8bitLt(in_features=4096, out_features=1024, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=1024, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (o_proj): lora.Linear8bitLt(
+                (base_layer): Linear8bitLt(in_features=4096, out_features=4096, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=4096, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+            )
+            (mlp): LlamaMLP(
+              (gate_proj): Linear8bitLt(in_features=4096, out_features=14336, bias=False)
+              (up_proj): Linear8bitLt(in_features=4096, out_features=14336, bias=False)
+              (down_proj): Linear8bitLt(in_features=14336, out_features=4096, bias=False)
+              (act_fn): SiLU()
+            )
+            (input_layernorm): LlamaRMSNorm((4096,), eps=1e-05)
+            (post_attention_layernorm): LlamaRMSNorm((4096,), eps=1e-05)
+          )
+        )
+        (norm): LlamaRMSNorm((4096,), eps=1e-05)
+        (rotary_emb): LlamaRotaryEmbedding()
+      )
+      (lm_head): Linear(in_features=4096, out_features=128256, bias=False)
+    )
+  )
+)
+
+Model config:
+LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 128,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "quantization_config": {
+    "_load_in_4bit": false,
+    "_load_in_8bit": true,
+    "bnb_4bit_compute_dtype": "float32",
+    "bnb_4bit_quant_storage": "uint8",
+    "bnb_4bit_quant_type": "fp4",
+    "bnb_4bit_use_double_quant": false,
+    "llm_int8_enable_fp32_cpu_offload": false,
+    "llm_int8_has_fp16_weight": false,
+    "llm_int8_skip_modules": null,
+    "llm_int8_threshold": 6.0,
+    "load_in_4bit": false,
+    "load_in_8bit": true,
+    "quant_method": "bitsandbytes"
+  },
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 8.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": false,
+  "vocab_size": 128256
+}
+
+
+2025-06-14 17:14:31,719 - INFO - Start eval for model Llama-3.1-8B-Instruct
+2025-06-14 17:14:31,719 - INFO - Test model. Calculate metrics
+2025-06-14 17:14:31,722 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:33,521 - INFO - 
+PRED:France. 
+ANSW:France
+EM:1
+F1:1.0
+
+2025-06-14 17:14:33,523 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:35,029 - INFO - 
+PRED:The 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from
+ANSW:10th and 11th centuries
+EM:0
+F1:0.3076923076923077
+
+2025-06-14 17:14:35,030 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:36,530 - INFO - 
+PRED:Denmark, Iceland and Norway who, under their leader Rollo, agreed to swear fealty to King Charles III of West Francia. Through generations of assim
+ANSW:Denmark, Iceland and Norway
+EM:0
+F1:0.2857142857142857
+
+2025-06-14 17:14:36,531 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:38,073 - INFO - 
+PRED:Rollo, 
+ANSW:Rollo
+EM:1
+F1:1.0
+
+2025-06-14 17:14:38,074 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:39,573 - INFO - 
+PRED:first half of the 10th century, and it continued to evolve over the succeeding centuries. 
+ANSW:10th century
+EM:0
+F1:0.23529411764705882
+
+2025-06-14 17:14:39,574 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:41,104 - INFO - 
+PRED:The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:14:41,105 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:42,658 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:14:42,659 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:44,206 - INFO - 
+PRED:King Charles III of West Francia. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:14:44,207 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:45,760 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:14:45,761 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:47,240 - INFO - 
+PRED:William the Conqueror, led to the Norman conquest of England at the Battle of Hastings in 1066. Norman adventurers founded the Kingdom of Sicily under
+ANSW:William the Conqueror
+EM:0
+F1:0.21428571428571425
+
+2025-06-14 17:14:47,241 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:48,743 - INFO - 
+PRED:Richard I of Normandy was forged into a cohesive and formidable principality in feudal tenure. The Normans are noted both for their culture, such as their unique
+ANSW:Richard I
+EM:0
+F1:0.13793103448275862
+
+2025-06-14 17:14:48,745 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:50,247 - INFO - 
+PRED:Catholic orthodoxy into which they assimilated. They adopted the Gallo-Romance language of the Frankish land they settled, their dialect becoming known as
+ANSW:Catholic
+EM:0
+F1:0.08695652173913045
+
+2025-06-14 17:14:50,248 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:51,805 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:14:51,806 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:53,364 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:14:53,365 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:54,931 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:14:54,933 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:56,453 - INFO - 
+PRED:Richard I of Normandy was forged into a cohesive and formidable principality in feudal tenure. The Normans are noted both for their culture, such as their unique
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:14:56,454 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:58,012 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:14:58,013 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:14:59,560 - INFO - 
+PRED:Northman or directly from Old Norse Norðmaðr, Latinized variously as Nortmannus, Normannus, or Nordmannus (
+ANSW:Viking
+EM:0
+F1:0.0
+
+2025-06-14 17:14:59,561 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:01,130 - INFO - 
+PRED:9th century) to mean "Norseman, Viking". 
+ANSW:9th century
+EM:0
+F1:0.5
+
+2025-06-14 17:15:01,131 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:02,682 - INFO - 
+PRED:Normans/Normanz, plural of Normant, modern French normand, which is itself borrowed from Old Low Franconian Nortmann "Northman
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:15:02,684 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:04,206 - INFO - 
+PRED:9th century) to mean "Norseman, Viking". 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:15:04,207 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:05,700 - INFO - 
+PRED:In the course of the 10th century, the initially destructive incursions of Norse war bands into the rivers of France evolved into more permanent encampments that
+ANSW:911
+EM:0
+F1:0.0
+
+2025-06-14 17:15:05,702 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:07,229 - INFO - 
+PRED:King Charles III of West Francia and the famed Viking ruler Rollo, and was situated in the former Frankish kingdom of Neustria. The treaty offered R
+ANSW:King Charles III
+EM:0
+F1:0.20689655172413793
+
+2025-06-14 17:15:07,231 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:08,743 - INFO - 
+PRED:the river Epte and the Atlantic coast in exchange for their protection against further Viking incursions. The area corresponded to the northern part of present-day Upper Norm
+ANSW:Seine
+EM:0
+F1:0.0
+
+2025-06-14 17:15:08,745 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:10,306 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:15:10,308 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:11,869 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:15:11,870 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:13,398 - INFO - 
+PRED:King Charles III of West Francia and the famed Viking ruler Rollo, and was situated in the former Frankish kingdom of Neustria. The treaty offered R
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:15:13,399 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:14,935 - INFO - 
+PRED:further Viking incursions. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:15:14,936 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:16,488 - INFO - 
+PRED:No Answer 
+ANSW:Rollo
+EM:0
+F1:0.0
+
+2025-06-14 17:15:16,490 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:17,989 - INFO - 
+PRED:Before Rollo's arrival, its populations did not differ from Picardy or the Île-de-France, which were considered "Frankish". Earlier Viking settlers
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:15:17,990 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:19,499 - INFO - 
+PRED:Danes, Norwegians, Norse–Gaels, Orkney Vikings, possibly Swedes, and Anglo-Danes from the English Danelaw under
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:15:19,501 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:21,053 - INFO - 
+PRED:No Answer 
+ANSW:Catholicism
+EM:0
+F1:0.0
+
+2025-06-14 17:15:21,054 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:22,632 - INFO - 
+PRED:north of France. 
+ANSW:north
+EM:0
+F1:0.5
+
+2025-06-14 17:15:22,633 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:24,148 - INFO - 
+PRED:Catholicism (Christianity) and the Gallo-Romance language of the local people, blending their maternal Frankish heritage with Old Norse traditions and customs
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:15:24,150 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:25,680 - INFO - 
+PRED:Frankish heritage with Old Norse traditions and customs to synthesize a unique "Norman" culture in the north of France. The Norman language was forged by the
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:15:25,681 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:27,279 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:15:27,280 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:28,808 - INFO - 
+PRED:fighting horsemen for more than a generation. 
+ANSW:fighting horsemen
+EM:0
+F1:0.4444444444444445
+
+2025-06-14 17:15:28,809 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:30,370 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:15:30,371 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:31,925 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:15:31,926 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:33,486 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:15:33,487 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:35,036 - INFO - 
+PRED:Seljuk Turks. 
+ANSW:Seljuk Turks
+EM:1
+F1:1.0
+
+2025-06-14 17:15:35,037 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:36,597 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:15:36,599 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:38,165 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:15:38,166 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:39,694 - INFO - 
+PRED:Lombards to act against the Byzantines, but they soon fought in Byzantine service in Sicily. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:15:39,695 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:41,228 - INFO - 
+PRED:Sicilian campaign of George Maniaces in 1038–40. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:15:41,229 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:42,771 - INFO - 
+PRED:the 1050s. 
+ANSW:1050s
+EM:0
+F1:0.6666666666666666
+
+2025-06-14 17:15:42,772 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:44,278 - INFO - 
+PRED:1060s, Robert Crispin led the Normans of Edessa against the Turks. 
+ANSW:1060s
+EM:0
+F1:0.16666666666666669
+
+2025-06-14 17:15:44,279 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:45,824 - INFO - 
+PRED:Alexius Komnenos. 
+ANSW:Alexius Komnenos
+EM:1
+F1:1.0
+
+2025-06-14 17:15:45,825 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:47,326 - INFO - 
+PRED:Hervé in the 1050s. By then however, there were already Norman mercenaries serving as far away as Trebizond and Georgia. They were
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:15:47,328 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:48,871 - INFO - 
+PRED:the 1050s. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:15:48,872 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:50,426 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:15:50,427 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:51,982 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:15:51,983 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:53,528 - INFO - 
+PRED:Afranji, meaning "Franks." 
+ANSW:Afranji
+EM:0
+F1:0.5
+
+2025-06-14 17:15:53,529 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:55,054 - INFO - 
+PRED:Oursel led a force of "Franks" into the upper Euphrates valley in northern Syria. From 1073 to 1074,
+ANSW:Oursel
+EM:0
+F1:0.10526315789473684
+
+2025-06-14 17:15:55,056 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:56,563 - INFO - 
+PRED:Some Normans joined Turkish forces to aid in the destruction of the Armenians vassal-states of Sassoun and Taron in far eastern Anatolia. ###
+ANSW:Turkish forces
+EM:0
+F1:0.16666666666666669
+
+2025-06-14 17:15:56,564 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:58,078 - INFO - 
+PRED:Some Normans joined Turkish forces to aid in the destruction of the Armenians vassal-states of Sassoun and Taron in far eastern Anatolia. ###
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:15:58,080 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:15:59,640 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:15:59,641 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:01,173 - INFO - 
+PRED:Oursel led a force of "Franks" into the upper Euphrates valley in northern Syria. From 1073 to 1074,
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:16:01,174 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:02,680 - INFO - 
+PRED:upper Euphrates valley in northern Syria. From 1073 to 1074, 8,000 of the 20,000 troops of the
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:16:02,682 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:04,195 - INFO - 
+PRED:of Norman mercenary origin during the period of the Comnenian Restoration, when Byzantine emperors were seeking out western European warriors. The Raouli
+ANSW:Norman mercenary
+EM:0
+F1:0.16666666666666669
+
+2025-06-14 17:16:04,196 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:05,702 - INFO - 
+PRED:Byzantine Greece were of Norman mercenary origin during the period of the Comnenian Restoration, when Byzantine emperors were seeking out western European warriors
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:16:05,704 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:07,229 - INFO - 
+PRED:George Maniaces in the Sicilian expedition of 1038. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:16:07,230 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:08,766 - INFO - 
+PRED:Sicilian expedition of 1038. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:16:08,768 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:10,280 - INFO - 
+PRED:Robert Guiscard, an other Norman adventurer previously elevated to the dignity of count of Apulia as the result of his military successes, ultimately drove the Byzantines
+ANSW:Robert Guiscard
+EM:0
+F1:0.14285714285714288
+
+2025-06-14 17:16:10,281 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:11,802 - INFO - 
+PRED:February 1082, when Dyrrachium was betrayed to the Normans by the Venetian and Amalfitan merchants who had settled there. ###
+ANSW:1082
+EM:0
+F1:0.1
+
+2025-06-14 17:16:11,803 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:13,333 - INFO - 
+PRED:30,000 men in 300 ships landing on the southern shores of Albania, capturing Valona, Kanina, Jericho (Orikumi), and reaching
+ANSW:30,000
+EM:0
+F1:0.1
+
+2025-06-14 17:16:13,334 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:14,888 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:16:14,889 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:16,446 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:16:16,448 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:17,999 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:16:18,001 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:19,556 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:16:19,557 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:21,089 - INFO - 
+PRED:Deabolis. 
+ANSW:Deabolis
+EM:1
+F1:1.0
+
+2025-06-14 17:16:21,091 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:22,599 - INFO - 
+PRED:Bohemond, Robert's son, landed in Valona and besieged Dyrrachium using the most sophisticated military equipment of the time, but to no
+ANSW:Bohemond
+EM:0
+F1:0.0909090909090909
+
+2025-06-14 17:16:22,601 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:24,104 - INFO - 
+PRED:Deabolis, Gllavenica (Ballsh), Kanina and Jericho. This time, the Albanians sided with the Normans, dissatisfied
+ANSW:Deabolis
+EM:0
+F1:0.125
+
+2025-06-14 17:16:24,106 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:25,599 - INFO - 
+PRED:Dyrrachium using the most sophisticated military equipment of the time, but to no avail. Meanwhile, they occupied Petrela, the citadel of
+ANSW:No Answer
+EM:0
+F1:0.08695652173913042
+
+2025-06-14 17:16:25,601 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:27,097 - INFO - 
+PRED:Bohemond, Robert's son, landed in Valona and besieged Dyrrachium using the most sophisticated military equipment of the time, but to no
+ANSW:No Answer
+EM:0
+F1:0.08695652173913042
+
+2025-06-14 17:16:27,098 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:28,650 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:16:28,651 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:30,120 - INFO - 
+PRED:1185, when a large Norman army invaded Dyrrachium, owing to the betrayal of high Byzantine officials. Some time later, Dyrrachium
+ANSW:1185
+EM:0
+F1:0.09523809523809523
+
+2025-06-14 17:16:30,121 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:31,661 - INFO - 
+PRED:Dyrrachium 
+ANSW:Dyrrachium
+EM:1
+F1:1.0
+
+2025-06-14 17:16:31,663 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:33,213 - INFO - 
+PRED:Adriatic 
+ANSW:the Adriatic
+EM:0
+F1:0.6666666666666666
+
+2025-06-14 17:16:33,214 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:34,766 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:16:34,767 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:36,316 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:16:36,317 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:37,824 - INFO - 
+PRED:Dyrrachium—one of the most important naval bases of the Adriatic—fell again to Byzantine hands. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:16:37,826 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:39,371 - INFO - 
+PRED:King Ethelred II of England. 
+ANSW:King Ethelred II
+EM:0
+F1:0.7499999999999999
+
+2025-06-14 17:16:39,372 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:40,917 - INFO - 
+PRED:Duke Richard II of Normandy. 
+ANSW:Duke Richard II
+EM:0
+F1:0.7499999999999999
+
+2025-06-14 17:16:40,919 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:42,416 - INFO - 
+PRED:Normandy in 1013, when he was forced from his kingdom by Sweyn Forkbeard. His stay in Normandy (until 1016)
+ANSW:Normandy
+EM:0
+F1:0.1
+
+2025-06-14 17:16:42,417 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:43,960 - INFO - 
+PRED:Sweyn Forkbeard. 
+ANSW:Sweyn Forkbeard
+EM:1
+F1:1.0
+
+2025-06-14 17:16:43,961 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:45,511 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:16:45,512 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:47,061 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:16:47,062 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:48,620 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:16:48,622 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:50,106 - INFO - 
+PRED:Harthacnut, he brought with him a Norman-educated mind. He also brought many Norman counsellors and fighters, some of whom established an English cavalry
+ANSW:Harthacnut
+EM:0
+F1:0.08333333333333333
+
+2025-06-14 17:16:50,107 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:51,604 - INFO - 
+PRED:When finally Edward the Confessor returned from his father's refuge in 1041, at the invitation of his half-brother Harthacnut, he
+ANSW:1041
+EM:0
+F1:0.09523809523809523
+
+2025-06-14 17:16:51,606 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:53,123 - INFO - 
+PRED:Robert of Jumièges archbishop of Canterbury and made Ralph the Timid earl of Hereford. 
+ANSW:Robert of Jumièges
+EM:0
+F1:0.35294117647058826
+
+2025-06-14 17:16:53,124 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:54,678 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:16:54,679 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:56,230 - INFO - 
+PRED:English cavalry force. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:16:56,231 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:57,783 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:16:57,785 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:16:59,330 - INFO - 
+PRED:Battle of Hastings. 
+ANSW:Battle of Hastings
+EM:1
+F1:1.0
+
+2025-06-14 17:16:59,331 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:00,862 - INFO - 
+PRED:King Harold II at the Battle of Hastings. 
+ANSW:William II
+EM:0
+F1:0.2
+
+2025-06-14 17:17:00,863 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:02,421 - INFO - 
+PRED:No Answer 
+ANSW:1066
+EM:0
+F1:0.0
+
+2025-06-14 17:17:02,423 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:03,991 - INFO - 
+PRED:No Answer 
+ANSW:Anglo-Saxons
+EM:0
+F1:0.0
+
+2025-06-14 17:17:03,992 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:05,613 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:17:05,615 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:07,171 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:17:07,173 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:08,729 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:17:08,731 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:10,235 - INFO - 
+PRED:the King of France for their land on the continent. They considered England to be their most important holding (it brought with it the title of King—an important status
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:17:10,237 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:11,790 - INFO - 
+PRED:Modern English. 
+ANSW:Modern English
+EM:1
+F1:1.0
+
+2025-06-14 17:17:11,792 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:13,350 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:17:13,351 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:14,905 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:17:14,907 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:16,455 - INFO - 
+PRED:Geoffrey Chaucer. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:17:16,456 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:18,000 - INFO - 
+PRED:1169. 
+ANSW:1169
+EM:1
+F1:1.0
+
+2025-06-14 17:17:18,001 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:19,549 - INFO - 
+PRED:Ireland 
+ANSW:Ireland
+EM:1
+F1:1.0
+
+2025-06-14 17:17:19,550 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:21,048 - INFO - 
+PRED:Irish culture to the point that it has been said that they became "more Irish than the Irish themselves." 
+ANSW:Irish
+EM:0
+F1:0.1
+
+2025-06-14 17:17:21,049 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:22,599 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:17:22,600 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:24,152 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:17:24,153 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:25,687 - INFO - 
+PRED:Trim Castle and Dublin Castle. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:17:25,689 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:27,247 - INFO - 
+PRED:Edgar Atheling, 
+ANSW:Edgar
+EM:0
+F1:0.6666666666666666
+
+2025-06-14 17:17:27,248 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:28,790 - INFO - 
+PRED:Malcolm III of Scotland 
+ANSW:King Malcolm III of Scotland
+EM:0
+F1:0.888888888888889
+
+2025-06-14 17:17:28,791 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:30,273 - INFO - 
+PRED:1072, riding as far as Abernethy where he met up with his fleet of ships. Malcolm submitted, paid homage to William and surrendered his son
+ANSW:1072
+EM:0
+F1:0.07692307692307693
+
+2025-06-14 17:17:30,274 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:31,816 - INFO - 
+PRED:Duncan 
+ANSW:Duncan
+EM:1
+F1:1.0
+
+2025-06-14 17:17:31,817 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:33,363 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:17:33,364 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:34,913 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:17:34,915 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:36,396 - INFO - 
+PRED:Duncan as a hostage, beginning a series of arguments as to whether the Scottish Crown owed allegiance to the King of England. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:17:36,397 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:37,947 - INFO - 
+PRED:Sybilla of Normandy 
+ANSW:Sybilla of Normandy
+EM:1
+F1:1.0
+
+2025-06-14 17:17:37,948 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:39,505 - INFO - 
+PRED:the "Davidian Revolution" 
+ANSW:Norman
+EM:0
+F1:0.0
+
+2025-06-14 17:17:39,507 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:41,062 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:17:41,064 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:42,615 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:17:42,617 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:44,088 - INFO - 
+PRED:Hereford and charged him with defending the Marches and warring with the Welsh. In these original ventures, the Normans failed to make any headway into
+ANSW:Hereford
+EM:0
+F1:0.07692307692307693
+
+2025-06-14 17:17:44,090 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:45,588 - INFO - 
+PRED:the Welsh. In these original ventures, the Normans failed to make any headway into Wales. 
+ANSW:the Welsh
+EM:0
+F1:0.23529411764705882
+
+2025-06-14 17:17:45,589 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:47,060 - INFO - 
+PRED:Edward the Confessor had set up the aforementioned Ralph as earl of Hereford and charged him with defending the Marches and warring with the Welsh. ###
+ANSW:Edward the Confessor
+EM:0
+F1:0.21428571428571425
+
+2025-06-14 17:17:47,061 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:48,617 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:17:48,619 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:50,164 - INFO - 
+PRED:Ralph 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:17:50,165 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:51,658 - INFO - 
+PRED:Wales was at some point subject to Norman interference. Norman words, such as baron (barwn), first entered Welsh at that time. 
+ANSW:Wales
+EM:0
+F1:0.0909090909090909
+
+2025-06-14 17:17:51,659 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:53,210 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:17:53,211 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:54,764 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:17:54,765 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:56,271 - INFO - 
+PRED:1018, Roger de Tosny travelled to the Iberian Peninsula to carve out a state for himself from Moorish lands, but failed. 
+ANSW:1018
+EM:0
+F1:0.0909090909090909
+
+2025-06-14 17:17:56,272 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:57,774 - INFO - 
+PRED:William of Montreuil led the papal army and took a huge booty. 
+ANSW:William of Montreuil
+EM:0
+F1:0.4
+
+2025-06-14 17:17:57,775 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:17:59,318 - INFO - 
+PRED:Antioch. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:17:59,320 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:00,879 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:18:00,880 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:02,415 - INFO - 
+PRED:Roger de Tosny travelled to the Iberian Peninsula to carve out a state for himself from Moorish lands, but failed. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:18:02,416 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:03,974 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:18:03,976 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:05,457 - INFO - 
+PRED:1097, Bohemond began carving out an independent principality around that city. Tancred was instrumental in the conquest of Jerusalem and he worked for the expansion
+ANSW:1097
+EM:0
+F1:0.07692307692307693
+
+2025-06-14 17:18:05,458 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:06,966 - INFO - 
+PRED:Tancred with an army of Italo-Normans. Bohemond was the de facto leader of the Crusade during its passage through Asia Minor. After
+ANSW:Tancred
+EM:0
+F1:0.08695652173913045
+
+2025-06-14 17:18:06,967 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:08,491 - INFO - 
+PRED:Jerusalem and he worked for the expansion of the Crusader kingdom in Transjordan and the region of Galilee. 
+ANSW:Jerusalem
+EM:0
+F1:0.10526315789473684
+
+2025-06-14 17:18:08,492 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:10,057 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:18:10,058 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:11,591 - INFO - 
+PRED:Bohemond of Taranto and his nephew Tancred with an army of Italo-Normans. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:18:11,592 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:13,144 - INFO - 
+PRED:380 years. 
+ANSW:380 years
+EM:1
+F1:1.0
+
+2025-06-14 17:18:13,146 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:14,695 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:18:14,696 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:16,251 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:18:16,252 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:17,790 - INFO - 
+PRED:a storm dispersed the fleet. 
+ANSW:a storm
+EM:0
+F1:0.5714285714285715
+
+2025-06-14 17:18:17,791 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:19,354 - INFO - 
+PRED:Berengaria 
+ANSW:Berengaria
+EM:1
+F1:1.0
+
+2025-06-14 17:18:19,356 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:20,908 - INFO - 
+PRED:No Answer 
+ANSW:1191
+EM:0
+F1:0.0
+
+2025-06-14 17:18:20,910 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:22,455 - INFO - 
+PRED:Isaac Komnenos. 
+ANSW:Isaac Komnenos
+EM:1
+F1:1.0
+
+2025-06-14 17:18:22,456 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:24,010 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:18:24,011 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:25,572 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:18:25,573 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:27,120 - INFO - 
+PRED:Isaac Komnenos. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:18:27,121 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:28,662 - INFO - 
+PRED:Conrad of Montferrat. 
+ANSW:Conrad of Montferrat
+EM:1
+F1:1.0
+
+2025-06-14 17:18:28,663 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:30,182 - INFO - 
+PRED:silver chains, because Richard had promised that he would not place him in irons. 
+ANSW:silver
+EM:0
+F1:0.13333333333333333
+
+2025-06-14 17:18:30,183 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:31,711 - INFO - 
+PRED:Richard de Camville and Robert de Thornham, as governors of Cyprus. 
+ANSW:Guy de Lusignan
+EM:0
+F1:0.14285714285714288
+
+2025-06-14 17:18:31,712 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:33,261 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:18:33,262 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:34,810 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:18:34,811 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:36,348 - INFO - 
+PRED:his daughter in marriage to the person named by Richard. No Answer 
+ANSW:No Answer
+EM:0
+F1:0.2857142857142857
+
+2025-06-14 17:18:36,349 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:37,887 - INFO - 
+PRED:Africa. 
+ANSW:Africa
+EM:1
+F1:1.0
+
+2025-06-14 17:18:37,889 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:39,413 - INFO - 
+PRED:Jean de Bethencourt and Gadifer de la Salle. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:18:39,414 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:40,961 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:18:40,962 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:42,476 - INFO - 
+PRED:Bethencourt took the title of King of the Canary Islands, as vassal to Henry III of Castile. 
+ANSW:Bethencourt
+EM:0
+F1:0.1111111111111111
+
+2025-06-14 17:18:42,478 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:43,994 - INFO - 
+PRED:Enrique Pérez de Guzmán, 2nd Count de Niebla. 
+ANSW:Enrique Pérez de Guzmán
+EM:0
+F1:0.6666666666666666
+
+2025-06-14 17:18:43,995 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:45,506 - INFO - 
+PRED:Enrique Pérez de Guzmán, 2nd Count de Niebla. 
+ANSW:Maciot de Bethencourt
+EM:0
+F1:0.18181818181818182
+
+2025-06-14 17:18:45,507 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:47,060 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:18:47,061 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:48,609 - INFO - 
+PRED:Maciot de Bethencourt 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:18:48,610 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:50,140 - INFO - 
+PRED:Channel Islands. Norman customary law was transcribed in two customaries in Latin by two judges for use by them and their colleagues: These are the Très anc
+ANSW:Channel Islands
+EM:0
+F1:0.13793103448275862
+
+2025-06-14 17:18:50,141 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:51,660 - INFO - 
+PRED:two customaries in Latin by two judges for use by them and their colleagues: These are the Très ancien coutumier (Very ancient customary), authored
+ANSW:two
+EM:0
+F1:0.07999999999999999
+
+2025-06-14 17:18:51,661 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:53,216 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:18:53,217 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:54,773 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:18:54,774 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:56,316 - INFO - 
+PRED:Très ancien coutumier (Very ancient customary) 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:18:56,318 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:57,810 - INFO - 
+PRED:Romanesque idiom to England and Italy, and the encastellation of these regions with keeps in their north French style fundamentally altered the military landscape. Their
+ANSW:Romanesque
+EM:0
+F1:0.07692307692307693
+
+2025-06-14 17:18:57,812 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:18:59,336 - INFO - 
+PRED:rounded arches, particularly over windows and doorways, and massive proportions. 
+ANSW:rounded
+EM:0
+F1:0.18181818181818182
+
+2025-06-14 17:18:59,337 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:00,858 - INFO - 
+PRED:rounded arches, particularly over windows and doorways, and massive proportions. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:19:00,859 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:02,428 - INFO - 
+PRED:No Answer 
+ANSW:Early Gothic
+EM:0
+F1:0.0
+
+2025-06-14 17:19:02,429 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:03,959 - INFO - 
+PRED:Anglo-Saxon and precedes the Early Gothic. 
+ANSW:Anglo-Saxon
+EM:0
+F1:0.2857142857142857
+
+2025-06-14 17:19:03,960 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:05,507 - INFO - 
+PRED:Kingdom of Sicily. 
+ANSW:Sicily
+EM:0
+F1:0.5
+
+2025-06-14 17:19:05,508 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:07,067 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:19:07,068 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:08,640 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:19:08,641 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:10,211 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:19:10,212 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:11,720 - INFO - 
+PRED:In the early 11th century the dukes began a programme of church reform, encouraging the Cluniac reform of monasteries and patronising intellectual pursuits
+ANSW:early 11th century
+EM:0
+F1:0.23076923076923078
+
+2025-06-14 17:19:11,721 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:13,273 - INFO - 
+PRED:the dukes as a unifying force for their disparate duchy. 
+ANSW:dukes
+EM:0
+F1:0.18181818181818182
+
+2025-06-14 17:19:13,275 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:14,829 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:19:14,830 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:16,343 - INFO - 
+PRED:the dukes began a programme of church reform, encouraging the Cluniac reform of monasteries and patronising intellectual pursuits, especially the proliferation of scriptoria
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:19:16,344 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:17,895 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:19:17,896 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:19,459 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:19:19,461 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:20,969 - INFO - 
+PRED:The French Wars of Religion in the 16th century and French Revolution in the 18th successively destroyed much of what existed in the way of the architectural
+ANSW:16th century
+EM:0
+F1:0.13793103448275862
+
+2025-06-14 17:19:20,970 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:22,527 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:19:22,528 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:24,082 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:19:24,083 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:25,624 - INFO - 
+PRED:embroidery. 
+ANSW:embroidery
+EM:1
+F1:1.0
+
+2025-06-14 17:19:25,625 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:27,132 - INFO - 
+PRED:By far the most famous work of Norman art is the Bayeux Tapestry, which is not a tapestry but a work of embroidery. 
+ANSW:Bayeux Tapestry
+EM:0
+F1:0.16
+
+2025-06-14 17:19:27,133 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:28,652 - INFO - 
+PRED:Odo, the Bishop of Bayeux and first Earl of Kent, employing natives from Kent who were learned in the Nordic traditions imported in the previous half century
+ANSW:Odo
+EM:0
+F1:0.07142857142857142
+
+2025-06-14 17:19:28,654 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:30,209 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:19:30,210 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:31,734 - INFO - 
+PRED:Odo, the Bishop of Bayeux and first Earl of Kent, employing natives from Kent who were learned in the Nordic traditions imported in the previous half century
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:19:31,735 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:33,257 - INFO - 
+PRED:mosaics, which were common in Norman Italy and drew heavily on the Greek heritage. Lombard Salerno was a centre of ivorywork in the 11
+ANSW:mosaics
+EM:0
+F1:0.07999999999999999
+
+2025-06-14 17:19:33,258 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:19:34,808 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:19:34,809 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.

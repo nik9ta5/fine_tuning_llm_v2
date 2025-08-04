@@ -1,0 +1,19 @@
+2025-06-15 14:37:33,670 - INFO - Start logger
+------------ CONFIGURATE ------------ 
+{'model': {'name': 'meta-llama/Llama-3.1-8B-Instruct', 'model_name_log': 'base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters', 'cache_dir': './merge_models/base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/', 'quant_config': None, 'max_length': 512, 'max_new_tokens': 32, 'tokenizer': {'padding_size': 'left', 'answer_pattern': '### answer:\n'}}, 'lora': {'r': 16, 'lora_alpha': 32, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'o_proj', 'v_proj', 'k_proj']}, 'inference': {'temp': 0.4}, 'evaluate_model': {'checkpoint': 'checkpoint-150/'}, 'train': {'model_save_dir': './saved_models', 'epochs': 30, 'train_batch': 2, 'val_batch': 2, 'test_batch': 2, 'grad_accum': 256, 'eval_step': 15, 'save_step': 15, 'torch_empty_cache_steps': 8, 'log_step': 10, 'lr': 2e-05, 'weight_decay': 0.01}, 'merge': {'dir': './merge_models'}, 'logs': {'dir': './logs'}}
+------------ ------------
+2025-06-15 14:37:33,670 - INFO - train merge model with SQuAD Adapter on Domen dataset
+2025-06-15 14:37:33,673 - INFO - PyTorch: setting up devices
+2025-06-15 14:37:33,848 - INFO - Using auto half precision backend
+2025-06-15 14:37:33,849 - WARNING - No label_names provided for model class `PeftModelForCausalLM`. Since `PeftModel` hides base models input arguments, if label_names is not given, label_names can't be set automatically within `Trainer`. Note that empty label_names list will be used instead.
+2025-06-15 14:37:33,849 - INFO - Start training for model base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters
+2025-06-15 14:37:33,945 - INFO - skipped Embedding(128256, 4096): 501.0M params
+2025-06-15 14:37:33,945 - INFO - skipped: 501.0M params
+2025-06-15 14:37:33,951 - INFO - ***** Running training *****
+2025-06-15 14:37:33,951 - INFO -   Num examples = 3,103
+2025-06-15 14:37:33,951 - INFO -   Num Epochs = 30
+2025-06-15 14:37:33,951 - INFO -   Instantaneous batch size per device = 2
+2025-06-15 14:37:33,951 - INFO -   Total train batch size (w. parallel, distributed & accumulation) = 512
+2025-06-15 14:37:33,951 - INFO -   Gradient Accumulation steps = 256
+2025-06-15 14:37:33,951 - INFO -   Total optimization steps = 210
+2025-06-15 14:37:33,952 - INFO -   Number of trainable parameters = 13,631,488

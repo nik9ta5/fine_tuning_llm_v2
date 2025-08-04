@@ -1,0 +1,189 @@
+2025-06-15 14:38:14,840 - INFO - Start logger
+------------ CONFIGURATE ------------ 
+{'model': {'name': 'meta-llama/Llama-3.1-8B-Instruct', 'model_name_log': 'base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters', 'cache_dir': './merge_models/base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/', 'quant_config': None, 'max_length': 512, 'max_new_tokens': 32, 'tokenizer': {'padding_size': 'left', 'answer_pattern': '### answer:\n'}}, 'lora': {'r': 16, 'lora_alpha': 32, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'o_proj', 'v_proj', 'k_proj']}, 'inference': {'temp': 0.4}, 'evaluate_model': {'checkpoint': 'checkpoint-150/'}, 'train': {'model_save_dir': './saved_models', 'epochs': 30, 'train_batch': 2, 'val_batch': 2, 'test_batch': 2, 'grad_accum': 256, 'eval_step': 30, 'save_step': 30, 'torch_empty_cache_steps': 8, 'log_step': 10, 'lr': 2e-05, 'weight_decay': 0.01}, 'merge': {'dir': './merge_models'}, 'logs': {'dir': './logs'}}
+------------ ------------
+2025-06-15 14:38:14,840 - INFO - train merge model with SQuAD Adapter on Domen dataset
+2025-06-15 14:38:14,841 - INFO - PyTorch: setting up devices
+2025-06-15 14:38:15,025 - INFO - Using auto half precision backend
+2025-06-15 14:38:15,025 - WARNING - No label_names provided for model class `PeftModelForCausalLM`. Since `PeftModel` hides base models input arguments, if label_names is not given, label_names can't be set automatically within `Trainer`. Note that empty label_names list will be used instead.
+2025-06-15 14:38:15,026 - INFO - Start training for model base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters
+2025-06-15 14:38:15,122 - INFO - skipped Embedding(128256, 4096): 501.0M params
+2025-06-15 14:38:15,122 - INFO - skipped: 501.0M params
+2025-06-15 14:38:15,128 - INFO - ***** Running training *****
+2025-06-15 14:38:15,128 - INFO -   Num examples = 3,103
+2025-06-15 14:38:15,128 - INFO -   Num Epochs = 30
+2025-06-15 14:38:15,128 - INFO -   Instantaneous batch size per device = 2
+2025-06-15 14:38:15,128 - INFO -   Total train batch size (w. parallel, distributed & accumulation) = 512
+2025-06-15 14:38:15,128 - INFO -   Gradient Accumulation steps = 256
+2025-06-15 14:38:15,128 - INFO -   Total optimization steps = 210
+2025-06-15 14:38:15,129 - INFO -   Number of trainable parameters = 13,631,488
+2025-06-15 14:40:51,465 - INFO - 
+Step 1: loss = 1.6982
+Step 1: grad_norm = 0.22512806951999664
+Step 1: learning_rate = 2e-05
+Step 1: num_tokens = 262123.0
+Step 1: mean_token_accuracy = 0.7517932007322088
+Step 1: epoch = 0.16494845360824742
+2025-06-15 15:01:50,275 - INFO - 
+Step 10: loss = 1.7025
+Step 10: grad_norm = 0.19079309701919556
+Step 10: learning_rate = 1.9142857142857146e-05
+Step 10: num_tokens = 2372499.0
+Step 10: mean_token_accuracy = 0.7528202684899402
+Step 10: epoch = 1.4948453608247423
+2025-06-15 15:25:25,559 - INFO - 
+Step 20: loss = 1.6192
+Step 20: grad_norm = 0.16455495357513428
+Step 20: learning_rate = 1.819047619047619e-05
+Step 20: num_tokens = 4743463.0
+Step 20: mean_token_accuracy = 0.7547262565329157
+Step 20: epoch = 2.9896907216494846
+2025-06-15 15:46:34,136 - INFO - 
+Step 30: loss = 1.5845
+Step 30: grad_norm = 0.14958228170871735
+Step 30: learning_rate = 1.723809523809524e-05
+Step 30: num_tokens = 6868767.0
+Step 30: mean_token_accuracy = 0.7577469845015842
+Step 30: epoch = 4.329896907216495
+2025-06-15 15:46:34,138 - INFO - 
+***** Running Evaluation *****
+2025-06-15 15:46:34,138 - INFO -   Num examples = 769
+2025-06-15 15:46:34,138 - INFO -   Batch size = 2
+2025-06-15 15:47:30,874 - INFO - 
+Step 30: eval_loss = nan
+Step 30: eval_runtime = 56.7365
+Step 30: eval_samples_per_second = 13.554
+Step 30: eval_steps_per_second = 6.786
+Step 30: eval_num_tokens = 6868767.0
+Step 30: eval_mean_token_accuracy = 0.7545531065046013
+Step 30: epoch = 4.329896907216495
+2025-06-15 15:47:30,874 - INFO - Saving model checkpoint to ./saved_models/train__15-06-2025_14-38-14__base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/checkpoint-30
+2025-06-15 15:47:30,884 - INFO - loading configuration file ./merge_models/base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/config.json
+2025-06-15 15:47:30,885 - INFO - Model config LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 128,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 8.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": false,
+  "vocab_size": 128256
+}
+
+2025-06-15 15:47:30,942 - INFO - chat template saved in ./saved_models/train__15-06-2025_14-38-14__base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/checkpoint-30/chat_template.jinja
+2025-06-15 15:47:30,943 - INFO - tokenizer config file saved in ./saved_models/train__15-06-2025_14-38-14__base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/checkpoint-30/tokenizer_config.json
+2025-06-15 15:47:30,943 - INFO - Special tokens file saved in ./saved_models/train__15-06-2025_14-38-14__base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/checkpoint-30/special_tokens_map.json
+2025-06-15 16:11:06,314 - INFO - 
+Step 40: loss = 1.5832
+Step 40: grad_norm = 0.1560332328081131
+Step 40: learning_rate = 1.6285714285714287e-05
+Step 40: num_tokens = 9241057.0
+Step 40: mean_token_accuracy = 0.7593919358633715
+Step 40: epoch = 5.824742268041237
+2025-06-15 16:32:15,179 - INFO - 
+Step 50: loss = 1.6148
+Step 50: grad_norm = 0.1518593728542328
+Step 50: learning_rate = 1.5333333333333334e-05
+Step 50: num_tokens = 11366704.0
+Step 50: mean_token_accuracy = 0.7601224794554022
+Step 50: epoch = 7.164948453608248
+2025-06-15 16:55:50,894 - INFO - 
+Step 60: loss = 1.586
+Step 60: grad_norm = 0.14950506389141083
+Step 60: learning_rate = 1.4380952380952382e-05
+Step 60: num_tokens = 13738391.0
+Step 60: mean_token_accuracy = 0.7621227897318272
+Step 60: epoch = 8.65979381443299
+2025-06-15 16:55:50,896 - INFO - 
+***** Running Evaluation *****
+2025-06-15 16:55:50,896 - INFO -   Num examples = 769
+2025-06-15 16:55:50,896 - INFO -   Batch size = 2
+2025-06-15 16:56:47,658 - INFO - 
+Step 60: eval_loss = nan
+Step 60: eval_runtime = 56.7627
+Step 60: eval_samples_per_second = 13.548
+Step 60: eval_steps_per_second = 6.783
+Step 60: eval_num_tokens = 13738391.0
+Step 60: eval_mean_token_accuracy = 0.7598786470951973
+Step 60: epoch = 8.65979381443299
+2025-06-15 16:56:47,658 - INFO - Saving model checkpoint to ./saved_models/train__15-06-2025_14-38-14__base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/checkpoint-60
+2025-06-15 16:56:47,667 - INFO - loading configuration file ./merge_models/base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/config.json
+2025-06-15 16:56:47,667 - INFO - Model config LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 128,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 8.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": false,
+  "vocab_size": 128256
+}
+
+2025-06-15 16:56:47,721 - INFO - chat template saved in ./saved_models/train__15-06-2025_14-38-14__base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/checkpoint-60/chat_template.jinja
+2025-06-15 16:56:47,722 - INFO - tokenizer config file saved in ./saved_models/train__15-06-2025_14-38-14__base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/checkpoint-60/tokenizer_config.json
+2025-06-15 16:56:47,722 - INFO - Special tokens file saved in ./saved_models/train__15-06-2025_14-38-14__base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/checkpoint-60/special_tokens_map.json
+2025-06-15 17:17:56,622 - INFO - 
+Step 70: loss = 1.5124
+Step 70: grad_norm = 0.4714040458202362
+Step 70: learning_rate = 1.3428571428571429e-05
+Step 70: num_tokens = 15864450.0
+Step 70: mean_token_accuracy = 0.7640762427535195
+Step 70: epoch = 10.0

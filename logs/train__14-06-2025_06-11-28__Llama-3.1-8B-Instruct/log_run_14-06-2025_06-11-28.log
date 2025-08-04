@@ -1,0 +1,29 @@
+2025-06-14 06:11:28,754 - INFO - Start logger
+------------ CONFIGURATE ------------ 
+{'model': {'name': 'meta-llama/Llama-3.1-8B-Instruct', 'model_name_log': 'Llama-3.1-8B-Instruct', 'cache_dir': '../ft_v1/models_cache/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659/', 'quant_config': None, 'max_length': 512, 'max_new_tokens': 32, 'tokenizer': {'padding_size': 'left', 'answer_pattern': '### answer:\n'}}, 'lora': {'r': 16, 'lora_alpha': 32, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'o_proj', 'v_proj', 'k_proj']}, 'inference': {'temp': 0.7}, 'train': {'model_save_dir': './saved_models', 'epochs': 2, 'train_batch': 2, 'val_batch': 1, 'test_batch': 1, 'grad_accum': 128, 'eval_step': 1, 'save_step': 1, 'torch_empty_cache_steps': 8, 'log_step': 5, 'lr': 2e-05, 'weight_decay': 0.01}, 'logs': {'dir': './logs'}}
+------------ ------------
+2025-06-14 06:11:28,755 - INFO - PyTorch: setting up devices
+2025-06-14 06:11:28,933 - INFO - Using auto half precision backend
+2025-06-14 06:11:28,934 - WARNING - No label_names provided for model class `PeftModelForCausalLM`. Since `PeftModel` hides base models input arguments, if label_names is not given, label_names can't be set automatically within `Trainer`. Note that empty label_names list will be used instead.
+2025-06-14 06:11:28,934 - INFO - Start training for model Llama-3.1-8B-Instruct
+2025-06-14 06:11:29,029 - INFO - skipped Embedding(128256, 4096): 501.0M params
+2025-06-14 06:11:29,030 - INFO - skipped: 501.0M params
+2025-06-14 06:11:29,036 - INFO - ***** Running training *****
+2025-06-14 06:11:29,036 - INFO -   Num examples = 58,038
+2025-06-14 06:11:29,036 - INFO -   Num Epochs = 2
+2025-06-14 06:11:29,036 - INFO -   Instantaneous batch size per device = 2
+2025-06-14 06:11:29,036 - INFO -   Total train batch size (w. parallel, distributed & accumulation) = 256
+2025-06-14 06:11:29,036 - INFO -   Gradient Accumulation steps = 128
+2025-06-14 06:11:29,036 - INFO -   Total optimization steps = 454
+2025-06-14 06:11:29,037 - INFO -   Number of trainable parameters = 13,631,488
+2025-06-14 06:12:47,354 - INFO - 
+Step 1: loss = 0.7643
+Step 1: grad_norm = 0.34979361295700073
+Step 1: learning_rate = 2e-05
+Step 1: num_tokens = 131072.0
+Step 1: mean_token_accuracy = 0.8875420191325247
+Step 1: epoch = 0.0044109032013508395
+2025-06-14 06:12:47,356 - INFO - 
+***** Running Evaluation *****
+2025-06-14 06:12:47,356 - INFO -   Num examples = 2547
+2025-06-14 06:12:47,356 - INFO -   Batch size = 1

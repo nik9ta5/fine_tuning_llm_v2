@@ -1,0 +1,3944 @@
+2025-06-14 17:23:09,341 - INFO - Start logger
+------------ CONFIGURATE ------------ 
+{'model': {'name': 'meta-llama/Llama-3.1-8B-Instruct', 'model_name_log': 'Llama-3.1-8B-Instruct', 'cache_dir': '../ft_v1/models_cache/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659/', 'quant_config': None, 'max_length': 512, 'max_new_tokens': 32, 'tokenizer': {'padding_size': 'left', 'answer_pattern': '### answer:\n'}}, 'lora': {'r': 16, 'lora_alpha': 32, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'o_proj', 'v_proj', 'k_proj']}, 'inference': {'temp': 0.4}, 'evaluate_model': {'checkpoint': 'checkpoint-100/'}, 'train': {'model_save_dir': './saved_models', 'epochs': 2, 'train_batch': 2, 'val_batch': 70, 'test_batch': 70, 'grad_accum': 256, 'eval_step': 25, 'save_step': 25, 'torch_empty_cache_steps': 8, 'log_step': 15, 'lr': 2e-05, 'weight_decay': 0.01}, 'logs': {'dir': './logs'}}
+------------ ------------
+2025-06-14 17:23:09,341 - INFO - MODEL CHECKPOINT EVAL: ./saved_models/train__14-06-2025_06-57-34__Llama-3.1-8B-Instruct/checkpoint-100/
+2025-06-14 17:23:09,344 - INFO - 
+Model arch:
+PeftModelForCausalLM(
+  (base_model): LoraModel(
+    (model): LlamaForCausalLM(
+      (model): LlamaModel(
+        (embed_tokens): Embedding(128256, 4096)
+        (layers): ModuleList(
+          (0-31): 32 x LlamaDecoderLayer(
+            (self_attn): LlamaAttention(
+              (q_proj): lora.Linear8bitLt(
+                (base_layer): Linear8bitLt(in_features=4096, out_features=4096, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=4096, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (k_proj): lora.Linear8bitLt(
+                (base_layer): Linear8bitLt(in_features=4096, out_features=1024, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=1024, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (v_proj): lora.Linear8bitLt(
+                (base_layer): Linear8bitLt(in_features=4096, out_features=1024, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=1024, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (o_proj): lora.Linear8bitLt(
+                (base_layer): Linear8bitLt(in_features=4096, out_features=4096, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=16, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=16, out_features=4096, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+            )
+            (mlp): LlamaMLP(
+              (gate_proj): Linear8bitLt(in_features=4096, out_features=14336, bias=False)
+              (up_proj): Linear8bitLt(in_features=4096, out_features=14336, bias=False)
+              (down_proj): Linear8bitLt(in_features=14336, out_features=4096, bias=False)
+              (act_fn): SiLU()
+            )
+            (input_layernorm): LlamaRMSNorm((4096,), eps=1e-05)
+            (post_attention_layernorm): LlamaRMSNorm((4096,), eps=1e-05)
+          )
+        )
+        (norm): LlamaRMSNorm((4096,), eps=1e-05)
+        (rotary_emb): LlamaRotaryEmbedding()
+      )
+      (lm_head): Linear(in_features=4096, out_features=128256, bias=False)
+    )
+  )
+)
+
+Model config:
+LlamaConfig {
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": [
+    128001,
+    128008,
+    128009
+  ],
+  "head_dim": 128,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 131072,
+  "mlp_bias": false,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "quantization_config": {
+    "_load_in_4bit": false,
+    "_load_in_8bit": true,
+    "bnb_4bit_compute_dtype": "float32",
+    "bnb_4bit_quant_storage": "uint8",
+    "bnb_4bit_quant_type": "fp4",
+    "bnb_4bit_use_double_quant": false,
+    "llm_int8_enable_fp32_cpu_offload": false,
+    "llm_int8_has_fp16_weight": false,
+    "llm_int8_skip_modules": null,
+    "llm_int8_threshold": 6.0,
+    "load_in_4bit": false,
+    "load_in_8bit": true,
+    "quant_method": "bitsandbytes"
+  },
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "factor": 8.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+  },
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": false,
+  "vocab_size": 128256
+}
+
+
+2025-06-14 17:23:09,344 - INFO - Start eval for model Llama-3.1-8B-Instruct
+2025-06-14 17:23:09,344 - INFO - Test model. Calculate metrics
+2025-06-14 17:23:09,378 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:23:17,523 - INFO - 
+PRED:France. 
+ANSW:France
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:The 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from
+ANSW:10th and 11th centuries
+EM:0
+F1:0.3076923076923077
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:Denmark, Iceland and Norway who, under their leader Rollo, agreed to swear fealty to King Charles III of West Francia. Through generations of assim
+ANSW:Denmark, Iceland and Norway
+EM:0
+F1:0.2857142857142857
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:Rollo, agreed to swear fealty to King Charles III of West Francia. Through generations of assimilation and mixing with the native Frankish and Roman-G
+ANSW:Rollo
+EM:0
+F1:0.07999999999999999
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:first half of the 10th century, and it continued to evolve over the succeeding centuries. 
+ANSW:10th century
+EM:0
+F1:0.23529411764705882
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:King Charles III of West Francia. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:William the Conqueror, led to the Norman conquest of England at the Battle of Hastings in 1066. 
+ANSW:William the Conqueror
+EM:0
+F1:0.3
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:Richard I of Normandy was forged into a cohesive and formidable principality in feudal tenure. The Normans are noted both for their culture, such as their unique
+ANSW:Richard I
+EM:0
+F1:0.13793103448275862
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:Catholic orthodoxy into which they assimilated. 
+ANSW:Catholic
+EM:0
+F1:0.2857142857142857
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:major political, cultural and military impact on medieval Europe and even the Near East. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:exponents of the Catholic orthodoxy into which they assimilated. They adopted the Gallo-Romance language of the Frankish land they settled, their dialect
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:Richard I of Normandy was forged into a cohesive and formidable principality in feudal tenure. The Normans are noted both for their culture, such as their unique
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:Northman or directly from Old Norse Norðmaðr, Latinized variously as Nortmannus, Normannus, or Nordmannus (
+ANSW:Viking
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,523 - INFO - 
+PRED:9th century) to mean "Norseman, Viking". 
+ANSW:9th century
+EM:0
+F1:0.5
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Normans/Normanz, plural of Normant, modern French normand, which is itself borrowed from Old Low Franconian Nortmann "Northman
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:9th century) to mean "Norseman, Viking". 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:911 as a fiefdom, was established by the treaty of Saint-Clair-sur-Epte between King Charles III of West Francia and the famed Viking
+ANSW:911
+EM:0
+F1:0.08695652173913045
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:King Charles III of West Francia and the famed Viking ruler Rollo, and was situated in the former Frankish kingdom of Neustria. The treaty offered R
+ANSW:King Charles III
+EM:0
+F1:0.20689655172413793
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:the river Epte and the Atlantic coast in exchange for their protection against further Viking incursions. The area corresponded to the northern part of present-day Upper Norm
+ANSW:Seine
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:King Charles III of West Francia and the famed Viking ruler Rollo, and was situated in the former Frankish kingdom of Neustria. The treaty offered R
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:further Viking incursions. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Rollo's contingents who raided and ultimately settled Normandy and parts of the Atlantic coast included Danes, Norwegians, Norse–Gaels, Or
+ANSW:Rollo
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Before Rollo's arrival, its populations did not differ from Picardy or the Île-de-France, which were considered "Frankish". Earlier Viking settlers
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Danes, Norwegians, Norse–Gaels, Orkney Vikings, possibly Swedes, and Anglo-Danes from the English Danelaw under
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Catholicism (Christianity) 
+ANSW:Catholicism
+EM:0
+F1:0.6666666666666666
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:north of France. 
+ANSW:north
+EM:0
+F1:0.5
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Catholicism (Christianity) and the Gallo-Romance language of the local people, blending their maternal Frankish heritage with Old Norse traditions and customs
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Frankish heritage with Old Norse traditions and customs to synthesize a unique "Norman" culture in the north of France. The Norman language was forged by the
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:No Answer ##
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:fighting horsemen for more than a generation. 
+ANSW:fighting horsemen
+EM:0
+F1:0.4444444444444445
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:the Seljuk Turks. 
+ANSW:Seljuk Turks
+EM:0
+F1:0.8
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Lombards to act against the Byzantines, but they soon fought in Byzantine service in Sicily. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Sicilian campaign of George Maniaces in 1038–40. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:the 1050s. By then however, there were already Norman mercenaries serving as far away as Trebizond and Georgia. They were based at Malat
+ANSW:1050s
+EM:0
+F1:0.08333333333333333
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:1060s, Robert Crispin led the Normans of Edessa against the Turks. 
+ANSW:1060s
+EM:0
+F1:0.16666666666666669
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Alexius Komnenos. 
+ANSW:Alexius Komnenos
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Hervé in the 1050s. By then however, there were already Norman mercenaries serving as far away as Trebizond and Georgia. They were
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:the 1050s. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Roussel de Bailleul 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Afranji, meaning "Franks." 
+ANSW:Afranji
+EM:0
+F1:0.5
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Oursel led a force of "Franks" into the upper Euphrates valley in northern Syria. From 1073 to 1074,
+ANSW:Oursel
+EM:0
+F1:0.10526315789473684
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Some Normans joined Turkish forces to aid in the destruction of the Armenians vassal-states of Sassoun and Taron in far eastern Anatolia. ###
+ANSW:Turkish forces
+EM:0
+F1:0.16666666666666669
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Some Normans joined Turkish forces to aid in the destruction of the Armenians vassal-states of Sassoun and Taron in far eastern Anatolia. ###
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:the Armenian state further south in Cilicia and the Taurus Mountains. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Oursel led a force of "Franks" into the upper Euphrates valley in northern Syria. From 1073 to 1074,
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:upper Euphrates valley in northern Syria. From 1073 to 1074, 8,000 of the 20,000 troops of the
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:of Norman mercenary origin during the period of the Comnenian Restoration, when Byzantine emperors were seeking out western European warriors. The Raouli
+ANSW:Norman mercenary
+EM:0
+F1:0.16666666666666669
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Byzantine Greece were of Norman mercenary origin during the period of the Comnenian Restoration, when Byzantine emperors were seeking out western European warriors
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:George Maniaces in the Sicilian expedition of 1038. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Sicilian expedition of 1038. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Robert Guiscard, an other Norman adventurer previously elevated to the dignity of count of Apulia as the result of his military successes, ultimately drove the Byzantines
+ANSW:Robert Guiscard
+EM:0
+F1:0.14285714285714288
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:February 1082, when Dyrrachium was betrayed to the Normans by the Venetian and Amalfitan merchants who had settled there. The
+ANSW:1082
+EM:0
+F1:0.09523809523809523
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:30,000 men in 300 ships landing on the southern shores of Albania, capturing Valona, Kanina, Jericho (Orikumi), and reaching
+ANSW:30,000
+EM:0
+F1:0.1
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:Robert Guiscard, an other Norman adventurer previously elevated to the dignity of count of Apulia as the result of his military successes, ultimately drove the Byzantines
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,524 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:17,555 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:23:25,489 - INFO - 
+PRED:Deabolis. 
+ANSW:Deabolis
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,489 - INFO - 
+PRED:Bohemond, Robert's son, landed in Valona and besieged Dyrrachium using the most sophisticated military equipment of the time, but to no
+ANSW:Bohemond
+EM:0
+F1:0.0909090909090909
+
+2025-06-14 17:23:25,489 - INFO - 
+PRED:Deabolis, Gllavenica (Ballsh), Kanina and Jericho. This time, the Albanians sided with the Normans, dissatisfied
+ANSW:Deabolis
+EM:0
+F1:0.125
+
+2025-06-14 17:23:25,489 - INFO - 
+PRED:Dyrrachium using the most sophisticated military equipment of the time, but to no avail. 
+ANSW:No Answer
+EM:0
+F1:0.125
+
+2025-06-14 17:23:25,489 - INFO - 
+PRED:Bohemond, Robert's son, landed in Valona and besieged Dyrrachium using the most sophisticated military equipment of the time, but to no
+ANSW:No Answer
+EM:0
+F1:0.08695652173913042
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:1185, when a large Norman army invaded Dyrrachium, owing to the betrayal of high Byzantine officials. Some time later, Dyrrachium
+ANSW:1185
+EM:0
+F1:0.09523809523809523
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Dyrrachium 
+ANSW:Dyrrachium
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Adriatic 
+ANSW:the Adriatic
+EM:0
+F1:0.6666666666666666
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Dyrrachium—one of the most important naval bases of the Adriatic—fell again to Byzantine hands. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:King Ethelred II of England. 
+ANSW:King Ethelred II
+EM:0
+F1:0.7499999999999999
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Duke Richard II of Normandy 
+ANSW:Duke Richard II
+EM:0
+F1:0.7499999999999999
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Normandy in 1013, when he was forced from his kingdom by Sweyn Forkbeard. His stay in Normandy (until 1016)
+ANSW:Normandy
+EM:0
+F1:0.1
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Sweyn Forkbeard. 
+ANSW:Sweyn Forkbeard
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Harthacnut, he brought with him a Norman-educated mind. He also brought many Norman counsellors and fighters, some of whom established an English cavalry
+ANSW:Harthacnut
+EM:0
+F1:0.08333333333333333
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:When finally Edward the Confessor returned from his father's refuge in 1041, at the invitation of his half-brother Harthacnut, he
+ANSW:1041
+EM:0
+F1:0.09523809523809523
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Robert of Jumièges archbishop of Canterbury and made Ralph the Timid earl of Hereford. 
+ANSW:Robert of Jumièges
+EM:0
+F1:0.35294117647058826
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:English cavalry force. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Battle of Hastings. 
+ANSW:Battle of Hastings
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:King Harold II at the Battle of Hastings. The invading Normans and their descendants replaced the Anglo-Saxons as the ruling class of England. The nobility
+ANSW:William II
+EM:0
+F1:0.07407407407407407
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:1066
+EM:0
+F1:0.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:Anglo-Saxons
+EM:0
+F1:0.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Modern English. 
+ANSW:Modern English
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Geoffrey Chaucer. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:1169. 
+ANSW:1169
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Ireland, after their invasion at Bannow Bay in 1169. 
+ANSW:Ireland
+EM:0
+F1:0.19999999999999998
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Irish culture to the point that it has been said that they became "more Irish than the Irish themselves." 
+ANSW:Irish
+EM:0
+F1:0.1
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Trim Castle and Dublin Castle. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Edgar Atheling 
+ANSW:Edgar
+EM:0
+F1:0.6666666666666666
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Malcolm III of Scotland 
+ANSW:King Malcolm III of Scotland
+EM:0
+F1:0.888888888888889
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:1072, riding as far as Abernethy where he met up with his fleet of ships. Malcolm submitted, paid homage to William and surrendered his son
+ANSW:1072
+EM:0
+F1:0.07692307692307693
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Duncan 
+ANSW:Duncan
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Duncan as a hostage, beginning a series of arguments as to whether the Scottish Crown owed allegiance to the King of England. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Sybilla of Normandy 
+ANSW:Sybilla of Normandy
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:the "Davidian Revolution" 
+ANSW:Norman
+EM:0
+F1:0.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Hereford and charged him with defending the Marches and warring with the Welsh. In these original ventures, the Normans failed to make any headway into
+ANSW:Hereford
+EM:0
+F1:0.07692307692307693
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:the Welsh. 
+ANSW:the Welsh
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Edward the Confessor had set up the aforementioned Ralph as earl of Hereford and charged him with defending the Marches and warring with the Welsh. ###
+ANSW:Edward the Confessor
+EM:0
+F1:0.21428571428571425
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Ralph as earl of Hereford and charged him with defending the Marches and warring with the Welsh. In these original ventures, the Normans failed
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Wales was at some point subject to Norman interference. Norman words, such as baron (barwn), first entered Welsh at that time. 
+ANSW:Wales
+EM:0
+F1:0.0909090909090909
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:1018, Roger de Tosny travelled to the Iberian Peninsula to carve out a state for himself from Moorish lands, but failed. 
+ANSW:1018
+EM:0
+F1:0.0909090909090909
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:William of Montreuil led the papal army and took a huge booty. 
+ANSW:William of Montreuil
+EM:0
+F1:0.4
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Antioch. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Roger de Tosny travelled to the Iberian Peninsula to carve out a state for himself from Moorish lands, but failed. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:1097, Bohemond began carving out an independent principality around that city. Tancred was instrumental in the conquest of Jerusalem and he worked for the expansion
+ANSW:1097
+EM:0
+F1:0.07692307692307693
+
+2025-06-14 17:23:25,490 - INFO - 
+PRED:Tancred with an army of Italo-Normans. Bohemond was the de facto leader of the Crusade during its passage through Asia Minor. After
+ANSW:Tancred
+EM:0
+F1:0.08695652173913045
+
+2025-06-14 17:23:25,520 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Jerusalem and he worked for the expansion of the Crusader kingdom in Transjordan and the region of Galilee. 
+ANSW:Jerusalem
+EM:0
+F1:0.10526315789473684
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Bohemond of Taranto and his nephew Tancred with an army of Italo-Normans. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:380 years. 
+ANSW:380 years
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:a storm dispersed the fleet. After some searching, it was discovered that the boat carrying his sister and his fiancée Berengaria was anchored on the south
+ANSW:a storm
+EM:0
+F1:0.14285714285714288
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Berengaria 
+ANSW:Berengaria
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:1191
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Isaac Komnenos. 
+ANSW:Isaac Komnenos
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Richard the Lion-hearted left Messina with a large fleet in order to reach Acre. But a storm dispersed the fleet. After some searching, it was discovered
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:despot Isaac Komnenos. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Conrad of Montferrat. 
+ANSW:Conrad of Montferrat
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:silver chains, because Richard had promised that he would not place him in irons. 
+ANSW:silver
+EM:0
+F1:0.13333333333333333
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Richard de Camville and Robert de Thornham, as governors of Cyprus. 
+ANSW:Guy de Lusignan
+EM:0
+F1:0.14285714285714288
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:his daughter in marriage to the person named by Richard. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Africa. 
+ANSW:Africa
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Jean de Bethencourt and Gadifer de la Salle. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Bethencourt took the title of King of the Canary Islands, as vassal to Henry III of Castile. 
+ANSW:Bethencourt
+EM:0
+F1:0.1111111111111111
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Enrique Pérez de Guzmán, 2nd Count de Niebla. 
+ANSW:Enrique Pérez de Guzmán
+EM:0
+F1:0.6666666666666666
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Maciot de Bethencourt 
+ANSW:Maciot de Bethencourt
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:King of the Canary Islands, as vassal to Henry III of Castile. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Maciot de Bethencourt 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Channel Islands. 
+ANSW:Channel Islands
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:two customaries in Latin by two judges for use by them and their colleagues: These are the Très ancien coutumier (Very ancient customary), authored
+ANSW:two
+EM:0
+F1:0.07999999999999999
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Très ancien coutumier (Very ancient customary) 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Romanesque idiom to England and Italy, and the encastellation of these regions with keeps in their north French style fundamentally altered the military landscape. Their
+ANSW:Romanesque
+EM:0
+F1:0.07692307692307693
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:rounded arches, particularly over windows and doorways, and massive proportions. 
+ANSW:rounded
+EM:0
+F1:0.18181818181818182
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:rounded arches, particularly over windows and doorways, and massive proportions. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:Early Gothic
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Anglo-Saxon and precedes the Early Gothic. 
+ANSW:Anglo-Saxon
+EM:0
+F1:0.2857142857142857
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Kingdom of Sicily. 
+ANSW:Sicily
+EM:0
+F1:0.5
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:In the early 11th century the dukes began a programme of church reform, encouraging the Cluniac reform of monasteries and patronising intellectual pursuits
+ANSW:early 11th century
+EM:0
+F1:0.23076923076923078
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:the dukes as a unifying force for their disparate duchy. 
+ANSW:dukes
+EM:0
+F1:0.18181818181818182
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:the dukes began a programme of church reform, encouraging the Cluniac reform of monasteries and patronising intellectual pursuits, especially the proliferation of scriptoria
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Normandy experienced a golden age of illustrated manuscripts, but it was brief and the major scriptoria of Normandy ceased to function after the midpoint of the century.
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:The French Wars of Religion in the 16th century and French Revolution in the 18th successively destroyed much of what existed in the way of the architectural
+ANSW:16th century
+EM:0
+F1:0.13793103448275862
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:embroidery. 
+ANSW:embroidery
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:By far the most famous work of Norman art is the Bayeux Tapestry, which is not a tapestry but a work of embroidery. 
+ANSW:Bayeux Tapestry
+EM:0
+F1:0.16
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Odo, the Bishop of Bayeux and first Earl of Kent, employing natives from Kent who were learned in the Nordic traditions imported in the previous half century
+ANSW:Odo
+EM:0
+F1:0.07142857142857142
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Odo, the Bishop of Bayeux and first Earl of Kent, employing natives from Kent who were learned in the Nordic traditions imported in the previous half century
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:mosaics, which were common in Norman Italy and drew heavily on the Greek heritage. Lombard Salerno was a centre of ivorywork in the 11
+ANSW:mosaics
+EM:0
+F1:0.07999999999999999
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:mosaics, which were common in Norman Italy and drew heavily on the Greek heritage. Lombard Salerno was a centre of ivorywork in the 11
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Lombard Salerno was a centre of ivorywork in the 11th century and this continued under Norman domination. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:11th century. 
+ANSW:11th
+EM:0
+F1:0.6666666666666666
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:William of Volpiano and John of Ravenna. 
+ANSW:William of Volpiano and John of Ravenna
+EM:1
+F1:0.8571428571428571
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:musical production and education. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:southern Italy, where they were patronised by Robert Guiscard and established a Latin monastery at Sant'Eufemia. 
+ANSW:southern Italy
+EM:0
+F1:0.2222222222222222
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Sant'Eufemia. 
+ANSW:Latin monastery at Sant'Eufemia.
+EM:0
+F1:0.4
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Robert Guiscard and established a Latin monastery at Sant'Eufemia. There they continued the tradition of singing. 
+ANSW:Robert Guiscard
+EM:0
+F1:0.2222222222222222
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:singing had developed and the choir achieved fame in Normandy. Under the Norman abbot Robert de Grantmesnil, several monks of Saint-Evroul
+ANSW:singing
+EM:0
+F1:0.0909090909090909
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:Computational complexity theory is a branch of the theory of computation in theoretical computer science that focuses on classifying computational problems according to their inherent difficulty, and relating those
+ANSW:Computational complexity theory
+EM:0
+F1:0.1875
+
+2025-06-14 17:23:33,386 - INFO - 
+PRED:their inherent difficulty, and relating those classes to each other. A computational problem is understood to be a task that is in principle amenable to being solved by a
+ANSW:inherent difficulty
+EM:0
+F1:0.12903225806451613
+
+2025-06-14 17:23:33,417 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:23:41,314 - INFO - 
+PRED:a task that is in principle amenable to being solved by a computer, which is equivalent to stating that the problem may be solved by mechanical application of mathematical steps
+ANSW:computational problems
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:Computational complexity theory is a branch of the theory of computation in theoretical computer science that focuses on classifying computational problems according to their inherent difficulty, and relating those
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:such as an algorithm. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:time and storage. Other complexity measures are also used, such as the amount of communication (used in communication complexity), the number of gates in a circuit (used
+ANSW:if its solution requires significant resources
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:quantifying the amount of resources needed to solve them, such as time and storage. 
+ANSW:mathematical models of computation
+EM:0
+F1:0.11111111111111112
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:time and storage. 
+ANSW:time and storage
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:number of gates in a circuit (used in circuit complexity) and the number of processors (used in parallel computing) One of the roles of computational complexity theory is
+ANSW:number of gates in a circuit
+EM:0
+F1:0.35294117647058826
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:determine the practical limits on what computers can and cannot do
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:communication complexity) and the number of gates in a circuit (used in circuit complexity) and the number of processors (used in parallel computing). 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:time and storage. Other complexity measures are also used, such as the amount of communication (used in communication complexity), the number of gates in a circuit (used
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:analysis of algorithms and computability theory. 
+ANSW:analysis of algorithms and computability theory
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:analysis of algorithms 
+ANSW:analysis of algorithms
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:computational complexity theory 
+ANSW:computational complexity theory
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:computability theory
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:analysis of algorithms and computability theory is that the former is devoted to analyzing the amount of resources needed by a particular algorithm to solve a problem, whereas the latter
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:computational complexity from computability theory: the latter theory asks what kind of problems can, in principle, be solved algorithmically. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:problem instance, and should not be confused with the problem itself. In computational complexity theory, a problem refers to the abstract question to be solved. In contrast,
+ANSW:problem instance
+EM:0
+F1:0.13793103448275862
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:problem itself. In contrast, an instance of this problem is a rather concrete utterance, which can serve as the input for a decision problem. For example,
+ANSW:the problem
+EM:0
+F1:0.14285714285714288
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:concrete utterance, which can serve as the input for a decision problem. For example, consider the problem of primality testing. The instance is a number
+ANSW:concrete
+EM:0
+F1:0.07692307692307693
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:problem instance, and should not be confused with the problem itself. In computational complexity theory, a problem refers to the abstract question to be solved. In contrast,
+ANSW:instances
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:solution for every instance. The input string for a computational problem is referred to as a problem instance, and should not be confused with the problem itself. In computational
+ANSW:solution
+EM:0
+F1:0.06666666666666667
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:input string for a computational problem is referred to as a problem instance, and should not be confused with the problem itself. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:problem itself. In contrast, an instance of this problem is a rather concrete utterance, which can serve as the input for a decision problem. For example,
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:"yes" if the number is prime and "no" otherwise (in this case "no"). No Answer 
+ANSW:No Answer
+EM:0
+F1:0.23529411764705882
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:2000 kilometres passing through all of Germany's 15 largest cities? 
+ANSW:2000
+EM:0
+F1:0.18181818181818182
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:round trip through all sites in Milan
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:computational problems
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:of little use for solving other instances of the problem, such as asking for a round trip through all sites in Milan whose total length is at most 10 km
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:Is there a route of at most 2000 kilometres passing through all of Germany's 15 largest cities? 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:computational problems and not particular problem instances. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:a string over an alphabet. Usually, the alphabet is taken to be the binary alphabet (i.e., the set {0,1}), and thus the strings
+ANSW:problem instance
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:binary alphabet (i.e., the set {0,1}) No Answer 
+ANSW:binary alphabet
+EM:0
+F1:0.4
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:string over an alphabet. Usually, the alphabet is taken to be the binary alphabet (i.e., the set {0,1}), and thus the strings are
+ANSW:bitstrings
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:binary notation, and graphs can be encoded directly via their adjacency matrices, or by encoding their adjacency lists in binary. 
+ANSW:binary notation
+EM:0
+F1:0.18181818181818182
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:by encoding their adjacency lists in binary. 
+ANSW:adjacency matrices
+EM:0
+F1:0.22222222222222224
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:string over an alphabet. Usually, the alphabet is taken to be the binary alphabet (i.e., the set {0,1}), and thus the strings are
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:by encoding their adjacency lists in binary. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:decision problems are one of the central objects of study in computational complexity theory. A decision problem is a special type of computational problem whose answer is either yes or no
+ANSW:Decision problems
+EM:0
+F1:0.12121212121212122
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:yes or no, or alternately either 1 or 0. 
+ANSW:yes or no
+EM:0
+F1:0.5
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:1 or 0
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:yes or no, or alternately either 1 or 0. A decision problem can be viewed as a formal language, where the members of the language are
+ANSW:yes
+EM:0
+F1:0.07407407407407407
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:yes, the algorithm is said to accept the input string, otherwise it is said to reject the input. 
+ANSW:yes
+EM:0
+F1:0.10526315789473684
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:decision problems are one of the central objects of study in computational complexity theory. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:decision problem is a special type of computational problem whose answer is either yes or no, or alternately either 1 or 0. 
+ANSW:No Answer
+EM:0
+F1:0.16666666666666669
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:accept the input string, otherwise it is said to reject the input. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:arbitrary graph. 
+ANSW:arbitrary graph
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:set of all connected graphs—of course, to obtain a precise definition of this language, one has to decide how graphs are encoded as binary strings. ### instructions
+ANSW:formal language
+EM:0
+F1:0.07142857142857144
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:encoding decision needs to be made in order to determine an exact definition of the formal language associated with this decision problem is then the set of all connected graphs—of
+ANSW:how graphs are encoded as binary strings
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:arbitrary graph. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:41,314 - INFO - 
+PRED:A function problem is a computational problem where a single output (of a total function) is expected for every input, but the output is more complex than that of
+ANSW:a computational problem
+EM:0
+F1:0.1875
+
+2025-06-14 17:23:41,345 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:23:49,218 - INFO - 
+PRED:a single output (of a total function) is expected for every input, but the output is more complex than that of a decision problem, that is, it
+ANSW:a single output
+EM:0
+F1:0.19999999999999998
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:function problem where a single output (of a total function) is expected for every input, but the output is more complex than that of a decision problem, that
+ANSW:A function problem
+EM:0
+F1:0.19354838709677416
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:the integer factorization problem. 
+ANSW:the integer factorization problem
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:a single output (of a total function) is expected for every input, but the output is more complex than that of a decision problem, that is, it
+ANSW:complex
+EM:0
+F1:0.07142857142857142
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:complex answer 
+ANSW:No Answer
+EM:0
+F1:0.5
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:Deciding whether a given triple is a member of this set corresponds to solving the problem of multiplying two numbers. 
+ANSW:decision problems
+EM:0
+F1:0.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:set of triples (a, b, c) such that the relation a × b = c holds. Deciding whether a given triple is a member of this
+ANSW:set of triples
+EM:0
+F1:0.21428571428571425
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:set of triples (a, b, c) such that the relation a × b = c holds. Deciding whether a given triple is a member of this
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:size of the input in bits. 
+ANSW:how much time the best algorithm requires to solve the problem
+EM:0
+F1:0.11764705882352942
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:the size of the instance. 
+ANSW:the instance
+EM:0
+F1:0.5714285714285715
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:as a function of the size of the instance. This is usually taken to be the size of the input in bits. Complexity theory is interested in how algorithms scale
+ANSW:as a function of the size of the instance
+EM:0
+F1:0.35897435897435903
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:bits. 
+ANSW:bits
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:the size of the input in bits. Complexity theory is interested in how algorithms scale with an increase in the input size. For instance, in the problem of finding
+ANSW:an increase in the input size
+EM:0
+F1:0.34285714285714286
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:as a function of the size of the instance. This is usually taken to be the size of the input in bits. Complexity theory is interested in how algorithms scale
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:Cobham's thesis says that a problem can be solved with a feasible amount of resources if it admits a polynomial time algorithm. 
+ANSW:Cobham's thesis
+EM:0
+F1:0.16666666666666669
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:function of n. 
+ANSW:the time taken
+EM:0
+F1:0.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:worst-case time complexity T(n) is defined to be the maximum time taken over all inputs of size n. 
+ANSW:worst-case time complexity
+EM:0
+F1:0.2857142857142857
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:T(n) is defined to be the maximum time taken over all inputs of size n. If T(n) is a polynomial in n, then the algorithm is
+ANSW:T(n)
+EM:0
+F1:0.07407407407407407
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:polynomial time algorithm. Cobham's thesis says that a problem can be solved with a feasible amount of resources if it admits a polynomial time algorithm. ### instructions
+ANSW:polynomial time algorithm
+EM:0
+F1:0.20689655172413793
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:A Turing machine is a mathematical model of a general computing machine. It is a theoretical device that manipulates symbols contained on a strip of tape. Turing machines are
+ANSW:A Turing machine
+EM:0
+F1:0.1875
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:other models of computation known to us today, such as a RAM machine, Conway's Game of Life, cellular automata or any programming language can be computed on
+ANSW:an algorithm
+EM:0
+F1:0.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:Turing machine is the most commonly used model in complexity theory. 
+ANSW:the Turing machine
+EM:0
+F1:0.42857142857142855
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:symbols contained on a strip of tape. 
+ANSW:symbols
+EM:0
+F1:0.25
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:A Turing machine is a mathematical model of a general computing machine. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:A Turing machine is a mathematical model of a general computing machine. It is a theoretical device that manipulates symbols contained on a strip of tape. Turing machines are
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:a thought experiment representing a computing machine—anything from an advanced supercomputer to a mathematician with a pencil and paper. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:A deterministic Turing machine is the most basic Turing machine, which uses a fixed set of rules to determine its future actions. 
+ANSW:A deterministic Turing machine
+EM:0
+F1:0.3076923076923077
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:fixed set of rules to determine its future actions. 
+ANSW:rules
+EM:0
+F1:0.19999999999999998
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:probabilistic Turing machine is a deterministic Turing machine with an extra supply of random bits. 
+ANSW:A probabilistic Turing machine
+EM:0
+F1:0.4210526315789474
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:non-deterministic Turing machine is a deterministic Turing machine with an added feature of non-determinism, which allows a Turing machine to have multiple possible future actions
+ANSW:A non-deterministic Turing machine
+EM:0
+F1:0.2758620689655173
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:randomized algorithms. 
+ANSW:randomized algorithms
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:deterministic Turing machine is the most basic Turing machine, which uses a fixed set of rules to determine its future actions. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:probabilistic decisions often helps algorithms solve problems more efficiently. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:complexity classes, such as deterministic Turing machines, probabilistic Turing machines, non-deterministic Turing machines, quantum Turing machines, symmetric Turing machines and alternating Turing
+ANSW:complexity classes
+EM:0
+F1:0.16666666666666669
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:time or space) 
+ANSW:time or space
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:probabilistic Turing machines, non-deterministic Turing machines, quantum Turing machines, symmetric Turing machines and alternating Turing machines. They are all equally powerful in principle
+ANSW:probabilistic Turing machines, non-deterministic Turing machines
+EM:0
+F1:0.27586206896551724
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:time or space) 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:some of these may be more powerful than others. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:random access machines. Perhaps surprisingly, each of these models can be converted to another without providing any extra computational power. The time and memory consumption of these alternate models
+ANSW:random access machines
+EM:0
+F1:0.1875
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:time and memory consumption of these alternate models may vary. What all these models have in common is that the machines operate deterministically. 
+ANSW:computational power
+EM:0
+F1:0.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:time and memory consumption of these alternate models may vary. 
+ANSW:time and memory
+EM:0
+F1:0.4615384615384615
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:operating deterministically. 
+ANSW:the machines operate deterministically
+EM:0
+F1:0.3333333333333333
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:time and memory consumption of these alternate models may vary. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:time and memory consumption of these alternate models may vary. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:non-deterministic Turing machine 
+ANSW:non-deterministic
+EM:0
+F1:0.5
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:unusual resources. For example, a non-deterministic Turing machine is a computational model that is allowed to branch out to check many different possibilities at once.
+ANSW:unusual resources
+EM:0
+F1:0.14814814814814814
+
+2025-06-14 17:23:49,218 - INFO - 
+PRED:many of the mathematical models we want to analyze, so that non-deterministic time is a very important resource in analyzing computational problems. 
+ANSW:mathematical models
+EM:0
+F1:0.16666666666666669
+
+2025-06-14 17:23:49,248 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:23:57,166 - INFO - 
+PRED:non-deterministic time is a very important resource in analyzing computational problems. 
+ANSW:time
+EM:0
+F1:0.16666666666666669
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:some computational problems are easier to analyze in terms of more unusual resources. For example, a non-deterministic Turing machine is a computational model that is allowed to
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:non-deterministic Turing machine 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:the total number of state transitions, or steps, the machine makes before it halts and outputs the answer ("yes" or "no"). 
+ANSW:state transitions
+EM:0
+F1:0.17391304347826084
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:difficulty, one defines sets of problems based on some criteria. For instance, the set of problems solvable within time f(n) on a deterministic Turing machine is
+ANSW:difficulty
+EM:0
+F1:0.07407407407407407
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:DTIME(f(n)) 
+ANSW:DTIME(f(n))
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:time 
+ANSW:time
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:DTIME(f(n)) 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:time 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:computational resource. 
+ANSW:complexity resources
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:computational resource
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:any complexity measure can be viewed as a computational resource. 
+ANSW:Blum complexity axioms
+EM:0
+F1:0.15384615384615383
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:complexity measure can be viewed as a computational resource. Complexity measures are very generally defined by the Blum complexity axioms. Other complexity measures used in complexity theory
+ANSW:Complexity measures
+EM:0
+F1:0.13793103448275862
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:complexity measure can be viewed as a computational resource. Complexity measures are very generally defined by the Blum complexity axioms. Other complexity measures used in complexity theory
+ANSW:Complexity measures
+EM:0
+F1:0.13793103448275862
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:Analogous definitions can be made for space requirements. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:best, worst and average case complexity refer to three different ways of measuring the time complexity (or any other complexity measure) of different inputs of the same size.
+ANSW:best, worst and average
+EM:0
+F1:0.25
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:complexity measure 
+ANSW:complexity measure
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:time complexity (or any other complexity measure) of different inputs of the same size. 
+ANSW:time
+EM:0
+F1:0.13333333333333333
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:size n may be faster to solve than others, we define the following complexities: 
+ANSW:inputs
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:best, worst and average case complexity refer to three different ways of measuring the time complexity (or any other complexity measure) of different inputs of the same size.
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:n 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:For example, consider the deterministic sorting algorithm quicksort. This solves the problem of sorting a list of integers that is given as the input. ### question:
+What
+ANSW:deterministic sorting algorithm quicksort
+EM:0
+F1:0.2666666666666667
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:worst-case is when the input is sorted or sorted in reverse order, and the algorithm takes time O(n2) for this case. 
+ANSW:worst-case
+EM:0
+F1:0.0909090909090909
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:O(n2) for this case. If we assume that all possible permutations of the input list are equally likely, the average time taken for sorting is O(n
+ANSW:O(n2)
+EM:0
+F1:0.07407407407407407
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:O(n log n) time. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:minimum amount of time required by the most efficient algorithm solving a given problem. 
+ANSW:the most efficient algorithm
+EM:0
+F1:0.4444444444444445
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:analysis of algorithms. 
+ANSW:analysis of algorithms
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:lower bounds make a statement about all possible algorithms that solve a given problem. The phrase "all possible algorithms" includes not just the algorithms known today, but any
+ANSW:lower bounds
+EM:0
+F1:0.13333333333333333
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:time complexity of a problem, one needs to show only that there is a particular algorithm with running time at most T(n). 
+ANSW:upper bound
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:all possible algorithms
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:one is interested in proving upper and lower bounds on the minimum amount of time required by the most efficient algorithm solving a given problem. The complexity of an algorithm is
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:big O notation, which hides constant factors and smaller terms. This makes the bounds independent of the specific details of the computational model used. For instance, if T
+ANSW:big O notation
+EM:0
+F1:0.19354838709677416
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:constant factors and smaller terms. 
+ANSW:constant factors and smaller terms
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:O(n2). No Answer 
+ANSW:T(n) = O(n2)
+EM:0
+F1:0.4
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:computational model used. For instance, if T(n) = 7n2 + 15n + 40, in big O notation one would write
+ANSW:the computational model
+EM:0
+F1:0.2
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:constant factors and smaller terms. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:big O notation, which hides constant factors and smaller terms. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:O(n2). 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:Of course, some complexity classes have complicated definitions that do not fit into this framework. 
+ANSW:complexity classes
+EM:0
+F1:0.23529411764705882
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:framework
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:complicated definitions
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:Of course, some complexity classes have complicated definitions that do not fit into this framework. Thus, a typical complexity class has a definition like the following: ### instructions
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:easy to establish in a framework for complexity classes. Thus, a typical complexity class has a definition like the following: Of course, some complexity classes have complicated definitions
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:machine model. 
+ANSW:chosen machine model
+EM:0
+F1:0.8
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:linear time on a multi-tape Turing machine, but necessarily requires quadratic time in the model of single-tape Turing machines. 
+ANSW:linear time
+EM:0
+F1:0.1904761904761905
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:single-tape Turing machines. 
+ANSW:single-tape Turing machines
+EM:1
+F1:1.0
+
+2025-06-14 17:23:57,166 - INFO - 
+PRED:Cobham-Edmonds thesis states that "the time complexities in any two reasonable and general models of computation are polynomially related" (Goldreich 200
+ANSW:Cobham-Edmonds thesis
+EM:0
+F1:0.17391304347826084
+
+2025-06-14 17:23:57,196 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:24:05,125 - INFO - 
+PRED:P, which is the set of decision problems solvable by a deterministic Turing machine within polynomial time. The corresponding set of function problems is FP. 
+ANSW:complexity class P
+EM:0
+F1:0.07142857142857142
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:often yields complexity classes that depend on the chosen machine model. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:{xx | x is any binary string} 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:Cobham-Edmonds thesis states that "the time complexities in any two reasonable and general models of computation are polynomially related" (Goldreich 200
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:time or space used by the algorithm. 
+ANSW:time or space
+EM:0
+F1:0.6
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:time or space used by the algorithm. 
+ANSW:bounding
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:Bounding the time or space used by the algorithm. 
+ANSW:complexity classes
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:time or space used by the algorithm. Some important complexity classes of decision problems defined in this manner are the following: 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:time or space used by the algorithm. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:space 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:BPP, ZPP and RP, which are defined using probabilistic Turing machines; AC and NC, which are defined using Boolean circuits; and BQP and
+ANSW:BPP, ZPP and RP
+EM:0
+F1:0.29629629629629634
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:Boolean circuits; and BQP and QMA, which are defined using quantum Turing machines. #P is an important complexity class of counting problems (not decision problems
+ANSW:Boolean
+EM:0
+F1:0.07692307692307693
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:quantum Turing machines. 
+ANSW:quantum
+EM:0
+F1:0.5
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:#P is an important complexity class of counting problems (not decision problems). 
+ANSW:#P
+EM:0
+F1:0.15384615384615385
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:Interactive proof systems. 
+ANSW:Interactive
+EM:0
+F1:0.5
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:probabilistic Turing machines; AC and NC, which are defined using Boolean circuits; and BQP and QMA, which are defined using quantum Turing machines.
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:quantum Turing machines. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:Interactive proof systems. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:time and space requirements, the answer to such questions is given by the time and space hierarchy theorems respectively. 
+ANSW:computation time
+EM:0
+F1:0.09523809523809525
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:DTIME(n) is contained in DTIME(n2) 
+ANSW:DTIME(n2)
+EM:0
+F1:0.33333333333333337
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:time and space hierarchy theorems respectively. 
+ANSW:time and space hierarchy theorems
+EM:0
+F1:0.9090909090909091
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:proper hierarchy on the classes defined by constraining the respective resources. 
+ANSW:a proper hierarchy on the classes defined
+EM:0
+F1:0.6666666666666665
+
+2025-06-14 17:24:05,125 - INFO - 
+PRED:quantitative statements about how much more additional time or space is needed in order to increase the number of problems that can be solved. 
+ANSW:quantitative statements
+EM:0
+F1:0.15384615384615385
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:DTIME(n2) 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:quantitative statements about how much more additional time or space is needed in order to increase the number of problems that can be solved. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:The time and space hierarchy theorems form the basis for most separation results of complexity classes. For instance, the time hierarchy theorem tells us that P is strictly
+ANSW:time and space hierarchy theorems
+EM:0
+F1:0.30303030303030304
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:P is strictly contained in EXPTIME, and the space hierarchy theorem tells us that L is strictly contained in PSPACE. 
+ANSW:EXPTIME
+EM:0
+F1:0.09523809523809523
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:space 
+ANSW:PSPACE
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:most separation results of complexity classes. For instance, the time hierarchy theorem tells us that P is strictly contained in EXPTIME, and the space hierarchy theorem tells
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:P 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:L 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:reduction. 
+ANSW:reduction
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:another problem. It captures the informal notion of a problem being at least as difficult as another problem. For instance, if a problem X can be solved using an
+ANSW:another problem
+EM:0
+F1:0.12903225806451613
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:no answer 
+ANSW:reduces
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:Cook reductions, Karp reductions and Levin reductions, and the bound on the complexity of reductions, such as polynomial-time reductions or log-space reductions. 
+ANSW:Karp reductions and Levin reductions
+EM:0
+F1:0.2962962962962963
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:the bound on the complexity of reductions
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:the informal notion of a problem being at least as difficult as another problem. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:polynomial-time reduction. This means that the reduction process takes polynomial time. For example, the problem of squaring an integer can be reduced to the problem of
+ANSW:polynomial-time reduction
+EM:0
+F1:0.14285714285714288
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:squaring an integer can be reduced to the problem of multiplying two integers. This means an algorithm for multiplying two integers can be used to square an integer. Indeed
+ANSW:multiplying two integers
+EM:0
+F1:0.1875
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:polynomial time. 
+ANSW:polynomial time
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:same input to both inputs of the multiplication algorithm. Thus we see that squaring is not more difficult than multiplication, since squaring can be reduced to multiplication.
+ANSW:input
+EM:0
+F1:0.07142857142857142
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:multiplication. 
+ANSW:multiplication
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:The complexity of problems often depends on what? 
+ANSW:the type of reduction being used
+EM:0
+F1:0.28571428571428575
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:This motivates the concept of a problem being hard for a complexity class. A problem X is hard for a class of problems C if every problem in C can
+ANSW:if every problem in C can be reduced to X
+EM:0
+F1:0.35
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:solve any problem in C. 
+ANSW:solve any problem in C
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:NP-hard
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:NP-complete problems contains the most difficult problems in NP, in the sense that they are the ones most likely not to be in P. 
+ANSW:NP-complete
+EM:0
+F1:0.07999999999999999
+
+2025-06-14 17:24:05,126 - INFO - 
+PRED:P. 
+ANSW:NP
+EM:0
+F1:0.0
+
+2025-06-14 17:24:05,156 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:24:13,109 - INFO - 
+PRED:a polynomial-time solution to Π1 would yield a polynomial-time solution to Π2. 
+ANSW:there is no known polynomial-time solution
+EM:0
+F1:0.2222222222222222
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:NP
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:P is often seen as a mathematical abstraction modeling those computational tasks that admit an efficient algorithm. This hypothesis is called the Cobham–Edmonds thesis. The complexity
+ANSW:P
+EM:0
+F1:0.07407407407407407
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:Cobham–Edmonds thesis. 
+ANSW:Cobham–Edmonds thesis
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:NP, on the other hand, contains many problems that people would like to solve efficiently, but for which no efficient algorithm is known, such as the Boolean satisf
+ANSW:NP
+EM:0
+F1:0.0689655172413793
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:Boolean satisfiability problem, the Hamiltonian path problem and the vertex cover problem. 
+ANSW:Boolean satisfiability problem
+EM:0
+F1:0.4
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:Turing machines
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:a mathematical abstraction modeling those computational tasks that admit an efficient algorithm. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:Cobham-Edmonds thesis. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:NP, on the other hand, contains many problems that people would like to solve efficiently, but for which no efficient algorithm is known, such as the Boolean satisf
+ANSW:No Answer
+EM:0
+F1:0.06666666666666667
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:Boolean satisfiability problem, the Hamiltonian path problem and the vertex cover problem. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:many important problems can be shown to have more efficient solutions. These include various types of integer programming problems in operations research, many problems in logistics, protein structure prediction
+ANSW:more efficient solutions
+EM:0
+F1:0.1875
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:protein structure prediction in biology, 
+ANSW:protein structure prediction
+EM:0
+F1:0.7499999999999999
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:$1,000,000 prize for resolving the problem. 
+ANSW:$1,000,000
+EM:0
+F1:0.2857142857142857
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:Ladner
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:NP-intermediate problems. Such problems are called NP-intermediate problems. The graph isomorphism problem, the discrete logarithm problem and the integer factorization problem
+ANSW:NP-intermediate problems
+EM:0
+F1:0.17391304347826084
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:the graph isomorphism problem, the discrete logarithm problem and the integer factorization problem are examples of problems believed to be NP-intermediate. They are some
+ANSW:graph isomorphism problem
+EM:0
+F1:0.2222222222222222
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:NP-intermediate problems. Such problems are called NP-intermediate problems. The graph isomorphism problem, the discrete logarithm problem and the integer factorization problem
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:graph isomorphism problem, the discrete logarithm problem and the integer factorization problem are examples of problems believed to be NP-intermediate. They are some of
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:graph isomorphism problem is the computational problem of determining whether two finite graphs are isomorphic. An important unsolved problem in complexity theory is whether the graph is
+ANSW:The graph isomorphism problem
+EM:0
+F1:0.25806451612903225
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:NP-complete, NP-intermediate, P, No Answer 
+ANSW:NP-complete
+EM:0
+F1:0.33333333333333337
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:polynomial time hierarchy collapses to its second level. If graph isomorphism is NP-complete, the polynomial time hierarchy collapses to its second level. Since it is
+ANSW:polynomial time hierarchy
+EM:0
+F1:0.21428571428571425
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:second level. 
+ANSW:second level
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:Babai and Eugene Luks have run time 2O(√(n log(n))) for graphs with n vertices. 
+ANSW:Laszlo Babai and Eugene Luks
+EM:0
+F1:0.4210526315789473
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:polynomial time hierarchy collapses to its second level. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:second level. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:The integer factorization problem is the computational problem of determining the prime factorization of a given integer. Phrased as a decision problem, it is the problem
+ANSW:The integer factorization problem
+EM:0
+F1:0.2666666666666667
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:k. No Answer 
+ANSW:k
+EM:0
+F1:0.5
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:modern cryptographic systems
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:general number field sieve, which takes time O(e(64/9)1/3(n.log 2)1/3(log (n.log 2
+ANSW:the general number field sieve
+EM:0
+F1:0.5000000000000001
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,109 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:No Answer 
+ANSW:suspected to be unequal
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:P ⊆ NP ⊆ PP ⊆ PSPACE, but it is possible that P = PSPACE. If P is not equal to NP, then P
+ANSW:P ⊆ NP ⊆ PP ⊆ PSPACE
+EM:0
+F1:0.3333333333333333
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:between P and PSPACE 
+ANSW:between P and PSPACE
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:No Answer 
+ANSW:Proving that any of these classes are unequal
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:P ⊆ NP ⊆ PP ⊆ PSPACE, but it is possible that P = PSPACE. If P is not equal to NP, then P
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:co-NP problems. It is believed that NP is not equal to co-NP; however, it has not yet been proven. It has been shown that
+ANSW:co-NP
+EM:0
+F1:0.07999999999999999
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:reversed) of NP problems. 
+ANSW:reversed
+EM:0
+F1:0.4
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:No Answer 
+ANSW:not equal
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:No Answer 
+ANSW:P is not equal to NP
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:co-NP problems. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:L (the set of all problems that can be solved in logarithmic space) 
+ANSW:L
+EM:0
+F1:0.14285714285714288
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:No Answer 
+ANSW:strictly contained in P or equal to P
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,110 - INFO - 
+PRED:No Answer 
+ANSW:complexity classes
+EM:0
+F1:0.0
+
+2025-06-14 17:24:13,140 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+2025-06-14 17:24:21,090 - INFO - 
+PRED:NL and NC, and it is not known if they are distinct or equal classes. 
+ANSW:NL and NC
+EM:0
+F1:0.33333333333333337
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:if they are distinct or equal classes
+EM:0
+F1:0.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:L 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:intractable problems. 
+ANSW:intractable problems
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:polynomial time algorithm is not always practical. If its running time is, say, n15, it is unreasonable to consider it efficient and it is still useless
+ANSW:exponential-time algorithms
+EM:0
+F1:0.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:NP-complete problems are also intractable in this sense. To see why exponential-time algorithms might be unusable in practice, consider a program that makes 2
+ANSW:NP-complete problems
+EM:0
+F1:0.15384615384615385
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:problems that can be solved in theory (e.g., given large but finite time), but which in practice take too long for their solutions to be useful, are
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:Cobham–Edmonds thesis states that only those problems that can be solved in polynomial time can be feasibly computed on some computational device. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:useless except on small instances. Nevertheless, a polynomial time algorithm is not always practical. If its running time is, say, n15, it is unreasonable
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:Presburger arithmetic has been shown not to be in P, yet algorithms have been written that solve the problem in reasonable times in most cases. 
+ANSW:Presburger arithmetic
+EM:0
+F1:0.14814814814814814
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:algorithms have been written that solve the problem in reasonable times in most cases. 
+ANSW:algorithms have been written
+EM:0
+F1:0.4444444444444445
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:the decision problem in Presburger arithmetic has been shown not to be in P, yet algorithms have been written that solve the problem in reasonable times in most cases.
+ANSW:NP-complete knapsack problem
+EM:0
+F1:0.0625
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:less than quadratic time and SAT solvers routinely handle large instances of the NP-complete Boolean satisfiability problem. 
+ANSW:in less than quadratic time
+EM:0
+F1:0.3636363636363636
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:SAT solvers routinely handle large instances of the NP-complete Boolean satisfiability problem. 
+ANSW:NP-complete Boolean satisfiability problem
+EM:0
+F1:0.5
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:Presburger arithmetic has been shown not to be in P, yet algorithms have been written that solve the problem in reasonable times in most cases. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:foundations were laid out
+EM:0
+F1:0.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:Alan Turing in 1936, which turned out to be a very robust and flexible simplification of a computer. 
+ANSW:Alan Turing
+EM:0
+F1:0.19999999999999998
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:Turing machines by Alan Turing in 1936, which turned out to be a very robust and flexible simplification of a computer. 
+ANSW:Turing machines
+EM:0
+F1:0.17391304347826084
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:1936 
+ANSW:1936
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:a very robust and flexible simplification of a computer. 
+ANSW:a computer
+EM:0
+F1:0.3636363636363636
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:computer. 
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:"On the Computational Complexity of Algorithms" by Juris Hartmanis and Richard Stearns (1965) 
+ANSW:On the Computational Complexity of Algorithms
+EM:0
+F1:0.631578947368421
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:Juris Hartmanis and Richard Stearns (1965) 
+ANSW:Juris Hartmanis and Richard Stearns
+EM:0
+F1:0.9090909090909091
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:1965
+EM:0
+F1:0.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:time and space complexity and proved the hierarchy theorems. Also, in 1965 Edmonds defined a "good" algorithm as one with running time bounded
+ANSW:time and space
+EM:0
+F1:0.23076923076923078
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:1965 Edmonds defined a "good" algorithm as one with running time bounded by a polynomial of the input size. 
+ANSW:1965
+EM:0
+F1:0.1
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:time and space complexity and proved the hierarchy theorems. Also, in 1965 Edmonds defined a "good" algorithm as one with running time bounded
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:John Myhill's definition of linear bounded automata (Myhill 1960) 
+ANSW:John Myhill
+EM:0
+F1:0.3636363636363636
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:1961
+EM:0
+F1:0.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:Hisao Yamada's paper on real-time computations (1962). 
+ANSW:Hisao Yamada
+EM:0
+F1:0.22222222222222224
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:input encoding
+EM:0
+F1:0.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:choice of encoding, one tries to keep the discussion abstract enough to be independent of the choice of encoding. This can be achieved by ensuring that different representations can be
+ANSW:encoding
+EM:0
+F1:0.06451612903225806
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:choice of encoding, one tries to keep the discussion abstract enough to be independent of the choice of encoding. This can be achieved by ensuring that different representations can be
+ANSW:No Answer
+EM:0
+F1:0.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:Manuel Blum developed an axiomatic complexity theory based on his axioms and proved an important result, the so-called, speed-up theorem. ### instructions
+ANSW:Manuel Blum
+EM:0
+F1:0.17391304347826084
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:speed-up theorem. 
+ANSW:speed-up theorem
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:"Reducibility Among Combinatorial Problems" in which he showed that 21 diverse combinatorial and graph theoretical problems, each infamous for its computational intract
+ANSW:"Reducibility Among Combinatorial Problems"
+EM:0
+F1:0.3076923076923077
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:21 diverse combinatorial and graph theoretical problems, each infamous for its computational intractability, are NP-complete. 
+ANSW:21
+EM:0
+F1:0.125
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:No Answer 
+ANSW:No Answer
+EM:1
+F1:1.0
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:SoCal, is a geographic and cultural region that generally comprises California's southernmost 10 counties. The region is traditionally described as "eight counties", based on
+ANSW:SoCal
+EM:0
+F1:0.07999999999999999
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:10-county definition, including Kern and San Luis Obispo counties, is also used based on historical political divisions. Southern California is a major economic center for
+ANSW:10 counties
+EM:0
+F1:0.07407407407407407
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:major economic center for the state of California and the United States. 
+ANSW:economic center
+EM:0
+F1:0.2857142857142857
+
+2025-06-14 17:24:21,090 - INFO - 
+PRED:demographics and economic ties: Imperial, Los Angeles, Orange, Riverside, San Bernardino, San Diego, Santa Barbara, and Ventura. 
+ANSW:demographics and economic ties
+EM:0
+F1:0.38095238095238093
+
+2025-06-14 17:24:21,120 - WARNING - Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
