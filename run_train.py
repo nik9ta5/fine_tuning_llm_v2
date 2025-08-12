@@ -100,9 +100,6 @@ If the context does not answer the question, answer 'No answer.'"""
         remove_columns=val_dataset.column_names
     )
 
-    train_dataset = train_dataset.select(range(30))
-    val_dataset = val_dataset.select(range(10))
-
     # ----- Конфигурация квантования -----
     quant_config = create_quant_config()
 
@@ -118,8 +115,6 @@ If the context does not answer the question, answer 'No answer.'"""
         torch_dtype=torch.bfloat16,
         quantization_config=quant_config
     )
-    # model.config.use_cache = False
-    # model.gradient_checkpointing_enable()
 
     # ----- Загрузка LoRA конфига -----
     lora_config = create_lora_config()
