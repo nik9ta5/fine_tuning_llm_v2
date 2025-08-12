@@ -1,0 +1,54 @@
+#Модели:
+# google/gemma-3-1b-pt 
+# google/gemma-3-4b-pt
+# meta-llama/Llama-3.1-8B-Instruct
+
+#Параметры для загрузки модели
+model:
+  name: "google/gemma-3-1b-pt"
+  model_name_log: "qwen_3__0_6b"
+  cache_dir: "../../../all_language_models/models--google--gemma-3-1b-it/snapshots/dcc83ea841ab6100d6b47a070329e1ba4cf78752" 
+  max_length: 512
+  max_new_tokens: 32
+    
+  tokenizer:
+    padding_size: "left"
+    answer_pattern: "### Answer:\n"
+
+#Параметры для конфигурации LoRA
+lora:
+  r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  target_modules: ["q_proj", "o_proj"] #"v_proj", "k_proj"
+
+#Параметры для инференса
+inference:
+  temp: 0.4
+
+#Параметры для оценки модели
+evaluate_model:
+ full_path_check: "./saved_models/train__15-06-2025_14-38-14__base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/"
+ checkpoint: "checkpoint-90/"
+
+#Параметры для обучения
+train:
+  model_save_dir: "./saved_models"
+  epochs: 1
+  train_batch: 1
+  val_batch: 1
+  test_batch: 1
+  grad_accum: 3
+  eval_step: 5
+  save_step: 100
+  torch_empty_cache_steps: 8
+  log_step: 5
+  lr: 0.00001
+  weight_decay: 0.01
+
+merge:
+ dir: "./merge_models"
+
+#Директория для логов
+logs:
+  dir: "./logs_v2"

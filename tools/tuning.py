@@ -5,7 +5,8 @@
 import os
 from datetime import datetime
 from trl import SFTTrainer, SFTConfig 
-from logger.custom_logger import CustomLoggingCallback
+from tools.logService import CustomLoggingCallback
+
 
 def CreateTrainArguments_SF(CONFIG: dict, random_state : int):
     """Функция для создания объекта, агрегирующего в себе параметры для обучения"""
@@ -44,7 +45,7 @@ def CreateTrainArguments_SF(CONFIG: dict, random_state : int):
         save_total_limit=None, #Ограничение на кол-во сохранений
 
         max_seq_length=CONFIG["model"]["max_length"], #Максимальная длинна последовательности
-        packing=True, #использовать упаковку
+        packing=False, #использовать упаковку
     ) 
     return sft_config
 
@@ -57,10 +58,12 @@ def CreateTrainer_SF(model, tokenizer, train_dataset, val_dataset, CONFIG: dict,
     training_args = CreateTrainArguments_SF(CONFIG, random_state)    
     trainer = SFTTrainer(
         model=model,
+        tokenizer=tokenizer,
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=val_dataset,
-        processing_class=tokenizer,
+        # processing_class=tokenizer,
+        dataset_text_field="prompt", #В какой колонке находится текст
         callbacks=[CustomLoggingCallback(logger)],
         data_collator=data_collator,
         compute_metrics=compute_metrics, #РЕАЛИЗОВАТЬ ФУНКЦИЮ
