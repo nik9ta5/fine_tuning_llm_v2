@@ -52,14 +52,14 @@ mem max mem reserv: {(torch.cuda.max_memory_reserved()//(1024**2)):.3f} MB
 if __name__ == "__main__":
 
     # ----- Создаем директорию для логов -----
-    dir_name_for_log = "./logs_v2" #В КОНФИГ
+    dir_name_for_log = CONFIG['logs']["dir"] #В КОНФИГ
     os.makedirs(dir_name_for_log, exist_ok=True)
 
 
     # ----- Создаем логгер -----
     logger = CustomLogger(
         dir_name_for_log, 
-        log_file_name="run_log_tining_v1.log", #В КОНФИГ
+        log_file_name=CONFIG['logs']["finemae"], #В КОНФИГ
         logging_lavel=logging.DEBUG,
         outputConsole=True
     )
@@ -85,33 +85,35 @@ If the context does not answer the question, answer 'No answer.'"""
     train_dataset = dataSet['train']
     val_dataset = dataSet['validation']
 
-    os.makedirs('./data', exist_ok=True)
+    os.makedirs(CONFIG['data']["path"], exist_ok=True)
 
     train_dataset = train_dataset.map(
         lambda x : second_prompt_template_dict(SYSTEM_INSTRICTION, x),
         num_proc=1,
-        cache_file_name="./data/cache_squad.cache",
+        cache_file_name=CONFIG['data']["cache_file_name_train"],
         remove_columns=train_dataset.column_names
     )
     val_dataset = val_dataset.map(
         lambda x : second_prompt_template_dict(SYSTEM_INSTRICTION, x),
         num_proc=1,
-        cache_file_name="./data/cache_squad.cache",
+        cache_file_name=CONFIG['data']["cache_file_name_val"],
         remove_columns=val_dataset.column_names
     )
+    train_dataset = train_dataset.select(range(1000))
+    val_dataset = val_dataset.select(range(100))
 
     # ----- Конфигурация квантования -----
     quant_config = create_quant_config()
 
     # ----- Загрузка модели и токенайзера -----
     tokenizer = AutoTokenizer.from_pretrained(
-        "../app_qna/modelcachedir/models--Qwen--Qwen3-0.6B/snapshots/c1899de289a04d12100db370d81485cdf75e47ca"
+        CONFIG['model']['full_path_for_model']
     )
     tokenizer.pad_token_id = tokenizer.eos_token_id
-    tokenizer.padding_side = "left"
+    tokenizer.padding_side = CONFIG["model"]["tokenizer"]["padding_size"]
     
     model = AutoModelForCausalLM.from_pretrained(
-        "../app_qna/modelcachedir/models--Qwen--Qwen3-0.6B/snapshots/c1899de289a04d12100db370d81485cdf75e47ca",
+        CONFIG['model']['full_path_for_model'],
         torch_dtype=torch.bfloat16,
         quantization_config=quant_config
     )
@@ -132,17 +134,17 @@ If the context does not answer the question, answer 'No answer.'"""
     # ----- запуск trainer -----
 
     #Паттерн ответа
-    answer_pattern_for_collator = "### Answer:\n"
+    answer_pattern_for_collator = CONFIG['model']['tokenizer']['answer_pattern']
     response_template_ids = tokenizer.encode(answer_pattern_for_collator, add_special_tokens=False)
 
     collator = DataCollatorForCompletionOnlyLM(response_template_ids, tokenizer=tokenizer)
     
     #Функция для вычисления метрик
-    func_em = build_compute_metrics_fn(
-        tokenizer,
-        answer_pattern_for_collator,
-        logger
-    )
+    # func_em = build_compute_metrics_fn(
+    #     tokenizer,
+    #     answer_pattern_for_collator,
+    #     logger
+    # )
     
     #Создаем trainer
     trainer = CreateTrainer_SF(
@@ -154,7 +156,7 @@ If the context does not answer the question, answer 'No answer.'"""
         RANDOM_STATE, 
         logger=logger,
         data_collator=collator,
-        compute_metrics=func_em
+        # compute_metrics=func_em
     )
 
     #Запускаем обучение

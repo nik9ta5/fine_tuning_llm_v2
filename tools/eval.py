@@ -138,3 +138,113 @@ def build_compute_metrics_fn(tokenizer, answer_pattern: str, mylogger=None):
         return {"em": avg_em, "f1": avg_f1}
     
     return custom_compute_metrics
+
+
+
+def normalize_text(text):
+    """
+    Нормализует текст: нижний регистр, удаление пробелов и пунктуации
+    """
+    text = text.lower() # Приводим к нижнему регистру
+    text = text.translate(str.maketrans("", "", string.punctuation)) # Удаляем пунктуацию
+    text = re.sub(r'\s+', ' ', text).strip() # Удаляем лишние пробелы
+    return text
+
+def compute_exact_match(prediction, ground_truth):
+    """
+    Вычисляет Exact Match для одного примера
+    Принимает 2 строки для сравнения
+    """
+    return int(normalize_text(prediction) == normalize_text(ground_truth))
+
+def compute_f1_score(prediction, ground_truth):
+    """
+    Вычисляет F1 Score для одного примера
+    Принимает 2 строки для сравнения
+    """
+    pred_tokens = normalize_text(prediction).split()
+    truth_tokens = normalize_text(ground_truth).split()
+    
+    if len(pred_tokens) == 0 and len(truth_tokens) == 0: # Если оба ответа пустые, F1 = 1
+        return 1.0
+    if len(pred_tokens) == 0 or len(truth_tokens) == 0: # Если один из ответов пустой, F1 = 0
+        return 0.0
+    
+    # Находим общие токены
+    common_tokens = set(pred_tokens) & set(truth_tokens)
+    tp = len(common_tokens)
+    
+    precision = tp / len(pred_tokens)  # Precision = TP / (TP + FP), где FP = предсказанные токены, не входящие в правильные
+    recall = tp / len(truth_tokens) # Recall = TP / (TP + FN), где FN = правильные токены, не входящие в предсказанные
+    
+    # F1 = 2 * (precision * recall) / (precision + recall)
+    if precision + recall == 0:
+        return 0.0
+    return 2 * (precision * recall) / (precision + recall)
+
+
+def calculate_evaluate_metrics_EM_F1(em_all, f1_all):
+    ''' 
+    Функция для вычисления среднего значения EM и F1
+    '''
+    em_all = np.array(em_all)
+    f1_all = np.array(f1_all)
+    print(f"EM: {em_all.mean()}, F1: {f1_all.mean()}")
+    return em_all.mean(), f1_all.mean()
+
+
+def evaluate_model_for_metrics(model, tokenizer, dataloader, device, max_new_tokens=None, temp=None, logger=None, pfraze_no_answ=None):
+    """Функция для оценки модели по метриками EM, F1 """
+    em_all = []
+    f1_all = []
+
+    if logger:
+        logger.log("Test model. Calculate metrics")
+
+    for batch, item in enumerate(tqdm(dataloader, desc="Test model")):
+        with autocast(dtype=torch.bfloat16): #Использовать смешанную точность (Работает)
+            #Генерируем батч
+            pred = model.generate(
+                input_ids=item['input_ids'].to(device),
+                attention_mask=item['attention_mask'].to(device),
+                max_new_tokens=max_new_tokens
+            )
+
+            tensor_shape_1 = item['input_ids'].shape[1]
+            answers_model_text = tokenizer.batch_decode(pred[:, tensor_shape_1:], skip_special_tokens=True)
+            
+            answers_model_text = [item.split("###")[0] for item in answers_model_text] #Модель генерирует часть инструкции
+            ### instructions:
+            # item['answer']
+
+            #Лишний цикл, но если внести в циклы которые ниже, то ничего не вычисляет
+            #только с помощью этого стало нормально определять, если 
+            # answers_model_text = ["" if normalize_text(item) == "no answer" else item for item in answers_model_text]
+
+            # =====================
+            # Модель учится отвечать, если не может ответить: "No Answer", следовательно, если ответ модели No Answer и в эталонном ответе нет ответа = "", то в функцию для вычисления метрики передаем ответ модели (No Answer) и как эталонный - No Answer
+            # При формировании промпта идет четкое указание No Answer, если ответа нет
+            # =====================
+
+            
+            tmp_em = [compute_exact_match(predict, answer) #Когда расчитываем руками - ответ модели расцениваем как "" и эталон ""
+                      # if normalize_text(predict) == "no answer" else compute_exact_match(predict, answer)
+                      for predict, answer in zip(answers_model_text, item['answer'])
+            ]
+            tmp_f1 = [compute_f1_score(predict, answer)
+                      # if normalize_text(predict) == "no answer" else compute_f1_score(predict, answer)
+                      for predict, answer in zip(answers_model_text, item['answer'])
+             ]
+            
+            if logger:
+                for predict, answer, emtmp, f1tmp in zip(answers_model_text, item['answer'], tmp_em, tmp_f1):
+                    logger.log(f"\nPRED:{predict}\nANSW:{answer}\nEM:{emtmp}\nF1:{f1tmp}\n")
+        
+        em_all += tmp_em
+        f1_all += tmp_f1
+    
+    em, f1 = calculate_evaluate_metrics_EM_F1(em_all, f1_all)
+    if logger:
+        logger.log(f"em_all_len: {len(em_all)} f1_all_len: {len(f1_all)}")
+        logger.log(f"EM: {em} F1: {f1}")
+    return em_all, f1_all, em, f1

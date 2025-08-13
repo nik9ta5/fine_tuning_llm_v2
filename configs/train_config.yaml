@@ -5,9 +5,9 @@
 
 #Параметры для загрузки модели
 model:
-  name: "google/gemma-3-1b-pt"
+  name: "Qwen/Qwen3-0.6B"
   model_name_log: "qwen_3__0_6b"
-  cache_dir: "../../../all_language_models/models--google--gemma-3-1b-it/snapshots/dcc83ea841ab6100d6b47a070329e1ba4cf78752" 
+  full_path_for_model : "../app_qna/modelcachedir/models--Qwen--Qwen3-0.6B/snapshots/c1899de289a04d12100db370d81485cdf75e47ca"
   max_length: 512
   max_new_tokens: 32
     
@@ -17,19 +17,14 @@ model:
 
 #Параметры для конфигурации LoRA
 lora:
-  r: 16
-  lora_alpha: 32
+  r: 32
+  lora_alpha: 64
   lora_dropout: 0.05
   target_modules: ["q_proj", "o_proj"] #"v_proj", "k_proj"
 
 #Параметры для инференса
 inference:
   temp: 0.4
-
-#Параметры для оценки модели
-evaluate_model:
- full_path_check: "./saved_models/train__15-06-2025_14-38-14__base_Llama-3.1-8B-Instruct_15-06-2025_06-26-46_SQuAD_Adapters/"
- checkpoint: "checkpoint-90/"
 
 #Параметры для обучения
 train:
@@ -38,17 +33,26 @@ train:
   train_batch: 1
   val_batch: 1
   test_batch: 1
-  grad_accum: 3
-  eval_step: 5
-  save_step: 100
+  grad_accum: 5
+  eval_step: 500
+  save_step: 500
   torch_empty_cache_steps: 8
-  log_step: 5
-  lr: 0.00001
+  log_step: 50
+  lr: 0.00002
   weight_decay: 0.01
-
-merge:
- dir: "./merge_models"
 
 #Директория для логов
 logs:
   dir: "./logs_v2"
+  finemae : "run_log_tining_v1.log"
+
+data:
+  path: "./data"
+  cache_file_name_train : "./data/cache_squad_train.cache"
+  cache_file_name_val : "./data/cache_squad_val.cache"
+
+
+#Для оценки обученной модели
+tuning_model:
+  full_path2adapters: "./saved_models/train__13-08-2025_11-35-28__qwen_3__0_6b"
+  checkpoint: "checkpoint-200"
